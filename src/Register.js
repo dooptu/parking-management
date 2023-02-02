@@ -96,7 +96,7 @@ const Register = () => {
 
     }, [phone])
 
-    useEffect(()=>{
+    useEffect(() => {
         setChecked(checked);
     }, [checked])
 
@@ -146,11 +146,6 @@ const Register = () => {
 
         }
 
-        
-
-        
-
-        
 
 
         if (!isproceed) {
@@ -180,8 +175,6 @@ const Register = () => {
             });
         }
 
-
-
     }
 
     return (
@@ -200,17 +193,10 @@ const Register = () => {
                     <section >
                         <p ref={errRef} className={errMsg ? "errMsg"
                             : "offScreen"} aria-live="assertive">{errMsg}</p>
-
-
                         <form onSubmit={handleSubmit} className="row">
-
-
                             <h2 style={{}}>Sign Up</h2>
                             <span style={{ marginBottom: "40px", display: "block" }}>Join over 1 million other drivers throughout the UK. Over 350,000 spaces and counting.</span>
-
-
-
-                            <br />
+                            {/* -------------------USER-NAME-------------------- */}
                             <div>
                                 <input
                                     placeholder="User Name *"
@@ -231,9 +217,7 @@ const Register = () => {
                                 <FontAwesomeIcon icon={faTimes} className={validName || !id ? "hide" : "invalid"} />
 
                             </div>
-
-
-
+                            {/* -------------------FULL-NAME-------------------- */}
                             <div>
                                 <input
                                     placeholder="Full Name *"
@@ -245,12 +229,8 @@ const Register = () => {
                                     required
 
                                 />
-
-                                <br />
                             </div>
-
-
-
+                            {/* -------------------PASSWORD-------------------- */}
                             <div className="row">
                                 <div className="col-sm-4 valid-pwd" id="password" style={{ marginRight: "20px" }}>
                                     <input
@@ -269,7 +249,7 @@ const Register = () => {
 
                                 </div>
 
-
+                                {/* -------------------CONFIRM-PASSWORD-------------------- */}
                                 <div className="col-sm-4 valid-pwd">
                                     <input
                                         placeholder="Confirm Password *"
@@ -290,7 +270,8 @@ const Register = () => {
 
                             </div>
 
-                            <div className="col-sm-4" style={{ marginRight: "80px", color:"#8AA4B3" }}>
+                            {/* -------------------BIRTHDAY-------------------- */}
+                            <div className="col-sm-4" style={{ marginRight: "80px", color: "#8AA4B3" }}>
                                 <input
                                     placeholder="Birth Day"
                                     type="date"
@@ -301,7 +282,7 @@ const Register = () => {
                                 />
 
                             </div>
-
+                            {/* -------------------GENDER-------------------- */}
                             <div className="input-gender col-sm-4 ">
 
                                 <input style={{ float: "left", marginLeft: "-10px" }} type="radio" checked={gender === 'female'} onChange={e => setGender(e.target.value)} name="gender" value="female" ></input>
@@ -314,7 +295,7 @@ const Register = () => {
 
 
                             </div>
-
+                            {/* -------------------EMAIL-------------------- */}
                             <div>
                                 <input
                                     placeholder="Email *"
@@ -337,44 +318,44 @@ const Register = () => {
                             </div>
 
 
-
+                            {/* -------------------PHONE-------------------- */}
                             <div>
-                            <input
-                                placeholder="Phone *"
-                                type="text"
-                                id="phone"
-                                className="col-sm-4"
-                                autoComplete="off"
-                                onChange={(e) => setPhone(e.target.value)}
-                                required
-                                aria-invalid={validPhone ? "false" : "true"}
-                                aria-describedby="emailnote"
-                                onFocus={() => setPhoneFocus(true)}
-                                onBlur={() => setPhoneFocus(false)}
+                                <input
+                                    placeholder="Phone *"
+                                    type="text"
+                                    id="phone"
+                                    className="col-sm-4"
+                                    autoComplete="off"
+                                    onChange={(e) => setPhone(e.target.value)}
+                                    required
+                                    aria-invalid={validPhone ? "false" : "true"}
+                                    aria-describedby="emailnote"
+                                    onFocus={() => setPhoneFocus(true)}
+                                    onBlur={() => setPhoneFocus(false)}
 
-                            />
-                            
+                                />
+
                                 <FontAwesomeIcon className={validPhone ? "valid" : "hide"} icon={faCheck} />
-                            
-                           
+
+
                                 <FontAwesomeIcon className={validPhone || !phone ? "hide" : "invalid"} icon={faTimes} />
-                            
+
                             </div>
 
-                           
 
+                            {/* -------------------PROMOTIONS-------------------- */}
                             <div className="col-sm-4 checkbox">
                                 <input type="checkbox" checked={checked === 'checked' ? 'checked' : ''} onChange={e => setChecked(e.target.value)} name="checked" value="checked"></input>
-                                <p > <a href="#" style={{color:"black"}}>Opt-in here if you would like to be one of the first to hear about our new discounts & promotions</a></p>
+                                <p > <a href="#" style={{ color: "black" }}>Opt-in here if you would like to be one of the first to hear about our new discounts & promotions</a></p>
                             </div>
-
+                            {/* -------------------SIGNUP-BTN-------------------- */}
                             <div>
-                            <button className="btn-res col-sm-4" type="submit" >
-                                Sign Up
-                            </button>
+                                <button className="btn-res col-sm-4" type="submit" >
+                                    Sign Up
+                                </button>
                             </div>
-                            
-                            <div className="anyaccount" style={{ marginLeft: "60px", float: "left", textAlign: "center" }} ><span style={{color:"black"}}>Already Registered?</span></div>
+                            {/* -------------------OTHER-------------------- */}
+                            <div className="anyaccount" style={{ marginLeft: "60px", float: "left", textAlign: "center" }} ><span style={{ color: "black" }}>Already Registered?</span></div>
                             <Link to={'/login'}> <button className="btn-already-res"> <FontAwesomeIcon icon={faUser} style={{ marginRight: "10px" }} />Log In</button></Link>
 
                             {/* <p>
