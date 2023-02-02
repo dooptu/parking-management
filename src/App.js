@@ -1,11 +1,11 @@
 import logo from './logo.svg';
 import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Home from './Home';
-import Login from './Login';
-import Register from './Register';
+import Home from './components/Home';
+import Login from './components/Login';
+import Register from './components/Register';
 import { ToastContainer } from 'react-toastify';
-import ForgottenPwd from './Forgotten-pwd';
+import ForgottenPwd from './components/Forgotten-pwd';
 
 function App() {
   return (

@@ -49,7 +49,7 @@ const Login = () => {
                 "username": username,
                 "password": password
             };
-            fetch("https://localhost:44308/User/Authenticate", {
+            fetch("https://localhost:44308/users/Authenticate", {
                 method: 'POST',
                 headers: { 'content-type': 'application/json' },
                 body: JSON.stringify(inputobj)
@@ -104,8 +104,8 @@ const Login = () => {
             <div className="login-form">
                 <h2 style={{}}>User Log in</h2>
                 <span style={{marginBottom:"40px", display:"block"}}>Log in to your YourParkingSpace account.</span>
-                <button className="google" style={{marginBottom:"10px"}} type="submit"> <img style={{width:"30px", position:"absolute", left:"20px" ,marginRight:"30px"}} src='Google_Logo.png'/> Login with Google</button>
-                <button className="google" style={{marginTop:"0px"}} type="submit"> <img style={{width:"30px", position:"absolute", left:"20px" ,marginRight:"30px"}} src='facebook.png'/> Login with Facebook</button>
+                <button className="google" style={{marginBottom:"10px"}} type="submit"> <img style={{width:"30px", position:"absolute", left:"20px" ,marginRight:"30px"}} src='./assets/img/Google_Logo.png'/> Login with Google</button>
+                <button className="google" style={{marginTop:"0px"}} type="submit"> <img style={{width:"30px", position:"absolute", left:"20px" ,marginRight:"30px"}} src='./assets/img/facebook.png'/> Login with Facebook</button>
                 <br />
                 <div className="dash-or"><span>Or</span></div>
                 <form onSubmit={ProceedLogin}>
