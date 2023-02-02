@@ -44,9 +44,7 @@ const Login = () => {
 
     const ProceedLoginusingAPI = (e) => {
         e.preventDefault();
-        if (validate()) {
-            ///implentation
-            // console.log('proceed');
+        if (validate()) {            
             let inputobj = {
                 "username": username,
                 "password": password
