@@ -366,14 +366,6 @@ const Register = () => {
                                 </span>
                             </p> */}
 
-
-
-
-
-
-
-
-
                         </form>
 
                     </section>
