@@ -1,15 +1,16 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import Helmet from "react-helmet";
 
 const Home = () => {
     const usenavigate = useNavigate();
     const [customerlist, listupdate] = useState(null);
-    const[displayusername,displayusernameupdate]=useState('');
+    const [displayusername, displayusernameupdate] = useState('');
     useEffect(() => {
         let username = sessionStorage.getItem('username');
         if (username === '' || username === null) {
             usenavigate('/login');
-        }else{
+        } else {
             displayusernameupdate(username);
         }
 
@@ -27,35 +28,38 @@ const Home = () => {
         });
 
     }, []);
-    
 
-    
+
+
 
     return (
         <div>
+            <Helmet>
+                <title>Home </title>
+            </Helmet>
             <div className="header">
                 <Link to={'/'}>Home</Link>
-                <span style={{marginLeft:'80%'}}>Welcome <b>{displayusername}</b></span>
+                <span style={{ marginLeft: '80%' }}>Welcome <b>{displayusername}</b></span>
                 <Link style={{ float: 'right' }} to={'/login'}>Logout</Link>
             </div>
             <h1 className="text-center">Welcome to My WebSite</h1>
             <table className="table table-bordered">
-                <thead>
+                {/* <thead>
                     <tr>
                         <td>Code</td>
                         <td>Name</td>
                         <td>Email</td>
                         <td>Credit Limit</td>
                     </tr>
-                </thead>
+                </thead> */}
                 <tbody>
                     {customerlist &&
                         customerlist.map(item => (
                             <tr key={item.id}>
-        <td>{item.id}</td>
-        <td>{item.name}</td>
-        <td>{item.email}</td>
-        <td>{item.creditLimit}</td>
+                                <td>{item.id}</td>
+                                <td>{item.name}</td>
+                                <td>{item.email}</td>
+                                <td>{item.creditLimit}</td>
                             </tr>
 
                         ))

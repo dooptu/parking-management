@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faTimes, faInfoCircle, faUser, faMailBulk, faMailReply } from "@fortawesome/free-solid-svg-icons";
 import BackgroundCommon from "./BackgroundCommon";
+import Helmet from "react-helmet";
 
 const ForgottenPwd = () => {
     const [resetEmail, setResetEmail] = useState('');
@@ -14,13 +15,12 @@ const ForgottenPwd = () => {
     useEffect(() => {
         // sessionStorage.clear();
     }, []);
-
-    
-
     
     return (
         <div className="container-login">
-
+            <Helmet>
+                <title>Forgotten</title>
+            </Helmet>
             <BackgroundCommon></BackgroundCommon>
             
             <div className="login-form" style={{marginTop:"200px"}}>
@@ -34,8 +34,7 @@ const ForgottenPwd = () => {
                     <Link to={'/login'}><FontAwesomeIcon icon={faMailReply}></FontAwesomeIcon> Go back</Link>
                     <br/>
                     <div className="anyaccount" ><span>Don’t have any account?</span></div>
-                    <Link  to={'/register'}> <button className="btn-signup"> <FontAwesomeIcon icon={faUser} style={{marginRight:"10px"}}/>Sign Up for free</button></Link>
-                    
+                    <Link  to={'/register'}> <button className="btn-signup"> <FontAwesomeIcon icon={faUser} style={{marginRight:"10px"}}/>Sign Up for free</button></Link>                   
                 </form>
             </div>
         </div>
