@@ -13,7 +13,7 @@ const ForgottenPwd = () => {
     const usenavigate = useNavigate();
 
     useEffect(() => {
-        // sessionStorage.clear();
+        sessionStorage.clear();
     }, []);
     
     return (

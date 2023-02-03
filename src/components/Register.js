@@ -148,8 +148,6 @@ const Register = () => {
         }
 
 
-
-
         if (!isproceed) {
             toast.warning(errormessage)
         } else
