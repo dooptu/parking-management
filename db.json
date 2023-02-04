@@ -62,6 +62,15 @@
       "gender": "female",
       "email": "sd@gmail.com",
       "phone": "0123020025"
+    },
+    {
+      "id": "User55",
+      "pwd": "Aa@123456",
+      "fullName": "2002-12-12",
+      "birthday": "2002-12-12",
+      "gender": "female",
+      "email": "sdsd@gmail.com",
+      "phone": "0000000000"
     }
   ]
 }
