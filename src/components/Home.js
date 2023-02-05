@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Helmet from "react-helmet";
+import { HelmetProvider } from "react-helmet-async";
 
 const Home = () => {
     const usenavigate = useNavigate();
@@ -33,7 +34,7 @@ const Home = () => {
 
 
     return (
-        <div>
+        <HelmetProvider>
             <Helmet>
                 <title>Home </title>
             </Helmet>
@@ -67,7 +68,7 @@ const Home = () => {
                 </tbody>
 
             </table>
-        </div>
+        </HelmetProvider>
     );
 }
 

@@ -48,7 +48,7 @@ const Register = () => {
     const [validPhone, setValidPhone] = useState(false);
     const [phoneFocus, setPhoneFocus] = useState(false);
 
-    const [checked, setChecked] = useState('');
+    const [checked, setChecked] = useState(false);
 
     const [errMsg, setErrMsg] = useState('');
     const [success, setSuccess] = useState(false);
@@ -98,7 +98,14 @@ const Register = () => {
     }, [phone])
 
     useEffect(() => {
-        setChecked(checked);
+        if (checked != false) {
+            
+            setChecked(true);
+            console.log(checked)
+        } else {
+            setChecked(false);
+            console.log(false);
+        }
     }, [checked])
 
 
@@ -348,7 +355,7 @@ const Register = () => {
 
                                     {/* -------------------PROMOTIONS-------------------- */}
                                     <div className="col-sm-4 checkbox">
-                                        <input type="checkbox" onChange={e => setChecked(e.target.value)} name="checked" value="checked"></input>
+                                        <input type="checkbox"  onChange={e => setChecked(e.target.value)} name="checked" value="checked"></input>
                                         <p > <a href="#" style={{ color: "black", textDecoration: "none" }}>Opt-in here if you would like to be one of the first to hear about our new discounts & promotions</a></p>
                                     </div>
                                     {/* -------------------SIGNUP-BTN-------------------- */}

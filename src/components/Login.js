@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faTimes, faInfoCircle, faUser } from "@fortawesome/free-solid-svg-icons";
 import BackgroundCommon from "./BackgroundCommon";
 import Helmet from "react-helmet";
+import { HelmetProvider } from "react-helmet-async";
 
 const Login = () => {
     const [username, usernameupdate] = useState('');
@@ -95,45 +96,47 @@ const Login = () => {
         return result;
     }
     return (
-        <>
-            <Helmet>
-                <title>Login</title>
-            </Helmet>
-            <div className="container-login">
+        <HelmetProvider>
+            <div>
+                <Helmet>
+                    <title>Login</title>
+                </Helmet>
+                <div className="container-login">
 
-                <BackgroundCommon></BackgroundCommon>
-                {/* <div className="container-background">
+                    <BackgroundCommon></BackgroundCommon>
+                    {/* <div className="container-background">
                 <img style={{position:"absolute",zIndex:"10", marginLeft:"-200px", marginTop:"110px"}} src="man.png"></img>
             </div> */}
 
-                <div className="login-form">
-                    <h2 style={{}}>User Log in</h2>
-                    <span style={{ marginBottom: "40px", display: "block" }}>Log in to your YourParkingSpace account.</span>
-                    <button className="google" style={{ marginBottom: "10px" }} type="submit"> <img style={{ width: "30px", position: "absolute", left: "20px", marginRight: "30px" }} src='./assets/img/Google_Logo.png' /> Login with Google</button>
-                    <button className="google" style={{ marginTop: "0px" }} type="submit"> <img style={{ width: "30px", position: "absolute", left: "20px", marginRight: "30px" }} src='./assets/img/facebook.png' /> Login with Facebook</button>
-                    <br />
-                    <div className="dash-or"><span>Or</span></div>
-                    <form onSubmit={ProceedLogin}>
-                        <input placeholder="User Name" style={{ marginTop: "30px" }} value={username} onChange={e => usernameupdate(e.target.value)} ></input>
-                        <input placeholder="Password" type="password" value={password} onChange={e => passwordupdate(e.target.value)} ></input>
-                        <button style={{ color: "#fff" }} type="submit">Log In</button>
-
-                        <Link to={'/Forgotten-pwd'}>Forgotten your password?</Link>
-
+                    <div className="login-form">
+                        <h2 style={{}}>User Log in</h2>
+                        <span style={{ marginBottom: "40px", display: "block" }}>Log in to your YourParkingSpace account.</span>
+                        <button className="google" style={{ marginBottom: "10px" }} type="submit"> <img style={{ width: "30px", position: "absolute", left: "20px", marginRight: "30px" }} src='./assets/img/Google_Logo.png' /> Login with Google</button>
+                        <button className="google" style={{ marginTop: "0px" }} type="submit"> <img style={{ width: "30px", position: "absolute", left: "20px", marginRight: "30px" }} src='./assets/img/facebook.png' /> Login with Facebook</button>
                         <br />
-                        <div className="anyaccount" ><span>Don’t have any account?</span></div>
-                        <Link to={'/register'}> <button className="btn-signup"> <FontAwesomeIcon icon={faUser} style={{ marginRight: "10px" }} />Sign Up for free</button></Link>
+                        <div className="dash-or"><span>Or</span></div>
+                        <form onSubmit={ProceedLogin}>
+                            <input placeholder="User Name" style={{ marginTop: "30px" }} value={username} onChange={e => usernameupdate(e.target.value)} ></input>
+                            <input placeholder="Password" type="password" value={password} onChange={e => passwordupdate(e.target.value)} ></input>
+                            <button style={{ color: "#fff" }} type="submit">Log In</button>
+
+                            <Link to={'/Forgotten-pwd'}>Forgotten your password?</Link>
+
+                            <br />
+                            <div className="anyaccount" ><span>Don’t have any account?</span></div>
+                            <Link to={'/register'}> <button className="btn-signup"> <FontAwesomeIcon icon={faUser} style={{ marginRight: "10px" }} />Sign Up for free</button></Link>
 
 
 
-                    </form>
+                        </form>
+
+                    </div>
+
 
                 </div>
 
-
             </div>
-
-        </>
+        </HelmetProvider>
 
     );
 }
