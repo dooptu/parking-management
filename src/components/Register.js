@@ -5,12 +5,14 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import BackgroundCommon from "./BackgroundCommon";
 import { Helmet, HelmetProvider } from 'react-helmet-async';
+import axios from "../api/axios";
+import { isValidDateValue } from "@testing-library/user-event/dist/utils";
 
 const USER_REGEX = /^[a-zA-Z][a-zA-Z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,30}/;
 const EMAIL_REGEX = /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/;
 const PHONE_REGEX = /^[0-9]{10,12}$/;
-const REGISTER_URL = "https://ace8-118-69-233-167.ap.ngrok.io/ParkingManagement/api/user";
+const REGISTER_URL = "https://4f20-42-118-112-251.ap.ngrok.io/ParkingManagement/api/user";
 
 
 
@@ -99,7 +101,7 @@ const Register = () => {
 
     useEffect(() => {
         if (checked != false) {
-            
+
             setChecked(true);
             console.log(checked)
         } else {
@@ -165,12 +167,30 @@ const Register = () => {
         e.preventDefault();
         //if button anabled with js hack
         const regObj = { id, pwd, fullName, birthday, gender, email, phone }
-        
+        // if(IsValidate()){
+        //     const response = await axios.post(REGISTER_URL,
+        //             JSON.stringify(regObj),
+        //             {
+        //                 headers: {'Content-Type' : 'application/json'},
+        //                 withCredentials: true
+        //             }
+        //         );
+        //         console.log(response.data)
+        //         setSuccess(true);
+
+        // }
+
         if (IsValidate()) {
 
             fetch(REGISTER_URL, {
-                method: "POST",
-                headers: { 'content-type': 'application/json' },
+                mode: 'no-cors',
+                cache: 'no-cache',
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json, text/plain, */*',
+                    'Content-Type': 'application/json;charset=UTF8',
+                    // 'accept' : '/'
+                },
                 body: JSON.stringify(regObj)
             }).then((res) => {
                 console.log(regObj)
@@ -356,7 +376,7 @@ const Register = () => {
 
                                     {/* -------------------PROMOTIONS-------------------- */}
                                     <div className="col-sm-4 checkbox">
-                                        <input type="checkbox"  onChange={e => setChecked(e.target.value)} name="checked" value="checked"></input>
+                                        <input type="checkbox" onChange={e => setChecked(e.target.value)} name="checked" value="checked"></input>
                                         <p > <a href="#" style={{ color: "black", textDecoration: "none" }}>Opt-in here if you would like to be one of the first to hear about our new discounts & promotions</a></p>
                                     </div>
                                     {/* -------------------SIGNUP-BTN-------------------- */}
