@@ -10,7 +10,7 @@ const USER_REGEX = /^[a-zA-Z][a-zA-Z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,30}/;
 const EMAIL_REGEX = /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/;
 const PHONE_REGEX = /^[0-9]{10,12}$/;
-const REGISTER_URL = "http://localhost:5000/users";
+const REGISTER_URL = "https://ace8-118-69-233-167.ap.ngrok.io/ParkingManagement/api/user";
 
 
 
@@ -88,7 +88,7 @@ const Register = () => {
     }, [fullName])
 
     useEffect(() => {
-        setFullName(birthday)
+        setBirthDay(birthday)
 
     }, [birthday])
 
@@ -165,7 +165,7 @@ const Register = () => {
         e.preventDefault();
         //if button anabled with js hack
         const regObj = { id, pwd, fullName, birthday, gender, email, phone }
-        console.log(regObj)
+        
         if (IsValidate()) {
 
             fetch(REGISTER_URL, {
@@ -173,6 +173,7 @@ const Register = () => {
                 headers: { 'content-type': 'application/json' },
                 body: JSON.stringify(regObj)
             }).then((res) => {
+                console.log(regObj)
                 console.log(res);
                 setSuccess(true);
                 toast.success('Register successfully.');
