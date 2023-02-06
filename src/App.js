@@ -7,6 +7,7 @@ import Register from './components/Register';
 import { ToastContainer } from 'react-toastify';
 import ForgottenPwd from './components/Forgotten-pwd';
 
+
 function App() {
   return (
     <div className="App">
@@ -18,11 +19,10 @@ function App() {
         <Route path='/register' element={<Register/>}></Route>
         <Route path='/Forgotten-pwd' element={<ForgottenPwd/>}></Route>
       </Routes>
-      
       </BrowserRouter>
-      
     </div>
   );
 }
+
 
 export default App;
