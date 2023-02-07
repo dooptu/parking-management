@@ -7,6 +7,9 @@ import BackgroundCommon from "./BackgroundCommon";
 import Helmet from "react-helmet";
 import { HelmetProvider } from "react-helmet-async";
 
+// const LOGIN_URL = "https://0c1a-42-118-112-251.ap.ngrok.io/ParkingManagement/api/user/getUser/";
+const LOGIN_URL = "http://localhost:5000/users/"
+
 const Login = () => {
     const [username, usernameupdate] = useState('');
     const [password, passwordupdate] = useState('');
@@ -14,7 +17,7 @@ const Login = () => {
     const usenavigate = useNavigate();
 
     useEffect(() => {
-        // sessionStorage.clear();
+        sessionStorage.clear();
     }, []);
 
     const ProceedLogin = (e) => {
@@ -22,22 +25,24 @@ const Login = () => {
         if (validate()) {
             ///implentation
 
-            fetch("http://localhost:8080/bookstore/api/v2/books/12346").then((res) => {
+            fetch(LOGIN_URL + username, {
+                // mode: 'no-cors'
+            }).then((res) => {
                 return res.json();
             }).then((resp) => {
-                //console.log(resp)
-                // if (Object.keys(resp).length === 0) {
-                //     toast.error('Please Enter valid username');
-                // } else {
-                //     if (resp.pwd === password) {
-                //         console.log(resp);
-                //         toast.success('Success');
-                //         sessionStorage.setItem('username', username);
-                //         usenavigate('/')
-                //     } else {
-                //         toast.error('Please Enter Correct Password');
-                //     }
-                // }
+                console.log(resp)
+                if (Object.keys(resp).length === 0) {
+                    toast.error('Please Enter valid username');
+                } else {
+                    if (resp.pwd === password) {
+                        console.log(resp);
+                        toast.success('Success');
+                        sessionStorage.setItem('username', username);
+                        usenavigate('/');
+                    } else {
+                        toast.error('Please Enter Correct Password');
+                    }
+                }
             }).catch((err) => {
                 toast.error('Login Failed due to :' + err.message);
             });
@@ -51,7 +56,7 @@ const Login = () => {
                 "username": username,
                 "password": password
             };
-            fetch("https://localhost:44308/users/Authenticate", {
+            fetch(LOGIN_URL, {
                 method: 'POST',
                 headers: { 'content-type': 'application/json' },
                 body: JSON.stringify(inputobj)

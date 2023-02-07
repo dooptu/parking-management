@@ -1,19 +1,20 @@
 import React, { useState, useEffect, useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faTimes, faInfoCircle, faUser } from "@fortawesome/free-solid-svg-icons";
-import { Link, useNavigate } from "react-router-dom";
+import { json, Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import BackgroundCommon from "./BackgroundCommon";
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import axios from "../api/axios";
 import { isValidDateValue } from "@testing-library/user-event/dist/utils";
+import { formToJSON } from "axios";
 
 const USER_REGEX = /^[a-zA-Z][a-zA-Z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,30}/;
 const EMAIL_REGEX = /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/;
 const PHONE_REGEX = /^[0-9]{10,12}$/;
-const REGISTER_URL = "https://4f20-42-118-112-251.ap.ngrok.io/ParkingManagement/api/user";
-
+// const REGISTER_URL = "https://0c1a-42-118-112-251.ap.ngrok.io/ParkingManagement/api/user/addAccount";
+const REGISTER_URL = "http://localhost:5000/users"
 
 
 const Register = () => {
@@ -38,7 +39,7 @@ const Register = () => {
     const [fullName, setFullName] = useState('')
     const [fullNameFocus, setFullNameFocus] = useState(false)
 
-    const [birthday, setBirthDay] = useState('');
+    const [birthday, setBirthDay] = useState(new Date());
 
     const [gender, setGender] = useState('female');
 
@@ -90,6 +91,7 @@ const Register = () => {
     }, [fullName])
 
     useEffect(() => {
+
         setBirthDay(birthday)
 
     }, [birthday])
@@ -103,10 +105,10 @@ const Register = () => {
         if (checked != false) {
 
             setChecked(true);
-            console.log(checked)
+
         } else {
             setChecked(false);
-            console.log(false);
+
         }
     }, [checked])
 
@@ -180,28 +182,77 @@ const Register = () => {
 
         // }
 
-        if (IsValidate()) {
+        // if (IsValidate()) {
 
-            fetch(REGISTER_URL, {
-                mode: 'no-cors',
-                cache: 'no-cache',
-                method: 'POST',
+        axios.post(REGISTER_URL,JSON.stringify(regObj),
+            {
+                
                 headers: {
-                    'Accept': 'application/json, text/plain, */*',
-                    'Content-Type': 'application/json;charset=UTF8',
-                    // 'accept' : '/'
-                },
-                body: JSON.stringify(regObj)
-            }).then((res) => {
-                console.log(regObj)
-                console.log(res);
-                setSuccess(true);
-                toast.success('Register successfully.');
-                navigate('/Login');
-            }).catch((err) => {
-                toast.error('Failed: ' + err.message);
-            });
-        }
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    withCredentials: false,
+                }
+
+        
+        // axios({
+        //     method: 'post',
+        //     url: REGISTER_URL,
+        //     data: JSON.stringify(regObj),
+
+        //     config: {
+        //         header: {
+        //             'Accept': 'application/json, */*',
+        //             'Content-Type': 'application/json-patch+json',
+        //             'Connection': 'keep-alive',
+        //             'Content-Encoding': 'gzip',
+        //             'Content-Encoding': 'compress',
+        //             'Content-Encoding': 'deflate',
+        //             'Content-Encoding': 'br'
+
+        //         }
+        //     }
+        }).then((res) => {
+            console.log(JSON.stringify(regObj))
+            console.log(res);
+            setSuccess(true);
+            toast.success('Register successfully.');
+            // navigate('/Login');
+        }).catch((err) => {
+            toast.error('Failed: ' + err.message);
+        });
+
+        // if (IsValidate()) {
+
+        //     fetch(REGISTER_URL, {
+        //         // mode: 'no-cors',
+        //         // cache: 'no-cache',
+        //         method: 'POST',
+        //         header: {
+        //             // 'Accept': '*/*',   
+        //             // 'Accept': 'JSON', 
+        //             // 'Content-Type': 'application/json',
+        //             'Accept': 'application/json',
+        //             'Content-Type': 'application/json',
+        //             withCredentials: false,
+        //             // 'Accept-Encoding': 'gzip, deflate, br',
+        //             // 'accept' : '/'
+        //         },
+
+        //         body: JSON.stringify(regObj)
+
+
+        //     }).then((res) => {
+
+        //         console.log(JSON.stringify(regObj))
+        //         console.log(res);
+        //         setSuccess(true);
+        //         toast.success('Register successfully.');
+        //         navigate('/Login');
+        //     }).catch((err) => {
+        //         toast.error('Failed: ' + err.message);
+        //     });
+        // }
+
     }
 
     return (
