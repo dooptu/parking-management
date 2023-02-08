@@ -13,8 +13,9 @@ const USER_REGEX = /^[a-zA-Z][a-zA-Z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,30}/;
 const EMAIL_REGEX = /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/;
 const PHONE_REGEX = /^[0-9]{10,12}$/;
-// const REGISTER_URL = "https://0c1a-42-118-112-251.ap.ngrok.io/ParkingManagement/api/user/addAccount";
-const REGISTER_URL = "http://localhost:5000/users"
+const REGISTER_URL = "https://4208-118-69-69-189.ap.ngrok.io/ParkingManagement/api/user/addNewAccount";
+// const REGISTER_URL = "https://1525-27-74-221-84.ap.ngrok.io/user/save"
+// const REGISTER_URL = "http://localhost:5000/users"
 
 
 const Register = () => {
@@ -41,7 +42,8 @@ const Register = () => {
 
     const [birthday, setBirthDay] = useState(new Date());
 
-    const [gender, setGender] = useState('female');
+    const [txtGender, setTxtGender] = useState('female')
+    const [gender, setGender] = useState(false);
 
     const [email, setEmail] = useState('')
     const [validEmail, setValidEmail] = useState(false);
@@ -90,11 +92,21 @@ const Register = () => {
 
     }, [fullName])
 
+
     useEffect(() => {
 
         setBirthDay(birthday)
 
     }, [birthday])
+
+    useEffect(()=>{
+        if(txtGender === 'female'){
+            setGender(false)
+        } else
+        if(txtGender === 'male'){
+            setGender(true)
+        }
+    },[txtGender])
 
     useEffect(() => {
         setPhone(phone)
@@ -169,6 +181,15 @@ const Register = () => {
         e.preventDefault();
         //if button anabled with js hack
         const regObj = { id, pwd, fullName, birthday, gender, email, phone }
+        const regObj1 = {
+            "id": id,
+            "pwd": pwd,
+            "fullName": fullName,
+            "birthday": birthday,
+            "gender": gender,
+            "email": email,
+            "phone": phone
+        }
         // if(IsValidate()){
         //     const response = await axios.post(REGISTER_URL,
         //             JSON.stringify(regObj),
@@ -184,16 +205,16 @@ const Register = () => {
 
         // if (IsValidate()) {
 
-        axios.post(REGISTER_URL,JSON.stringify(regObj),
-            {
-                
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                    withCredentials: false,
-                }
+        // axios.post(REGISTER_URL,
+        //     {
+        //         data:JSON.stringify(regObj),
+        //         headers: {
+        //             'Accept': 'application/json',
+        //             'Content-Type': 'application/json',
+        //             withCredentials: false,
+        //         }
 
-        
+
         // axios({
         //     method: 'post',
         //     url: REGISTER_URL,
@@ -211,236 +232,242 @@ const Register = () => {
 
         //         }
         //     }
-        }).then((res) => {
-            console.log(JSON.stringify(regObj))
-            console.log(res);
-            setSuccess(true);
-            toast.success('Register successfully.');
-            // navigate('/Login');
-        }).catch((err) => {
-            toast.error('Failed: ' + err.message);
-        });
+        // }).then((res) => {
+        //     console.log(JSON.stringify(regObj))
+        //     console.log(res);
+        //     setSuccess(true);
+        //     toast.success('Register successfully.');
+        //     navigate('/Login');
+        // }).catch((err) => {
+        //     toast.error('Failed: ' + err.message);
+        // });
 
-        // if (IsValidate()) {
+        if (IsValidate()) {
 
-        //     fetch(REGISTER_URL, {
-        //         // mode: 'no-cors',
-        //         // cache: 'no-cache',
-        //         method: 'POST',
-        //         header: {
-        //             // 'Accept': '*/*',   
-        //             // 'Accept': 'JSON', 
-        //             // 'Content-Type': 'application/json',
-        //             'Accept': 'application/json',
-        //             'Content-Type': 'application/json',
-        //             withCredentials: false,
-        //             // 'Accept-Encoding': 'gzip, deflate, br',
-        //             // 'accept' : '/'
-        //         },
+            fetch(REGISTER_URL, {
+                // mode: 'no-cors',
+                // cache: 'no-cache',
+                method: 'POST',
+                header: {
+                    // 'Accept': '*/*',   
+                    // 'Accept': 'application/json', 
+                    // 'Content-Type': 'application/json',
+                    "Accept": "*/*",
+                    "Content-Type": "application/text",
+                    "X-Requested-With": "XMLHttpRequest",
+                    // "Connection": "close",
+                    "Cache-Control": "no-cache",
+                    // withCredentials: true, 
+                    // crossorigin: true,
+                    // credentials: "same-origin",
+                    
+                    // 'Accept-Encoding': 'gzip, deflate, br',
+                    // 'accept' : '/'
+                },
 
-        //         body: JSON.stringify(regObj)
+                body: JSON.stringify(regObj)
 
 
-        //     }).then((res) => {
+            }).then((res) => {
 
-        //         console.log(JSON.stringify(regObj))
-        //         console.log(res);
-        //         setSuccess(true);
-        //         toast.success('Register successfully.');
-        //         navigate('/Login');
-        //     }).catch((err) => {
-        //         toast.error('Failed: ' + err.message);
-        //     });
-        // }
-
+                console.log(JSON.stringify(regObj))
+                console.log(res);
+                setSuccess(true);
+                toast.success('Register successfully.');
+                navigate('/Login');
+            }).catch((err) => {
+                toast.error('Failed: ' + err.message);
+            });
     }
 
-    return (
-        <HelmetProvider>
-            <>
-                <Helmet>
-                    <title>Register</title>
-                </Helmet>
-                <div className="container-register">
-                    <BackgroundCommon className="background-register"></BackgroundCommon>
-                    <div className="register-form">
-                        {success ? (
-                            <section>
-                                <h1>Success!</h1>
-                                <p>
-                                    <a href="#">Sign In</a>
-                                </p>
-                            </section>
-                        ) : (
-                            <section >
-                                <p ref={errRef} className={errMsg ? "errMsg"
-                                    : "offScreen"} aria-live="assertive">{errMsg}</p>
-                                <form onSubmit={handleSubmit} className="row">
-                                    <h2 style={{}}>Sign Up</h2>
-                                    <span style={{ marginBottom: "40px", display: "block" }}>Join over 1 million other drivers throughout the UK. Over 350,000 spaces and counting.</span>
-                                    {/* -------------------USER-NAME-------------------- */}
-                                    <div>
+}
+
+return (
+    <HelmetProvider>
+        <>
+            <Helmet>
+                <title>Register</title>
+            </Helmet>
+            <div className="container-register">
+                <BackgroundCommon className="background-register"></BackgroundCommon>
+                <div className="register-form">
+                    {success ? (
+                        <section>
+                            <h1>Success!</h1>
+                            <p>
+                                <a href="#">Sign In</a>
+                            </p>
+                        </section>
+                    ) : (
+                        <section >
+                            <p ref={errRef} className={errMsg ? "errMsg"
+                                : "offScreen"} aria-live="assertive">{errMsg}</p>
+                            <form onSubmit={handleSubmit} className="row">
+                                <h2 style={{}}>Sign Up</h2>
+                                <span style={{ marginBottom: "40px", display: "block" }}>Join over 1 million other drivers throughout the UK. Over 350,000 spaces and counting.</span>
+                                {/* -------------------USER-NAME-------------------- */}
+                                <div>
+                                    <input
+                                        placeholder="User Name *"
+                                        type="text"
+                                        id="username"
+                                        className="col-sm-4"
+                                        ref={userRef}
+                                        autoComplete="off"
+                                        onChange={(e) => setId(e.target.value)}
+                                        required
+                                        aria-invalid={validName ? "false" : "true"}
+                                        aria-describedby="unidnote"
+                                        onFocus={() => setUserFocus(true)}
+                                        onBlur={() => setUserFocus(false)}
+                                    />
+
+                                    <FontAwesomeIcon icon={faCheck} className={validName ? "valid" : "hide"} />
+                                    <FontAwesomeIcon icon={faTimes} className={validName || !id ? "hide" : "invalid"} />
+
+                                </div>
+                                {/* -------------------FULL-NAME-------------------- */}
+                                <div>
+                                    <input
+                                        placeholder="Full Name *"
+                                        type="text"
+                                        id="fullname"
+                                        className="col-sm-4"
+                                        autoComplete="off"
+                                        onChange={(e) => setFullName(e.target.value)}
+                                        required
+
+                                    />
+                                </div>
+                                {/* -------------------PASSWORD-------------------- */}
+                                <div className="row">
+                                    <div className="col-sm-4 valid-pwd" id="password" style={{ marginRight: "20px" }}>
                                         <input
-                                            placeholder="User Name *"
-                                            type="text"
-                                            id="username"
-                                            className="col-sm-4"
-                                            ref={userRef}
-                                            autoComplete="off"
-                                            onChange={(e) => setId(e.target.value)}
+                                            placeholder="Password *"
+                                            type="password"
+                                            id="password"
+                                            onChange={(e) => setPwd(e.target.value)}
                                             required
-                                            aria-invalid={validName ? "false" : "true"}
-                                            aria-describedby="unidnote"
-                                            onFocus={() => setUserFocus(true)}
-                                            onBlur={() => setUserFocus(false)}
+                                            aria-invalid={validPwd ? "false" : "true"}
+                                            aria-describedby="pwdnode"
+                                            onFocus={() => setPwdFocus(true)}
+                                            onBlur={() => setPwdFocus(false)}
                                         />
-
-                                        <FontAwesomeIcon icon={faCheck} className={validName ? "valid" : "hide"} />
-                                        <FontAwesomeIcon icon={faTimes} className={validName || !id ? "hide" : "invalid"} />
+                                        <i><FontAwesomeIcon icon={faCheck} className={validPwd ? "valid" : "hide"} /></i>
+                                        <i><FontAwesomeIcon icon={faTimes} className={validPwd || !pwd ? "hide" : "invalid"} /></i>
 
                                     </div>
-                                    {/* -------------------FULL-NAME-------------------- */}
-                                    <div>
+
+                                    {/* -------------------CONFIRM-PASSWORD-------------------- */}
+                                    <div className="col-sm-4 valid-pwd">
                                         <input
-                                            placeholder="Full Name *"
-                                            type="text"
-                                            id="fullname"
-                                            className="col-sm-4"
-                                            autoComplete="off"
-                                            onChange={(e) => setFullName(e.target.value)}
+                                            placeholder="Confirm Password *"
+                                            type="password"
+                                            id="confirm_password"
+
+                                            onChange={(e) => setMatchPwd(e.target.value)}
                                             required
-
-                                        />
-                                    </div>
-                                    {/* -------------------PASSWORD-------------------- */}
-                                    <div className="row">
-                                        <div className="col-sm-4 valid-pwd" id="password" style={{ marginRight: "20px" }}>
-                                            <input
-                                                placeholder="Password *"
-                                                type="password"
-                                                id="password"
-                                                onChange={(e) => setPwd(e.target.value)}
-                                                required
-                                                aria-invalid={validPwd ? "false" : "true"}
-                                                aria-describedby="pwdnode"
-                                                onFocus={() => setPwdFocus(true)}
-                                                onBlur={() => setPwdFocus(false)}
-                                            />
-                                            <i><FontAwesomeIcon icon={faCheck} className={validPwd ? "valid" : "hide"} /></i>
-                                            <i><FontAwesomeIcon icon={faTimes} className={validPwd || !pwd ? "hide" : "invalid"} /></i>
-
-                                        </div>
-
-                                        {/* -------------------CONFIRM-PASSWORD-------------------- */}
-                                        <div className="col-sm-4 valid-pwd">
-                                            <input
-                                                placeholder="Confirm Password *"
-                                                type="password"
-                                                id="confirm_password"
-
-                                                onChange={(e) => setMatchPwd(e.target.value)}
-                                                required
-                                                aria-invalid={validMatch ? "false" : "true"}
-                                                aria-describedby="confirmnode"
-                                                onFocus={() => setMatchFocus(true)}
-                                                onBlur={() => setMatchFocus(false)}
-                                            />
-
-                                            <i><FontAwesomeIcon icon={faCheck} className={validMatch && matchPwd ? "valid" : "hide"} /></i>
-                                            <i><FontAwesomeIcon icon={faTimes} className={validMatch || !matchPwd ? "hide" : "invalid"} /></i>
-                                        </div>
-
-                                    </div>
-
-                                    {/* -------------------BIRTHDAY-------------------- */}
-                                    <div className="col-sm-4" style={{ marginRight: "80px", color: "#8AA4B3" }}>
-                                        <input
-                                            placeholder="Birth Day"
-                                            type="date"
-                                            id="birthday"
-
-                                            autoComplete="off"
-                                            onChange={(e) => setBirthDay(e.target.value)}
+                                            aria-invalid={validMatch ? "false" : "true"}
+                                            aria-describedby="confirmnode"
+                                            onFocus={() => setMatchFocus(true)}
+                                            onBlur={() => setMatchFocus(false)}
                                         />
 
-                                    </div>
-                                    {/* -------------------GENDER-------------------- */}
-                                    <div className="input-gender col-sm-4 ">
-
-                                        <input style={{ float: "left", marginLeft: "-10px" }} type="radio" checked={gender === 'female'} onChange={e => setGender(e.target.value)} name="gender" value="female" ></input>
-                                        <label className="gender"><span>Female</span></label>
-
-
-                                        <input style={{ float: "left" }} type="radio" checked={gender === 'male'} onChange={e => setGender(e.target.value)} name="gender" value="male" ></input>
-                                        <label className="gender"><span>Male</span></label>
-
-
-
-                                    </div>
-                                    {/* -------------------EMAIL-------------------- */}
-                                    <div>
-                                        <input
-                                            placeholder="Email *"
-                                            type="text"
-                                            id="email"
-                                            className="col-sm-4"
-                                            autoComplete="off"
-                                            onChange={(e) => setEmail(e.target.value)}
-                                            required
-                                            aria-invalid={validEmail ? "false" : "true"}
-                                            aria-describedby="emailnote"
-                                            onFocus={() => setEmailFocus(true)}
-                                            onBlur={() => setEmailFocus(false)}
-
-                                        />
-
-                                        <FontAwesomeIcon icon={faCheck} className={validEmail ? "valid" : "hide"} />
-                                        <FontAwesomeIcon icon={faTimes} className={validEmail || !email ? "hide" : "invalid"} />
-
+                                        <i><FontAwesomeIcon icon={faCheck} className={validMatch && matchPwd ? "valid" : "hide"} /></i>
+                                        <i><FontAwesomeIcon icon={faTimes} className={validMatch || !matchPwd ? "hide" : "invalid"} /></i>
                                     </div>
 
+                                </div>
 
-                                    {/* -------------------PHONE-------------------- */}
-                                    <div>
-                                        <input
-                                            placeholder="Phone *"
-                                            type="text"
-                                            id="phone"
-                                            className="col-sm-4"
-                                            autoComplete="off"
-                                            onChange={(e) => setPhone(e.target.value)}
-                                            required
-                                            aria-invalid={validPhone ? "false" : "true"}
-                                            aria-describedby="emailnote"
-                                            onFocus={() => setPhoneFocus(true)}
-                                            onBlur={() => setPhoneFocus(false)}
+                                {/* -------------------BIRTHDAY-------------------- */}
+                                <div className="col-sm-4" style={{ marginRight: "80px", color: "#8AA4B3" }}>
+                                    <input
+                                        placeholder="Birth Day"
+                                        type="date"
+                                        id="birthday"
 
-                                        />
+                                        autoComplete="off"
+                                        onChange={(e) => setBirthDay(e.target.value)}
+                                    />
 
-                                        <FontAwesomeIcon className={validPhone ? "valid" : "hide"} icon={faCheck} />
+                                </div>
+                                {/* -------------------GENDER-------------------- */}
+                                <div className="input-gender col-sm-4 ">
 
-
-                                        <FontAwesomeIcon className={validPhone || !phone ? "hide" : "invalid"} icon={faTimes} />
-
-                                    </div>
+                                    <input style={{ float: "left", marginLeft: "-10px" }} type="radio" checked={txtGender === 'female'} onChange={e => setTxtGender(e.target.value)} name="gender" value="female" ></input>
+                                    <label className="gender"><span>Female</span></label>
 
 
-                                    {/* -------------------PROMOTIONS-------------------- */}
-                                    <div className="col-sm-4 checkbox">
-                                        <input type="checkbox" onChange={e => setChecked(e.target.value)} name="checked" value="checked"></input>
-                                        <p > <a href="#" style={{ color: "black", textDecoration: "none" }}>Opt-in here if you would like to be one of the first to hear about our new discounts & promotions</a></p>
-                                    </div>
-                                    {/* -------------------SIGNUP-BTN-------------------- */}
-                                    <div>
-                                        <button className="btn-res col-sm-4" type="submit" >
-                                            Sign Up
-                                        </button>
-                                    </div>
-                                    {/* -------------------OTHER-------------------- */}
-                                    <div className="anyaccount" style={{ marginLeft: "60px", float: "left", textAlign: "center" }} ><span style={{ color: "black" }}>Already Registered?</span></div>
-                                    <Link to={'/login'}> <button className="btn-already-res"> <FontAwesomeIcon icon={faUser} style={{ marginRight: "10px" }} />Log In</button></Link>
+                                    <input style={{ float: "left" }} type="radio" checked={txtGender === 'male'} onChange={e => setTxtGender(e.target.value)} name="gender" value="male" ></input>
+                                    <label className="gender"><span>Male</span></label>
 
-                                    {/* <p>
+
+
+                                </div>
+                                {/* -------------------EMAIL-------------------- */}
+                                <div>
+                                    <input
+                                        placeholder="Email *"
+                                        type="text"
+                                        id="email"
+                                        className="col-sm-4"
+                                        autoComplete="off"
+                                        onChange={(e) => setEmail(e.target.value)}
+                                        required
+                                        aria-invalid={validEmail ? "false" : "true"}
+                                        aria-describedby="emailnote"
+                                        onFocus={() => setEmailFocus(true)}
+                                        onBlur={() => setEmailFocus(false)}
+
+                                    />
+
+                                    <FontAwesomeIcon icon={faCheck} className={validEmail ? "valid" : "hide"} />
+                                    <FontAwesomeIcon icon={faTimes} className={validEmail || !email ? "hide" : "invalid"} />
+
+                                </div>
+
+
+                                {/* -------------------PHONE-------------------- */}
+                                <div>
+                                    <input
+                                        placeholder="Phone *"
+                                        type="text"
+                                        id="phone"
+                                        className="col-sm-4"
+                                        autoComplete="off"
+                                        onChange={(e) => setPhone(e.target.value)}
+                                        required
+                                        aria-invalid={validPhone ? "false" : "true"}
+                                        aria-describedby="emailnote"
+                                        onFocus={() => setPhoneFocus(true)}
+                                        onBlur={() => setPhoneFocus(false)}
+
+                                    />
+
+                                    <FontAwesomeIcon className={validPhone ? "valid" : "hide"} icon={faCheck} />
+
+
+                                    <FontAwesomeIcon className={validPhone || !phone ? "hide" : "invalid"} icon={faTimes} />
+
+                                </div>
+
+
+                                {/* -------------------PROMOTIONS-------------------- */}
+                                <div className="col-sm-4 checkbox">
+                                    <input type="checkbox" onChange={e => setChecked(e.target.value)} name="checked" value="checked"></input>
+                                    <p > <a href="#" style={{ color: "black", textDecoration: "none" }}>Opt-in here if you would like to be one of the first to hear about our new discounts & promotions</a></p>
+                                </div>
+                                {/* -------------------SIGNUP-BTN-------------------- */}
+                                <div>
+                                    <button className="btn-res col-sm-4" type="submit" >
+                                        Sign Up
+                                    </button>
+                                </div>
+                                {/* -------------------OTHER-------------------- */}
+                                <div className="anyaccount" style={{ marginLeft: "60px", float: "left", textAlign: "center" }} ><span style={{ color: "black" }}>Already Registered?</span></div>
+                                <Link to={'/login'}> <button className="btn-already-res"> <FontAwesomeIcon icon={faUser} style={{ marginRight: "10px" }} />Log In</button></Link>
+
+                                {/* <p>
                                 Already Registered? <br />
                                 <span className="line">
 
@@ -448,17 +475,17 @@ const Register = () => {
                                 </span>
                             </p> */}
 
-                                </form>
+                            </form>
 
-                            </section>
-                        )}
-                    </div>
-
+                        </section>
+                    )}
                 </div>
-            </>
-        </HelmetProvider>
 
-    )
+            </div>
+        </>
+    </HelmetProvider>
+
+)
 
 }
 

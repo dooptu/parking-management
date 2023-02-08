@@ -35,6 +35,33 @@
       "gender": "female",
       "email": "fghj@Hjd.com",
       "phone": "98989898989"
+    },
+    {
+      "id": "Tutu",
+      "pwd": "Aa@123456",
+      "fullName": "Tu",
+      "birthday": "2002-04-11",
+      "gender": "male",
+      "email": "tu@gmail.com",
+      "phone": "0123456789"
+    },
+    {
+      "id": "tunguyen111",
+      "pwd": "Aa@123456",
+      "fullName": "minh tu",
+      "birthday": "2002-04-11",
+      "gender": "female",
+      "email": "tu@Gmail.com",
+      "phone": "1234567891"
+    },
+    {
+      "id": "minhtu",
+      "pwd": "Aa@123456",
+      "fullName": "Minh Tu",
+      "birthday": "2022-04-12",
+      "gender": false,
+      "email": "tu@gmail.com",
+      "phone": "1212312132"
     }
   ]
 }

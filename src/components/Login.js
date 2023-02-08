@@ -8,7 +8,8 @@ import Helmet from "react-helmet";
 import { HelmetProvider } from "react-helmet-async";
 
 // const LOGIN_URL = "https://0c1a-42-118-112-251.ap.ngrok.io/ParkingManagement/api/user/getUser/";
-const LOGIN_URL = "http://localhost:5000/users/"
+
+const LOGIN_URL = "https://4208-118-69-69-189.ap.ngrok.io/ParkingManagement/api/user/getOneUser/"
 
 const Login = () => {
     const [username, usernameupdate] = useState('');
@@ -130,8 +131,6 @@ const Login = () => {
                             <br />
                             <div className="anyaccount" ><span>Don’t have any account?</span></div>
                             <Link to={'/register'}> <button className="btn-signup"> <FontAwesomeIcon icon={faUser} style={{ marginRight: "10px" }} />Sign Up for free</button></Link>
-
-
 
                         </form>
 
