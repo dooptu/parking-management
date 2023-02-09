@@ -6,6 +6,8 @@ import Login from './components/Login';
 import Register from './components/Register';
 import { ToastContainer } from 'react-toastify';
 import ForgottenPwd from './components/Forgotten-pwd';
+import Header from './components/Header';
+import Reservation from './components/Reservation';
 
 
 function App() {
@@ -18,8 +20,11 @@ function App() {
         <Route path='/login' element={<Login/>}></Route>
         <Route path='/register' element={<Register/>}></Route>
         <Route path='/Forgotten-pwd' element={<ForgottenPwd/>}></Route>
+        <Route path='/Reservation' element={<Reservation/>}></Route>
       </Routes>
+      
       </BrowserRouter>
+      
     </div>
   );
 }

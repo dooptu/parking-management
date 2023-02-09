@@ -9,7 +9,9 @@ import { HelmetProvider } from "react-helmet-async";
 
 // const LOGIN_URL = "https://0c1a-42-118-112-251.ap.ngrok.io/ParkingManagement/api/user/getUser/";
 
-const LOGIN_URL = "https://4208-118-69-69-189.ap.ngrok.io/ParkingManagement/api/user/getOneUser/"
+const LOGIN_URL = "https://parkingsystem.pagekite.me/ParkingManagement/api/user/getOneUser/"
+const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,30}/;
+const EMAIL_REGEX = /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/;
 
 const Login = () => {
     const [username, usernameupdate] = useState('');
@@ -21,14 +23,32 @@ const Login = () => {
         sessionStorage.clear();
     }, []);
 
+    useEffect(() => {
+
+        usernameupdate(username)
+    }, [username])
+
+    useEffect(() => {
+
+        passwordupdate(password)
+    }, [password])
+
     const ProceedLogin = (e) => {
         e.preventDefault();
         if (validate()) {
             ///implentation
-
+            console.log(username)
             fetch(LOGIN_URL + username, {
+                headers: {
+                    // "Accept": "*/*",
+                    // "Content-Type": "application/text",
+                    "X-Requested-With": "XMLHttpRequest",
+                    // "Connection": "close",
+                    "Cache-Control": "no-cache",
+                }
                 // mode: 'no-cors'
             }).then((res) => {
+                console.log(res.json)
                 return res.json();
             }).then((resp) => {
                 console.log(resp)
@@ -78,9 +98,9 @@ const Login = () => {
                 } else {
                     if (resp.password === password) {
                         toast.success('Success');
-                        sessionStorage.setItem('username',username);
+                        sessionStorage.setItem('username', username);
                         usenavigate('/')
-                    }else{
+                    } else {
                         toast.error('Please Enter valid credentials');
                     }
                 }
