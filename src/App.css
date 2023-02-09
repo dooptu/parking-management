@@ -777,6 +777,16 @@ input[type='radio']:checked:after {
 .footer a,p{
   color: white;
 }
+/* --------------------------------------RESERVATION--------------------------------- */
+.step-reservation {
+  text-align: center;
+}
+
+.step-reservation div{
+  width: 100px;
+  height: 100px;
+  background-color: black;
+}
 
 
 @keyframes App-logo-spin {
