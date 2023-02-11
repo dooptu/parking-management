@@ -1,5 +1,5 @@
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Helmet from "react-helmet";
 import { HelmetProvider } from "react-helmet-async";
@@ -7,24 +7,62 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faTimes, faInfoCircle, faUser } from "@fortawesome/free-solid-svg-icons";
 
 const Slider = () => {
+    const [startDate, setStartDate] = useState();
+    const [endDate, setEndDate] = useState();
+    const [startTime, setStartTime] = useState('');
+    const [endTime, setEndTime] = useState('');
+    const userRef = useRef();
+    const errRef = useRef();
+
+    useEffect(() => {
+        setStartDate(startDate);
+    }, [startDate]);
+
+    useEffect(() => {
+        setEndDate(endDate);
+    }, [endDate]);
+
+    useEffect(() => {
+        setStartTime(startTime);
+
+    }, [startTime]);
+
+    useEffect(() => {
+        setEndTime(endTime);
+    }, [endTime]);
+
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const regObj = { startDate, endDate, startTime, endTime }
+        sessionStorage.setItem("startDate", startDate);
+
+        sessionStorage.setItem("endDate", endDate);
+
+        sessionStorage.setItem("startTime", startTime);
+        sessionStorage.setItem("endTime", endTime);
+
+        console.log(JSON.stringify(regObj));
+        window.location.href = '/Reservation'
+    }
 
     return (
         <div className="background" style={{ marginTop: '-11px' }}>
             <div className="booking-in-homepage">
                 <h2>BOOKING NOW</h2>
-                <form onSubmit={''}>
+                <form onSubmit={handleSubmit}>
                     <div className="class-input">
                         <label>Start date *</label>
                         <br />
                         <div>
-                            <input type={'date'} placeholder="User Name" style={{ width: '100%', position: 'relative' }}  ></input>
+                            <input type={'date'} style={{ width: '100%', position: 'relative' }} onChange={(e) => setStartDate(e.target.value)} ></input>
 
                         </div>
                     </div>
                     <div className="class-input">
                         <label>Start time *</label>
                         <br />
-                        <select class="form-select">
+                        <select class="form-select" autoComplete="" onChange={(e) => setStartTime(e.target.value)}>
                             <option>00:00</option>
                             <option>01:00</option>
                             <option>02:00</option>
@@ -57,14 +95,14 @@ const Slider = () => {
                         <label>End date *</label>
                         <br />
                         <div>
-                            <input type={'date'} placeholder="User Name" style={{ width: '100%', position: 'relative' }}  ></input>
+                            <input type={'date'} style={{ width: '100%', position: 'relative' }} onChange={(e) => setEndDate(e.target.value)}  ></input>
 
                         </div>
                     </div>
                     <div className="class-input">
                         <label>End time *</label>
                         <br />
-                        <select class="form-select">
+                        <select class="form-select" autoComplete="off" onChange={(e) => setEndTime(e.target.value)}>
                             <option>00:00</option>
                             <option>01:00</option>
                             <option>02:00</option>
@@ -88,12 +126,12 @@ const Slider = () => {
                             <option>21:00</option>
                             <option>22:00</option>
                             <option>23:00</option>
-
-
                         </select>
                     </div>
 
+
                     <button style={{ color: "#fff" }} type="submit">Book now</button>
+
                 </form>
 
 
