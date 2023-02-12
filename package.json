@@ -2,7 +2,7 @@
   "name": "reactauthentication",
   "version": "0.1.0",
   "private": true,
-  "proxy": "https://parkingsystem.pagekite.me",
+  "proxy": "https://demo-spring-heroku-app.herokuapp.com",
   "dependencies": {
     "@fortawesome/free-solid-svg-icons": "^6.2.1",
     "@fortawesome/react-fontawesome": "^0.2.0",

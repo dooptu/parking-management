@@ -10,10 +10,11 @@ import Slider from "./Slider";
 
 const Home = () => {
     const [zone, setZone] = useState('');
-    useEffect(() => {
-        setZone(zone);
-        console.log(zone);
-    }, [zone]);
+
+    // useEffect(() => {
+    //     setZone(zone);
+    //     console.log(zone);
+    // }, [zone]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -21,7 +22,7 @@ const Home = () => {
         console.log(zone);
         // window.location.href = '/Reservation';
     }
-   
+
 
     return (
         <HelmetProvider>
@@ -52,7 +53,7 @@ const Home = () => {
                         </div>
                         <div className="card-footer">
                             <button style={{ color: "#fff", width: '25%' }} type="submit"><span>Details</span></button>
-                            <button style={{ color: "#fff" }} type="submit" onChange={(e) => setZone(e.target.value)} value="A"><span>Make Reservation</span></button>
+                            <button style={{ color: "#fff" }} type="submit" onChange={() => setZone('A')} value="A"><span>Make Reservation</span></button>
                         </div>
                     </div>
 
@@ -72,7 +73,7 @@ const Home = () => {
                             </div>
                         </div>
                         <div className="card-footer">
-                            <button style={{ color: "#fff", width: '25%' }} type="submit" onChange={(e) => setZone(e.target.value)} value="B"><span>Details</span></button>
+                            <button style={{ color: "#fff", width: '25%' }} type="submit" onChange={() => setZone('B')} value="B"><span>Details</span></button>
                             <button style={{ color: "#fff" }} type="submit"><span>Make Reservation</span></button>
                         </div>
                     </div>
@@ -93,7 +94,7 @@ const Home = () => {
                             </div>
                         </div>
                         <div className="card-footer">
-                            <button style={{ color: "#fff", width: '25%' }} type="submit" onChange={(e) => setZone(e.target.value)} value="B"><span>Details</span></button>
+                            <button style={{ color: "#fff", width: '25%' }} type="submit" onChange={() => setZone('C')} value="C"><span>Details</span></button>
                             <button style={{ color: "#fff" }} type="submit"><span>Make Reservation</span></button>
                         </div>
                     </div>
@@ -154,7 +155,7 @@ const Home = () => {
             </form>
             <Footer></Footer>
 
-            
+
         </HelmetProvider>
     );
 }

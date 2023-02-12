@@ -179,8 +179,12 @@ const Register = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        const password = pwd;
+        const fullname = fullName;
+        const dateofbirth = birthday;
+
         //if button anabled with js hack
-        const regObj = { id, pwd, fullName, birthday, gender, email, phone }
+        const regObj = { id, password, fullname, dateofbirth, gender, email, phone }
         const regObj1 = {
             "id": id,
             "pwd": pwd,

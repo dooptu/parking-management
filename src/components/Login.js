@@ -9,7 +9,7 @@ import { HelmetProvider } from "react-helmet-async";
 
 // const LOGIN_URL = "https://0c1a-42-118-112-251.ap.ngrok.io/ParkingManagement/api/user/getUser/";
 
-const LOGIN_URL = "https://parkingsystem.pagekite.me/ParkingManagement/api/user/getOneUser/"
+const LOGIN_URL = "https://demo-spring-heroku-app.herokuapp.com/user/findById?id="
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,30}/;
 const EMAIL_REGEX = /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/;
 
@@ -45,8 +45,9 @@ const Login = () => {
                     "X-Requested-With": "XMLHttpRequest",
                     // "Connection": "close",
                     "Cache-Control": "no-cache",
+                    mode: 'no-cors'
                 }
-                // mode: 'no-cors'
+                
             }).then((res) => {
                 console.log(res.json)
                 return res.json();
@@ -141,7 +142,7 @@ const Login = () => {
                         <button className="google" style={{ marginTop: "0px" }} type="submit"> <img style={{ width: "30px", position: "absolute", left: "20px", marginRight: "30px" }} src='./assets/img/facebook.png' /> Login with Facebook</button>
                         <br />
                         <div className="dash-or"><span>Or</span></div>
-                        <form onSubmit={ProceedLogin}>
+                        <form onSubmit={ProceedLoginusingAPI}>
                             <input placeholder="User Name" style={{ marginTop: "30px" }} value={username} onChange={e => usernameupdate(e.target.value)} ></input>
                             <input placeholder="Password" type="password" value={password} onChange={e => passwordupdate(e.target.value)} ></input>
                             <button style={{ color: "#fff" }} type="submit">Log In</button>
