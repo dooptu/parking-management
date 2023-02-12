@@ -40,12 +40,15 @@ const Login = () => {
             console.log(username)
             fetch(LOGIN_URL + username, {
                 headers: {
+                    method: 'GET',
                     // "Accept": "*/*",
                     // "Content-Type": "application/text",
                     "X-Requested-With": "XMLHttpRequest",
+                    "Access-Control-Allow-Origin": "*",
+                    "Access-Control-Allow-Headers": "Origin,X-Requested-With, Content-Type, Accept",
                     // "Connection": "close",
                     "Cache-Control": "no-cache",
-                    mode: 'no-cors'
+                    mode: 'cors'
                 }
                 
             }).then((res) => {
@@ -142,7 +145,7 @@ const Login = () => {
                         <button className="google" style={{ marginTop: "0px" }} type="submit"> <img style={{ width: "30px", position: "absolute", left: "20px", marginRight: "30px" }} src='./assets/img/facebook.png' /> Login with Facebook</button>
                         <br />
                         <div className="dash-or"><span>Or</span></div>
-                        <form onSubmit={ProceedLoginusingAPI}>
+                        <form onSubmit={ProceedLogin}>
                             <input placeholder="User Name" style={{ marginTop: "30px" }} value={username} onChange={e => usernameupdate(e.target.value)} ></input>
                             <input placeholder="Password" type="password" value={password} onChange={e => passwordupdate(e.target.value)} ></input>
                             <button style={{ color: "#fff" }} type="submit">Log In</button>

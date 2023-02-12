@@ -106,8 +106,8 @@ const ReservationDetail = () => {
 
     return (
         <div>
-            <Header></Header>
-            <Slider></Slider>
+            
+            
             <h2 style={{ textAlign: 'center', paddingTop: '30px', color: '#BA3925' }}>Processing...</h2>
             <div class="step-reservation container d-flex align-items-center justify-content-center">
                 <div className="circle">

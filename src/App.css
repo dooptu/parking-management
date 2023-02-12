@@ -854,12 +854,39 @@ p {
 
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
+/* ----------------------------------PAYMENT-INFORMATION-------------------------------------*/
 
-  to {
-    transform: rotate(360deg);
-  }
+.payment-infor{
+  margin-left: 35%;
+  margin-right: 10%;
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+
+.payment-infor p{
+  color: black;
+}
+
+.payment-infor button{
+  width: 35%;
+  height: 50px;
+  border-radius: 5px;
+  border: 0.5px solid #2DC98A;
+  background-color: #2DC98A;
+  margin-left: 5%;
+}
+
+.payment-infor img{
+  width: 500px;
+  height: 150px;
+}
+
+.payment-infor-detail{
+  margin-top: 5%;
+}
+
+.payment-infor-detail span{
+  display: inline-block;
+  width: 200px;
+  margin-right: 0px;
 }
