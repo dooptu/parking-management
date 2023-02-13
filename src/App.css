@@ -814,6 +814,11 @@ p {
   padding-top: 30%;
   font-size: 20px;
   color: #fff;
+  text-decoration: none;
+}
+
+.step-reservation Link{
+  text-decoration: none;
 }
 /* --------------------------------------RESERVATION-DETAILS--------------------------------- */
 
@@ -854,6 +859,12 @@ p {
 
 }
 
+.zone-reservation{
+  position: absolute;
+  top: 142%;
+  right: 10%;
+}
+
 /* ----------------------------------PAYMENT-INFORMATION-------------------------------------*/
 
 .payment-infor{
@@ -889,4 +900,85 @@ p {
   display: inline-block;
   width: 200px;
   margin-right: 0px;
+}
+
+/* -------------------------------------------------BANKING--------------------------- */
+
+.header-banking-gate{
+  width: 100%;
+  height: 200px;
+  background-color: #2DC98A;
+  position: relative;
+  text-align: center;
+}
+
+.header-banking-gate div{
+  font-size: 40px;
+  width: 300px;
+  text-align: center;
+  top:20%;
+  left: 41%;
+  margin: 0 auto;
+  position: absolute;
+}
+
+.input-creadit-card{
+  margin-top: 50px;
+  float: right;
+}
+
+/* -----------------------------------------------RESERVATION-COMPLETE------------------ */
+
+.complete-infor{
+  margin-left: 35%;
+  margin-right: 10%;
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+
+.complete-infor-detail{
+  margin-top: 5%;
+}
+
+.complete-infor-detail span{
+  display: inline-block;
+  width: 200px;
+  margin-right: 0px;
+}
+/* -----------------------------------------------ZONE-DETAIL------------------------------- */
+
+.zone-detail{
+  width: 45%;
+  margin-left: 10%;
+  margin-top: 50px;
+  font-size: 18px;
+  
+}
+
+
+.zone-detail p{
+  display: block;
+  width: 100%;
+  border-bottom: 1px solid green;
+  color: black;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.table-responsive div{
+  width: 100%;
+  background-color: rgba(250, 104, 104, 0.874);
+  text-align: center;
+}
+
+.zone-detail-make{
+  position: absolute;
+  top:100%;
+  right: 20%;
+  margin-top: 50px;
+  
+}
+
+.zone-detail-make input{
+  width: 200px;
 }

@@ -20,7 +20,8 @@ const Home = () => {
         e.preventDefault();
         sessionStorage.setItem("zone", zone);
         console.log(zone);
-        // window.location.href = '/Reservation';
+        window.location.href = '/Reservation';
+        window.location.href = '/ZoneDetail'
     }
 
 

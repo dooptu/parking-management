@@ -16,14 +16,14 @@ const ReservationDetail = () => {
     const [endDate, setEndDate] = useState(sessionStorage.getItem("endDate"));
     const [startTime, setStartTime] = useState(sessionStorage.getItem("startTime"));
     const [endTime, setEndTime] = useState(sessionStorage.getItem("endTime"));
-    const [zone, setZone] = useState(sessionStorage.getItem("zone"))
+    const [zone, setZone] = useState(sessionStorage.getItem("B"))
     const [fullName, setFullName] = useState('');
     const [email, setEmail] = useState('')
     const [validEmail, setValidEmail] = useState(false);
     const [phone, setPhone] = useState('')
     const [validPhone, setValidPhone] = useState(false);
-    const [typeOfVehicle, setTypeOfVehicle] = useState('');
-    const [slot, setSlot] = useState('');
+    const [typeOfVehicle, setTypeOfVehicle] = useState('Moto');
+    const [slot, setSlot] = useState('R2');
 
     useEffect(() => {
         setStartDate(startDate);
@@ -62,11 +62,11 @@ const ReservationDetail = () => {
         setValidPhone(result);
     })
 
-    useEffect (() =>{
+    useEffect(() => {
         setTypeOfVehicle(typeOfVehicle)
     }, [typeOfVehicle])
 
-    useEffect (() =>{
+    useEffect(() => {
         setSlot(slot)
     }, [slot])
 
@@ -96,39 +96,44 @@ const ReservationDetail = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const obj = {startDate, endDate, startTime, endTime, zone, typeOfVehicle, slot, fullName, email, phone }
-        if (IsValidate)
-        console.log(obj);
-        window.location.href = '/PaymentInformation'
+        const obj = { startDate, endDate, startTime, endTime, zone, typeOfVehicle, slot, fullName, email, phone }
+        if (IsValidate) {
+            console.log(JSON.stringify(obj));
+            sessionStorage.setItem("reservation", JSON.stringify(obj));
+            window.location.href = '/PaymentInformation';
+
+
+        }
     }
 
 
 
     return (
         <div>
-            
-            
+
+
             <h2 style={{ textAlign: 'center', paddingTop: '30px', color: '#BA3925' }}>Processing...</h2>
             <div class="step-reservation container d-flex align-items-center justify-content-center">
+
                 <div className="circle">
-                    <div class="col-lg-3 rounded-circle"><span>1</span></div>
+                    <div class="col-lg-3 rounded-circle" style={{ backgroundColor: 'black' }}><span>1</span></div>
                     <h6 style={{ display: 'block', width: '80px', textAlign: 'center', marginLeft: '10px' }}>Reservation Details</h6>
                 </div>
+
                 <FontAwesomeIcon style={{ fontSize: '25px', marginTop: '-30px' }} icon={faArrowRight}></FontAwesomeIcon>
-                <div className="circle">
-                    <div class="col-lg-3 rounded-circle"><span>1</span></div>
-                    <h6 style={{ display: 'block', width: '80px', textAlign: 'center', marginLeft: '10px' }}>Reservation Details</h6>
-                </div>
+                <Link style={{ textDecoration: 'none' }} to={'/PaymentInformation'}>
+                    <div className="circle">
+                        <div class="col-lg-3 rounded-circle"><span>2</span></div>
+                        <h6 style={{ display: 'block', width: '80px', textAlign: 'center', marginLeft: '10px' }}>Payment Accuracy</h6>
+                    </div>
+                </Link>
                 <FontAwesomeIcon style={{ fontSize: '25px', marginTop: '-30px' }} icon={faArrowRight}></FontAwesomeIcon>
-                <div className="circle">
-                    <div class="col-lg-3 rounded-circle"><span>1</span></div>
-                    <h6 style={{ display: 'block', width: '80px', textAlign: 'center', marginLeft: '10px' }}>Reservation Details</h6>
-                </div>
-                <FontAwesomeIcon style={{ fontSize: '25px', marginTop: '-30px' }} icon={faArrowRight}></FontAwesomeIcon>
-                <div className="circle">
-                    <div class="col-lg-3 rounded-circle"><span>1</span></div>
-                    <h6 style={{ display: 'block', width: '80px', textAlign: 'center', marginLeft: '10px' }}>Reservation Details</h6>
-                </div>
+                <Link style={{ textDecoration: 'none' }} to={'/ReservationComplete'}>
+                    <div className="circle">
+                        <div class="col-lg-3 rounded-circle" ><span>3</span></div>
+                        <h6 style={{ display: 'block', width: '80px', textAlign: 'center', marginLeft: '10px' }}>Reservation Completed</h6>
+                    </div>
+                </Link>
             </div>
             <div className="reservation-details">
                 <h3 style={{ paddingBottom: '30px' }}>Reservation details</h3>
@@ -216,7 +221,7 @@ const ReservationDetail = () => {
                     <div className=" col-lg-6 class-input">
                         <label>Zone *</label>
                         <br />
-                        <select class="form-select" onChange={(e) => setZone(e.target.value)} value={zone}>
+                        <select class="form-select" onChange={(e) => setZone(e.target.value)} >
                             <option>A</option>
                             <option>B</option>
                             <option>C</option>
@@ -289,7 +294,71 @@ const ReservationDetail = () => {
 
                 </div>
             </div>
-            <Footer></Footer>
+
+            <div class="table-responsive  align-items-center justify-content-center zone-reservation">
+                <h5>AVAILABILITY</h5>
+                <div style={{marginTop:'50px'}}>Resident Area</div>
+                <table class="table border">
+                    <tbody>
+                        <tr class="border">
+                            <td class="border">R1</td>
+                            <td class="border">R2</td>
+                            <td class="border">R3</td>
+                            <td class="border">R4</td>
+                            <td class="border">R5</td>
+                            <td class="border">R6</td>
+                            <td class="border">R7</td>
+                            <td class="border">R8</td>
+                            <td class="border">R9</td>
+                            <td class="border">R10</td>
+                        </tr>
+                        <tr>
+                            <td class="border">R11</td>
+                            <td class="border">R12</td>
+                            <td class="border">R13</td>
+                            <td class="border">R14</td>
+                            <td class="border">R15</td>
+                            <td class="border">R16</td>
+                            <td class="border">R17</td>
+                            <td class="border">R18</td>
+                            <td class="border">R19</td>
+                            <td class="border">R20</td>
+                        </tr>
+                    </tbody>
+
+                </table>
+                <div>Customer Area</div>
+                <table class="table border">
+                    <tbody>
+                        <tr class="border">
+                            <td class="border">C1</td>
+                            <td class="border">C2</td>
+                            <td class="border">C3</td>
+                            <td class="border">C4</td>
+                            <td class="border">C5</td>
+                            <td class="border">C6</td>
+                            <td class="border">C7</td>
+                            <td class="border">C8</td>
+                            <td class="border">C9</td>
+                            <td class="border">C10</td>
+                        </tr>
+                        <tr>
+                            <td class="border">C11</td>
+                            <td class="border">C12</td>
+                            <td class="border">C13</td>
+                            <td class="border">C14</td>
+                            <td class="border">C15</td>
+                            <td class="border">C16</td>
+                            <td class="border">C17</td>
+                            <td class="border">C18</td>
+                            <td class="border">C19</td>
+                            <td class="border">C20</td>
+                        </tr>
+                    </tbody>
+
+                </table>
+            </div>
+
         </div>
     )
 

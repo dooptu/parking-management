@@ -9,6 +9,10 @@ import ForgottenPwd from './components/Forgotten-pwd';
 import Header from './components/Header';
 import Reservation from './components/Reservation';
 import PaymentInformation from './components/PaymentInformation';
+import Banking from './components/Banking';
+import ReservationComplete from './components/ReservationComplete';
+import ZoneDetai from './components/ZoneDetail';
+import ZoneDetail from './components/ZoneDetail';
 
 
 function App() {
@@ -23,7 +27,9 @@ function App() {
         <Route path='/Forgotten-pwd' element={<ForgottenPwd/>}></Route>
         <Route path='/Reservation' element={<Reservation/>}></Route>
         <Route path='/PaymentInformation' element={<PaymentInformation></PaymentInformation>} ></Route>
-        
+        <Route path='/Banking' element={<Banking></Banking>}></Route>
+        <Route path='/ReservationComplete' element={<ReservationComplete></ReservationComplete>}></Route>
+        <Route path='/ZoneDetail' element={<ZoneDetail/>}></Route>
       </Routes>
       
       </BrowserRouter>
