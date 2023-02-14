@@ -40,15 +40,15 @@ const ZoneDetail = () => {
                         <table class="table border">
                             <tbody>
                                 <tr class="border">
-                                    <td class="border">R1</td>
-                                    <td class="border">R2</td>
-                                    <td class="border">R3</td>
-                                    <td class="border">R4</td>
-                                    <td class="border">R5</td>
-                                    <td class="border">R6</td>
-                                    <td class="border">R7</td>
-                                    <td class="border">R8</td>
-                                    <td class="border">R9</td>
+                                    <td class="border">R01</td>
+                                    <td class="border">R02</td>
+                                    <td class="border">R03</td>
+                                    <td class="border">R04</td>
+                                    <td class="border">R05</td>
+                                    <td class="border">R06</td>
+                                    <td class="border">R07</td>
+                                    <td class="border">R08</td>
+                                    <td class="border">R09</td>
                                     <td class="border">R10</td>
                                 </tr>
                                 <tr>
@@ -70,15 +70,15 @@ const ZoneDetail = () => {
                         <table class="table border">
                             <tbody>
                                 <tr class="border">
-                                    <td class="border">C1</td>
-                                    <td class="border">C2</td>
-                                    <td class="border">C3</td>
-                                    <td class="border">C4</td>
-                                    <td class="border">C5</td>
-                                    <td class="border">C6</td>
-                                    <td class="border">C7</td>
-                                    <td class="border">C8</td>
-                                    <td class="border">C9</td>
+                                    <td class="border">C01</td>
+                                    <td class="border">C02</td>
+                                    <td class="border">C03</td>
+                                    <td class="border">C04</td>
+                                    <td class="border">C05</td>
+                                    <td class="border">C06</td>
+                                    <td class="border">C07</td>
+                                    <td class="border">C08</td>
+                                    <td class="border">C09</td>
                                     <td class="border">C10</td>
                                 </tr>
                                 <tr>
@@ -180,9 +180,6 @@ const ZoneDetail = () => {
                             <option>23:00</option>
                         </select>
                     </div>
-
-
-                    
 
 
                 </div>

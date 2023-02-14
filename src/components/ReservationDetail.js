@@ -96,11 +96,16 @@ const ReservationDetail = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const obj = { startDate, endDate, startTime, endTime, zone, typeOfVehicle, slot, fullName, email, phone }
+        const id_Building = zone;
+        const type_Of_Vehicle= typeOfVehicle;
+        const id_C_Slot = slot;
+        const fullname = fullName;
+        const obj = { startDate, endDate, startTime, endTime, id_Building, type_Of_Vehicle, id_C_Slot, fullname, email, phone }
         if (IsValidate) {
             console.log(JSON.stringify(obj));
+            console.log(obj)
             sessionStorage.setItem("reservation", JSON.stringify(obj));
-            window.location.href = '/PaymentInformation';
+            // 
 
 
         }

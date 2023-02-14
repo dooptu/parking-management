@@ -26,12 +26,12 @@ const Login = () => {
     useEffect(() => {
 
         usernameupdate(username)
-    }, [username])
+    }, [username]);
 
     useEffect(() => {
 
         passwordupdate(password)
-    }, [password])
+    }, [password]);
 
     const ProceedLogin = (e) => {
         e.preventDefault();

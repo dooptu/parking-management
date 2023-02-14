@@ -28,12 +28,13 @@ const PaymentInformation = () => {
 
             <h2 style={{ textAlign: 'center', paddingTop: '30px', color: '#BA3925' }}>Processing...</h2>
             <div class="step-reservation container d-flex align-items-center justify-content-center">
-                <Link style={{textDecoration: 'none'}} to={'/Reservation'}>
+                <Link style={{ textDecoration: 'none' }} to={'/Reservation'}>
                     <div className="circle">
                         <div class="col-lg-3 rounded-circle" ><span>1</span></div>
                         <h6 style={{ display: 'block', width: '80px', textAlign: 'center', marginLeft: '10px' }}>Reservation Details</h6>
                     </div>
                 </Link>
+
                 <FontAwesomeIcon style={{ fontSize: '25px', marginTop: '-30px' }} icon={faArrowRight}></FontAwesomeIcon>
 
                 <div className="circle">
@@ -42,7 +43,8 @@ const PaymentInformation = () => {
                 </div>
 
                 <FontAwesomeIcon style={{ fontSize: '25px', marginTop: '-30px' }} icon={faArrowRight}></FontAwesomeIcon>
-                <Link style={{textDecoration: 'none'}} to={'/ReservationComplete'}>
+
+                <Link style={{ textDecoration: 'none' }} to={'/ReservationComplete'}>
                     <div className="circle">
                         <div class="col-lg-3 rounded-circle" ><span>3</span></div>
                         <h6 style={{ display: 'block', width: '80px', textAlign: 'center', marginLeft: '10px' }}>Reservation Completed</h6>
@@ -56,12 +58,15 @@ const PaymentInformation = () => {
                     <p style={{ width: '500px' }}>In order to complete your reservation, you will need to make an online payment. Click the button below to go to a secure payment site.</p>
                     <p style={{ fontWeight: 'bold' }}>YOUR RESERVATION WILL NOT BE VALID WITHOUT THE PAYMENT!</p>
                     <div className="col-lg-6 class-input" >
+                    
                         <label style={{ marginLeft: '-20%', marginTop: '20px', width: '700px' }}>Payment method *</label>
                         <br />
+
                         <select class="form-select" style={{ width: '35%', marginLeft: '-20%', float: 'left' }} >
                             <option> <FontAwesomeIcon icon={faCashRegister}></FontAwesomeIcon> Cash</option>
                             <option>Baking</option>
                         </select>
+
                         <Link to={'/Banking'}>
 
                             <button style={{ color: "#fff" }} type="submit">Pay now</button>
@@ -80,7 +85,7 @@ const PaymentInformation = () => {
                         <a>1</a>
                         <br />
                         <span>Duration</span>
-                        <a>{reservation.startDate}, {reservation.endDate}, {reservation.startTime}, {reservation.endTime} (13 hours)</a>
+                        <a>{reservation.startDate}, {reservation.endDate}, {reservation.startTime}, {reservation.endTime}</a>
                         <br />
                         <span>Created</span>
                         <a>{Date.now().toLocaleString().split('-')}</a>
