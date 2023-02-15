@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import Helmet from "react-helmet";
 import { HelmetProvider } from "react-helmet-async";
@@ -10,14 +10,23 @@ import Slider from "./Slider"
 import Header from "./Header";
 import Footer from "./Footer";
 import ReservationDetail from "./ReservationDetail";
+import ZoneA from "./ZoneA";
+import ZoneB from "./ZoneB";
+import ZoneC from "./ZoneC";
 
 const ZoneDetail = () => {
+    const {index} = useParams();
+
+
+
     return (
         <div>
             <Header></Header>
             <Slider></Slider>
             <form onSubmit={'handleSubmit'}>
-                <div className="zone-detail">
+                {index === 'A' ? <ZoneA></ZoneA> : index === 'B' ? <ZoneB></ZoneB> : <ZoneC></ZoneC>}
+
+                {/* <div className="zone-detail">
                     <p><h5>ZONE 1</h5></p>
                     <p>
                         <h5>DESCRIPTION</h5>
@@ -98,7 +107,7 @@ const ZoneDetail = () => {
                         </table>
                     </div>
                     <button style={{width:'30%',height:'50px', borderRadius:'5px' ,color: "#fff", marginLeft:'35%', backgroundColor:'#2DC98A', border:'#2DC98A' }} type="submit">Book now</button>
-                </div>
+                </div> */}
 
                 <div className="zone-detail-make">
                     <h5>MAKE RESERVATION</h5>

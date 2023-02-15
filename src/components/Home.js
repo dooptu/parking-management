@@ -21,7 +21,7 @@ const Home = () => {
         sessionStorage.setItem("zone", zone);
         console.log(zone);
         window.location.href = '/Reservation';
-        window.location.href = '/ZoneDetail'
+        
     }
 
 
@@ -53,7 +53,10 @@ const Home = () => {
                             </div>
                         </div>
                         <div className="card-footer">
-                            <button style={{ color: "#fff", width: '25%' }} type="submit"><span>Details</span></button>
+                            <Link to={'/ZoneDetail/A'}>
+
+                                <button style={{ color: "#fff", width: '25%' }} type="submit" onChange={() => setZone('B')} value="B"><span>Details</span></button>
+                            </Link>
                             <button style={{ color: "#fff" }} type="submit" onChange={() => setZone('A')} value="A"><span>Make Reservation</span></button>
                         </div>
                     </div>
@@ -74,7 +77,10 @@ const Home = () => {
                             </div>
                         </div>
                         <div className="card-footer">
-                            <button style={{ color: "#fff", width: '25%' }} type="submit" onChange={() => setZone('B')} value="B"><span>Details</span></button>
+                            <Link to={'/ZoneDetail/B'}>
+
+                                <button style={{ color: "#fff", width: '25%' }} type="submit" onChange={() => setZone('B')} value="B"><span>Details</span></button>
+                            </Link>
                             <button style={{ color: "#fff" }} type="submit"><span>Make Reservation</span></button>
                         </div>
                     </div>
@@ -95,7 +101,10 @@ const Home = () => {
                             </div>
                         </div>
                         <div className="card-footer">
-                            <button style={{ color: "#fff", width: '25%' }} type="submit" onChange={() => setZone('C')} value="C"><span>Details</span></button>
+                            <Link to={'/ZoneDetail/C'}>
+
+                                <button style={{ color: "#fff", width: '25%' }} type="submit" onChange={() => setZone('B')} value="B"><span>Details</span></button>
+                            </Link>
                             <button style={{ color: "#fff" }} type="submit"><span>Make Reservation</span></button>
                         </div>
                     </div>
@@ -162,3 +171,37 @@ const Home = () => {
 }
 
 export default Home;
+
+
+// import React, { useState } from "react";
+
+// function ContentSwitcher() {
+//   const [activeButton, setActiveButton] = useState(1);
+
+//   const handleClick = (buttonIndex) => {
+//     setActiveButton(buttonIndex);
+//   };
+
+//   return (
+//     <div>
+//       <button onClick={() => handleClick(1)}>Button 1</button>
+//       <button onClick={() => handleClick(2)}>Button 2</button>
+//       <button onClick={() => handleClick(3)}>Button 3</button>
+//       {activeButton === 1 && <Content1 />}
+//       {activeButton === 2 && <Content2 />}
+//       {activeButton === 3 && <Content3 />}
+//     </div>
+//   );
+// }
+
+// function Content1() {
+//   return <div>Content for Button 1</div>;
+// }
+
+// function Content2() {
+//   return <div>Content for Button 2</div>;
+// }
+
+// function Content3() {
+//   return <div>Content for Button 3</div>;
+// }

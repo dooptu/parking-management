@@ -29,7 +29,7 @@ function App() {
         <Route path='/PaymentInformation' element={<PaymentInformation/>}></Route>
         <Route path='/Banking' element={<Banking></Banking>}></Route>
         <Route path='/ReservationComplete' element={<ReservationComplete/>}></Route>
-        <Route path='/ZoneDetail' element={<ZoneDetail/>}></Route>
+        <Route path='/ZoneDetail/:index' element={<ZoneDetail/>}></Route>
       </Routes>
       
       </BrowserRouter>
