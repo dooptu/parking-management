@@ -862,7 +862,7 @@ p {
 
 .zone-reservation {
   position: absolute;
-  top: 142%;
+  top: 1110px;
   right: 10%;
 }
 
@@ -969,7 +969,7 @@ p {
 
 .table-responsive div {
   width: 100%;
-  background-color: rgba(250, 104, 104, 0.874);
+  background-color: #ffe250df ;
   text-align: center;
 }
 

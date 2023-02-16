@@ -9,18 +9,19 @@ import Footer from "./Footer";
 import Slider from "./Slider";
 
 const Home = () => {
-    const [zone, setZone] = useState('');
+    const [zone, setZone] = useState('A');
 
-    // useEffect(() => {
-    //     setZone(zone);
-    //     console.log(zone);
-    // }, [zone]);
+    useEffect(() => {
+        setZone(zone);
+        
+    }, [zone]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        
         sessionStorage.setItem("zone", zone);
-        console.log(zone);
-        window.location.href = '/Reservation';
+        
+        // window.location.href = '/Reservation';
         
     }
 
@@ -53,11 +54,14 @@ const Home = () => {
                             </div>
                         </div>
                         <div className="card-footer">
+                        <form onSubmit={handleSubmit}>
+
                             <Link to={'/ZoneDetail/A'}>
 
-                                <button style={{ color: "#fff", width: '25%' }} type="submit" onChange={() => setZone('B')} value="B"><span>Details</span></button>
+                                <button style={{ color: "#fff", width: '25%' }}  ><span>Details</span></button>
                             </Link>
-                            <button style={{ color: "#fff" }} type="submit" onChange={() => setZone('A')} value="A"><span>Make Reservation</span></button>
+                            <button style={{ color: "#fff" }}   onClick={e => setZone(e.target.value)} value='A'><span>Make Reservation</span></button>
+                        </form>
                         </div>
                     </div>
 
@@ -77,11 +81,15 @@ const Home = () => {
                             </div>
                         </div>
                         <div className="card-footer">
+                        <form onSubmit={handleSubmit}>
+
+                        </form>
+
                             <Link to={'/ZoneDetail/B'}>
 
-                                <button style={{ color: "#fff", width: '25%' }} type="submit" onChange={() => setZone('B')} value="B"><span>Details</span></button>
+                                <button style={{ color: "#fff", width: '25%' }}  onClick={() => setZone('B')} value="B"><span>Details</span></button>
                             </Link>
-                            <button style={{ color: "#fff" }} type="submit"><span>Make Reservation</span></button>
+                            <button style={{ color: "#fff" }}  onClick={e => setZone(e.target.value)} value='B'><span>Make Reservation</span></button>
                         </div>
                     </div>
 
@@ -101,11 +109,14 @@ const Home = () => {
                             </div>
                         </div>
                         <div className="card-footer">
+                        <form onSubmit={handleSubmit}>
+
+                        </form>
                             <Link to={'/ZoneDetail/C'}>
 
-                                <button style={{ color: "#fff", width: '25%' }} type="submit" onChange={() => setZone('B')} value="B"><span>Details</span></button>
+                                <button style={{ color: "#fff", width: '25%' }}  onClick={() => setZone('C')} value="C"><span>Details</span></button>
                             </Link>
-                            <button style={{ color: "#fff" }} type="submit"><span>Make Reservation</span></button>
+                            <button style={{ color: "#fff" }}  onClick={e => setZone(e.target.value)} value='C'><span>Make Reservation</span></button>
                         </div>
                     </div>
 

@@ -1,12 +1,41 @@
-import { useParams } from "react-router-dom";
+import { useParams, useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 function ZoneA() {
+    const [shells, setShells] = useState([]);
 
-  return (
-    <div>
-      <form onSubmit={'handleSubmit'}>
+    useEffect(() => {
+        fetch('http://localhost:5000/zoneA')
+            .then(response => response.json())
+            .then((data) => {
+                setShells(data)
+                console.log(data)
+            })
+            .catch(error => console.error(error));
+    }, []);
+
+    const residentSlot = shells.filter(slot => slot.id_slot.startsWith('R'));
+    const customerSlot = shells.filter(slot => slot.id_slot.startsWith('C'));
+
+    return (
+        <div>
+            <form onSubmit={'handleSubmit'}>
                 <div className="zone-detail">
-                    <p><h5>ZONE A</h5></p>
+                    <p style={{float:'left'}}>
+                    
+
+                        <h5 style={{ float: 'left', marginRight:'20px' }}>ZONE A</h5>
+                    
+                        <Link style={{float:'left', marginRight:'20px'}} to={'/ZoneDetail/B'}>
+
+                            <h5>ZONE B</h5>
+                        </Link>
+
+
+                        <Link style={{float:'left', marginRight:'20px'}} to={'/ZoneDetail/C'}>
+
+                            <h5>ZONE C</h5>
+                        </Link></p>
                     <p>
                         <h5>DESCRIPTION</h5>
                         <span>P1 is the nearest zone to the terminal (100m distance).</span>
@@ -28,18 +57,24 @@ function ZoneA() {
                         <table class="table border">
                             <tbody>
                                 <tr class="border">
-                                    <td class="border">R01</td>
-                                    <td class="border">R02</td>
-                                    <td class="border">R03</td>
-                                    <td class="border">R04</td>
-                                    <td class="border">R05</td>
-                                    <td class="border">R06</td>
-                                    <td class="border">R07</td>
-                                    <td class="border">R08</td>
-                                    <td class="border">R09</td>
-                                    <td class="border">R10</td>
+
+                                    {residentSlot.slice(0, 10).map(shell => (
+                                        <td className="border" key={shell.id} style={{ backgroundColor: shell.status == 1 ? 'rgba(250, 104, 104, 0.874)' : 'white' }}>
+
+                                            {shell.id_slot}
+                                        </td>
+                                    ))}
                                 </tr>
-                                <tr>
+                                <tr class="border">
+
+                                    {residentSlot.slice(10, 20).map(shell => (
+                                        <td className="border" key={shell.id} style={{ backgroundColor: shell.status == 1 ? 'rgba(250, 104, 104, 0.874)' : 'white' }}>
+
+                                            {shell.id_slot}
+                                        </td>
+                                    ))}
+                                </tr>
+                                {/* <tr>
                                     <td class="border">R11</td>
                                     <td class="border">R12</td>
                                     <td class="border">R13</td>
@@ -50,7 +85,7 @@ function ZoneA() {
                                     <td class="border">R18</td>
                                     <td class="border">R19</td>
                                     <td class="border">R20</td>
-                                </tr>
+                                </tr> */}
                             </tbody>
 
                         </table>
@@ -58,39 +93,33 @@ function ZoneA() {
                         <table class="table border">
                             <tbody>
                                 <tr class="border">
-                                    <td class="border">C01</td>
-                                    <td class="border">C02</td>
-                                    <td class="border">C03</td>
-                                    <td class="border">C04</td>
-                                    <td class="border">C05</td>
-                                    <td class="border">C06</td>
-                                    <td class="border">C07</td>
-                                    <td class="border">C08</td>
-                                    <td class="border">C09</td>
-                                    <td class="border">C10</td>
+
+                                    {customerSlot.slice(0, 10).map(shell => (
+                                        <td className="border" key={shell.id} style={{ backgroundColor: shell.status == 1 ? 'rgba(250, 104, 104, 0.874)' : 'white' }}>
+
+                                            {shell.id_slot}
+                                        </td>
+                                    ))}
                                 </tr>
-                                <tr>
-                                    <td class="border">C11</td>
-                                    <td class="border">C12</td>
-                                    <td class="border">C13</td>
-                                    <td class="border">C14</td>
-                                    <td class="border">C15</td>
-                                    <td class="border">C16</td>
-                                    <td class="border">C17</td>
-                                    <td class="border">C18</td>
-                                    <td class="border">C19</td>
-                                    <td class="border">C20</td>
+                                <tr class="border">
+
+                                    {customerSlot.slice(10, 20).map(shell => (
+                                        <td className="border" key={shell.id} style={{ backgroundColor: shell.status == 1 ? 'rgba(250, 104, 104, 0.874)' : 'white' }}>
+
+                                            {shell.id_slot}
+                                        </td>
+                                    ))}
                                 </tr>
                             </tbody>
 
                         </table>
                     </div>
-                    <button style={{width:'30%',height:'50px', borderRadius:'5px' ,color: "#fff", marginLeft:'35%', backgroundColor:'#2DC98A', border:'#2DC98A' }} type="submit">Book now</button>
+                    <button style={{ width: '30%', height: '50px', borderRadius: '5px', color: "#fff", marginLeft: '35%', backgroundColor: '#2DC98A', border: '#2DC98A' }} type="submit">Book now</button>
                 </div>
 
-                
+
             </form>
-    </div>
-  );
+        </div>
+    );
 }
 export default ZoneA;

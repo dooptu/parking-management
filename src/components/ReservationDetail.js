@@ -16,7 +16,7 @@ const ReservationDetail = () => {
     const [endDate, setEndDate] = useState(sessionStorage.getItem("endDate"));
     const [startTime, setStartTime] = useState(sessionStorage.getItem("startTime"));
     const [endTime, setEndTime] = useState(sessionStorage.getItem("endTime"));
-    const [zone, setZone] = useState(sessionStorage.getItem("B"))
+    const [zone, setZone] = useState('A')
     const [fullName, setFullName] = useState('');
     const [email, setEmail] = useState('')
     const [validEmail, setValidEmail] = useState(false);
@@ -44,6 +44,7 @@ const ReservationDetail = () => {
 
     useEffect(() => {
         setZone(zone);
+        console.log(zone)
     }, [zone])
 
     useEffect(() => {
@@ -69,6 +70,41 @@ const ReservationDetail = () => {
     useEffect(() => {
         setSlot(slot)
     }, [slot])
+
+
+    const [shells, setShells] = useState([]);
+
+    useEffect(() => {
+        if (zone === 'A') {
+            fetch('http://localhost:5000/zoneA')
+                .then(response => response.json())
+                .then((data) => {
+                    setShells(data)
+                   
+                })
+                .catch(error => console.error(error));
+        } else if (zone === 'B') {
+            fetch('http://localhost:5000/zoneB')
+                .then(response => response.json())
+                .then((data) => {
+                    setShells(data)
+                    
+                })
+                .catch(error => console.error(error));
+        } else if (zone === 'C') {
+            fetch('http://localhost:5000/zoneC')
+                .then(response => response.json())
+                .then((data) => {
+                    setShells(data)
+                    
+                })
+                .catch(error => console.error(error));
+        }
+    },[]);
+
+    const residentSlot = shells.filter(slot => slot.id_slot.startsWith('R'));
+    const customerSlot = shells.filter(slot => slot.id_slot.startsWith('C'));
+
 
 
     const IsValidate = () => {
@@ -97,10 +133,45 @@ const ReservationDetail = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const id_Building = zone;
-        const type_Of_Vehicle= typeOfVehicle;
+        const type_Of_Vehicle = typeOfVehicle;
         const id_C_Slot = slot;
         const fullname = fullName;
-        const obj = { startDate, endDate, startTime, endTime, id_Building, type_Of_Vehicle, id_C_Slot, fullname, email, phone }
+        const idUser= "user8";
+
+        const obj = {idUser ,startDate, endDate, startTime, endTime, id_Building, type_Of_Vehicle, id_C_Slot, fullname, email, phone }
+        
+        fetch('https://demo-spring-heroku-app.herokuapp.com/bookingCustomer/save', {
+            // mode: 'no-cors',
+            // cache: 'no-cache',
+            method: 'POST',
+            header: {
+                // 'Accept': '*/*',   
+                // 'Accept': 'application/json', 
+                // 'Content-Type': 'application/json',
+                "Accept": "*/*",
+                "Content-Type": "application/text",
+                "X-Requested-With": "XMLHttpRequest",
+                // "Connection": "close",
+                "Cache-Control": "no-cache",
+                // withCredentials: true, 
+                // crossorigin: true,
+                // credentials: "same-origin",
+                
+                // 'Accept-Encoding': 'gzip, deflate, br',
+                // 'accept' : '/'
+            },
+
+            body: JSON.stringify(obj)
+
+
+        }).then((res) => {
+
+            console.log(JSON.stringify(obj))
+            console.log(res);
+
+        }).catch((err) => {
+            toast.error('Failed: ' + err.message);
+        });
         if (IsValidate) {
             console.log(JSON.stringify(obj));
             console.log(obj)
@@ -248,9 +319,15 @@ const ReservationDetail = () => {
                         <label>Slot *</label>
                         <br />
                         <select class="form-select" onChange={(e) => setSlot(e.target.value)} >
-                            <option>R1</option>
-                            <option>R2</option>
-                            <option>C</option>
+                            {shells.map(shell => {
+                                    if(shell.status == 0){
+                                        return <option>{shell.id_slot}</option>
+                                    }
+
+                                
+
+                            })}
+
 
                         </select>
                     </div>
@@ -302,33 +379,27 @@ const ReservationDetail = () => {
 
             <div class="table-responsive  align-items-center justify-content-center zone-reservation">
                 <h5>AVAILABILITY</h5>
-                <div style={{marginTop:'50px'}}>Resident Area</div>
+                <div style={{ marginTop: '50px' }}>Resident Area</div>
                 <table class="table border">
                     <tbody>
                         <tr class="border">
-                            <td class="border">R1</td>
-                            <td class="border">R2</td>
-                            <td class="border">R3</td>
-                            <td class="border">R4</td>
-                            <td class="border">R5</td>
-                            <td class="border">R6</td>
-                            <td class="border">R7</td>
-                            <td class="border">R8</td>
-                            <td class="border">R9</td>
-                            <td class="border">R10</td>
+                            {residentSlot.slice(0, 10).map(shell => (
+                                <td className="border" key={shell.id} style={{ backgroundColor: shell.status == 1 ? 'rgba(250, 104, 104, 0.874)' : 'white' }}>
+
+                                    {shell.id_slot}
+                                </td>
+                            ))}
                         </tr>
-                        <tr>
-                            <td class="border">R11</td>
-                            <td class="border">R12</td>
-                            <td class="border">R13</td>
-                            <td class="border">R14</td>
-                            <td class="border">R15</td>
-                            <td class="border">R16</td>
-                            <td class="border">R17</td>
-                            <td class="border">R18</td>
-                            <td class="border">R19</td>
-                            <td class="border">R20</td>
+                        <tr class="border">
+
+                            {residentSlot.slice(10, 20).map(shell => (
+                                <td className="border" key={shell.id} style={{ backgroundColor: shell.status == 1 ? 'rgba(250, 104, 104, 0.874)' : 'white' }}>
+
+                                    {shell.id_slot}
+                                </td>
+                            ))}
                         </tr>
+
                     </tbody>
 
                 </table>
@@ -336,28 +407,21 @@ const ReservationDetail = () => {
                 <table class="table border">
                     <tbody>
                         <tr class="border">
-                            <td class="border">C1</td>
-                            <td class="border">C2</td>
-                            <td class="border">C3</td>
-                            <td class="border">C4</td>
-                            <td class="border">C5</td>
-                            <td class="border">C6</td>
-                            <td class="border">C7</td>
-                            <td class="border">C8</td>
-                            <td class="border">C9</td>
-                            <td class="border">C10</td>
+                            {customerSlot.slice(0, 10).map(shell => (
+                                <td className="border" key={shell.id} style={{ backgroundColor: shell.status == 1 ? 'rgba(250, 104, 104, 0.874)' : 'white' }}>
+
+                                    {shell.id_slot}
+                                </td>
+                            ))}
                         </tr>
-                        <tr>
-                            <td class="border">C11</td>
-                            <td class="border">C12</td>
-                            <td class="border">C13</td>
-                            <td class="border">C14</td>
-                            <td class="border">C15</td>
-                            <td class="border">C16</td>
-                            <td class="border">C17</td>
-                            <td class="border">C18</td>
-                            <td class="border">C19</td>
-                            <td class="border">C20</td>
+                        <tr class="border">
+
+                            {customerSlot.slice(10, 20).map(shell => (
+                                <td className="border" key={shell.id} style={{ backgroundColor: shell.status == 1 ? 'rgba(250, 104, 104, 0.874)' : 'white' }}>
+
+                                    {shell.id_slot}
+                                </td>
+                            ))}
                         </tr>
                     </tbody>
 
