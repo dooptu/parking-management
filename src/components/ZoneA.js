@@ -5,7 +5,7 @@ function ZoneA() {
     const [shells, setShells] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:5000/zoneA')
+        fetch('https://demo-spring-heroku-app.herokuapp.com/present_slot/A')
             .then(response => response.json())
             .then((data) => {
                 setShells(data)
