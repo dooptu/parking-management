@@ -410,6 +410,12 @@ input[type='radio']:checked:after {
   width: 420px;
 }
 
+.checkbox{
+  width: 800px;
+  margin-top: 50px;
+
+}
+
 .checkbox input {
   float: left;
   width: 20px;
@@ -420,7 +426,7 @@ input[type='radio']:checked:after {
 }
 
 .checkbox p {
-  width: 380px;
+  width: 100%;
   margin-left: 60px;
   color: #8AA4B3;
   font-weight: 500;
@@ -455,6 +461,25 @@ input[type='radio']:checked:after {
 
 .btn-already-res:hover {
   background-color: #2DC98A !important;
+
+}
+
+.input-role {
+  width: 100%;
+  margin-left: 50px;
+  padding-left: 50px;
+}
+
+.input-role input {
+  width: 20px;
+  margin-right: 50px;
+  padding-right: 50px;
+  margin-left: 20px;
+  outline: none;
+  box-shadow: none;
+}
+
+.input-role{
 
 }
 
