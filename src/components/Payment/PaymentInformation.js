@@ -12,8 +12,6 @@ import Footer from "../Complement/Footer";
 import ReservationDetail from "./ReservationDetail";
 import './Payment.css'
 
-import imas from '../../../public/assets/img/visa.png'
-
 const EMAIL_REGEX = /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/;
 const PHONE_REGEX = /^[0-9]{10,12}$/;
 const PaymentInformation = () => {
@@ -142,7 +140,7 @@ const PaymentInformation = () => {
                             
 
                 </div>
-                <img src={'../../../public/assets/img/visa.jpg'} />
+                <img src={''} />
                 <div className="payment-infor-detail" >
                     <span>Reservation ID</span>
                     <i>{bookingInf.id_Booking}</i>

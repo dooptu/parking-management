@@ -6,14 +6,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faTimes, faInfoCircle, faUser } from "@fortawesome/free-solid-svg-icons";
 import './Complement.css'
 const Header = () => {
-   
     const usenavigate = useNavigate();
     const [customerlist, listupdate] = useState(null);
     const [displayusername, displayusernameupdate] = useState('');
-    
-
-
-
 
     return (
         
@@ -47,7 +42,7 @@ const Header = () => {
                         </ul>
                     </li>
                     <li class="nav-item not-hover">
-                        <span  > <FontAwesomeIcon icon={faUser} style={{ paddingTop: '10px' }} />{displayusername}</span>
+                        <span  > <FontAwesomeIcon icon={faUser} style={{ paddingTop: '10px', color:'black' }} />{displayusername}</span>
                     </li>
                     <li class="nav-item not-hover" style={{ paddingTop: '5px', textDecoration: 'none' }}>
                         <Link to={'/login'}><a>Logout</a></Link>
