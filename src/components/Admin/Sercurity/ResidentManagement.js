@@ -2,25 +2,29 @@ import '../Admin.css'
 import React, { useState, useEffect, useRef } from "react";
 import Pagination from '../../Complement/Pagination';
 import PaginationUser from './PaginationUser';
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
+import { json, Link, useNavigate } from "react-router-dom";
 import './SecurityDashBoard.css'
+import PopUpEditUser from './Popup/PopUpEditUser';
 
-const URL_Find_All = 'https://corsproxy-pms.herokuapp.com/https://backend-heroku-pms.herokuapp.com/MoreFeatureGet/findByIdCustomer?idCustomer=';
-const URL = 'https://corsproxy-pms.herokuapp.com/https://backend-heroku-pms.herokuapp.com/security/ListAllCustomerFromBuilding/'
 
-const REGISTER_URL = " https://corsproxy-pms.herokuapp.com/https://backend-heroku-pms.herokuapp.com/security/createCustomer";
+// const URL_Find_All = 'https://corsproxy-pms.herokuapp.com/https://backend-heroku-pms.herokuapp.com/customer/findById?IdUser=';
+const URL_Find_All = 'https://corsproxy-pms.herokuapp.com/https://backend-heroku-pms.herokuapp.com/MoreFeatureGet/findByIdResident?idResident=';
+const URL = 'https://corsproxy-pms.herokuapp.com/https://backend-heroku-pms.herokuapp.com/security/ListAllResidentFromBuilding/'
+// const URL = 'https://corsproxy-pms.herokuapp.com/https://backend-heroku-pms.herokuapp.com/MoreFeatureGet/findResidentAll'
+const REGISTER_URL = " https://corsproxy-pms.herokuapp.com/https://backend-heroku-pms.herokuapp.com/security/createResident";
 const USER_REGEX = /^[a-zA-Z][a-zA-Z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,30}/;
 const EMAIL_REGEX = /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/;
 const PHONE_REGEX = /^[0-9]{10,12}$/;
 
-const CustomerManagement = () => {
-    const [customers, setCustomers] = useState([]);
+const ResidentManagement = () => {
+    const [residents, setResidents] = useState([]);
     const [filteredCustomers, setFilteredCustomers] = useState([]);
     const [idSearch, setIdSearch] = useState('');
     const [idNull, setIdNull] = useState(true);
     const [building, setBuilding] = useState('A');
+
 
     const [id, setId] = useState('');
     const [validName, setValidName] = useState(false);
@@ -61,14 +65,13 @@ const CustomerManagement = () => {
         setShowPopupCreateRes(!showPopupCreateRes);
     };
 
-
     useEffect(() => {
         const result = USER_REGEX.test(id);
         setValidName(result);
         // console.log(id)
     }, [id])
 
-    useEffect(()=>{
+    useEffect(() => {
         setFullName(fullName)
         console.log(fullName)
     }, [fullName])
@@ -94,7 +97,7 @@ const CustomerManagement = () => {
 
     }, [pwd, matchPwd])
 
-   
+
 
     useEffect(() => {
 
@@ -109,7 +112,7 @@ const CustomerManagement = () => {
             if (txtGender === 'male') {
                 setGender(true)
             }
-        console.log(txtGender)  
+        console.log(txtGender)
         // console.log(gender)  
     }, [txtGender])
 
@@ -118,15 +121,10 @@ const CustomerManagement = () => {
 
     }, [phone])
 
-    
-
-    
 
     const IsValidate = () => {
         let isproceed = true;
         let errormessage = 'Please enter the valid value!';
-
-       
 
         if (!PHONE_REGEX.test(phone)) {
             isproceed = false;
@@ -147,7 +145,6 @@ const CustomerManagement = () => {
             isproceed = false;
 
         }
-        
 
         if (!isproceed) {
             toast.warning(errormessage)
@@ -163,7 +160,7 @@ const CustomerManagement = () => {
 
         const regObj = { id, password, fullname, dateofbirth, gender, email, phone }
         console.log(regObj)
-        
+
 
         if (IsValidate()) {
 
@@ -176,10 +173,7 @@ const CustomerManagement = () => {
                     "X-Requested-With": "XMLHttpRequest",
                     "Cache-Control": "no-cache",
                 },
-
                 body: JSON.stringify(regObj)
-
-
             }).then((res) => {
 
                 console.log(JSON.stringify(regObj))
@@ -193,9 +187,12 @@ const CustomerManagement = () => {
 
     }
 
+
+
     useEffect(() => {
         setIdSearch(idSearch);
     }, [idSearch])
+
 
     useEffect(() => {
         setBuilding(building)
@@ -205,14 +202,10 @@ const CustomerManagement = () => {
         fetch(URL + building)
             .then(response => response.json())
             .then((data) => {
-                setCustomers(data)
+                setResidents(data)
+                console.log(data)
             })
-            .catch((err) => {
-                console.log(toast);
-                toast.error('Failed: ' + err.message);
-                localStorage.setItem("msg", 'Failed: ' + err.message )
-                window.location.href = '/AdminHomePage'
-            });
+            .catch(error => console.error(error));
     }, [building])
 
     const handleSetBuilding = (item) => {
@@ -221,40 +214,42 @@ const CustomerManagement = () => {
 
     const handleIdFilter = async (e) => {
         e.preventDefault();
-        if (id === null || id === '') {
+        if (idSearch === null || idSearch === '') {
+
+            console.log(URL)
             fetch(URL + building)
                 .then(response => response.json())
                 .then((data) => {
                     setIdNull(true);
-                    setCustomers(data)
+                    setResidents(data)
+                    console.log(data)
                 })
-                .catch((err) => {
-                    console.log(toast);
-                    toast.error('Failed: ' + err.message);
-                    localStorage.setItem("msg", 'Failed: ' + err.message )
-                });
+                .catch(error => console.error(error));
 
         }
         else {
-            fetch(URL_Find_All + id)
+
+            console.log(URL_Find_All + idSearch)
+            fetch(URL_Find_All + idSearch)
                 .then(response => response.json())
                 .then((data) => {
                     setIdNull(false);
-                    setCustomers(data)
+                    setResidents(data)
+                    console.log(data)
                 })
-                .catch((err) => {
-                    console.log(toast);
-                    toast.error('Failed: ' + err.message);
-                    localStorage.setItem("msg", 'Failed: ' + err.message )
-                    window.location.href = '/AdminHomePage'
-                });
+                .catch(error => console.error(error));
+
+
+
+
         }
 
     }
 
+
     return (
         <div className="admin-homepage-dashboard">
-            <h5 style={{ textAlign: 'left', margin: '20px' }}>Manage Customer</h5>
+            <h5 style={{ textAlign: 'left', margin: '20px' }}>Manage Resident</h5>
             <ul class="nav justify-content-center nav-custom nav-custom-sercurity">
                 <li class="nav-item" onClick={() => handleSetBuilding('A')}>
                     <a class="nav-link" href="#">Zone A</a>
@@ -265,14 +260,15 @@ const CustomerManagement = () => {
                 <li class="nav-item" onClick={() => handleSetBuilding('C')}>
                     <a class="nav-link" href="#">Zone C</a>
                 </li>
+                <li class="nav-item" onClick={() => handleSetBuilding('All')}>
+                    <a class="nav-link" href="#">All Resident</a>
+                </li>
             </ul>
             <form className='filter-id justify-content-center' onSubmit={handleIdFilter}>
                 Filter by ID:
-                <input type="text" onChange={e => setId(e.target.value)} />
+                <input type="text" onChange={e => setIdSearch(e.target.value)} />
                 <button type='submit'>Search</button>
             </form>
-
-
             <table className="table table-striped">
                 <thead>
                     <tr>
@@ -283,7 +279,7 @@ const CustomerManagement = () => {
                         <th>Gender</th>
                         <th>Phone</th>
                         <th>Email</th>
-                        <th>Status</th>
+                        <th style={{ width: '50px' }}>Status</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -293,14 +289,14 @@ const CustomerManagement = () => {
                     <th><input onChange={(e) => setFullName(e.target.value)}></input></th>
                     <th><input type="date" onChange={(e) => setBirthDay(e.target.value)}></input></th>
                     <th>
-                        <select type="select"  onChange={e => setTxtGender(e.target.value)} >
-                        <option value="female" className="gender">Female</option>
-                        <option value="male" className="gender">Male</option>
+                        <select type="select" onChange={e => setTxtGender(e.target.value)} >
+                            <option value="female" className="gender">Female</option>
+                            <option value="male" className="gender">Male</option>
                         </select>
                     </th>
                     <th><input onChange={(e) => setPhone(e.target.value)}></input></th>
                     <th><input onChange={(e) => setEmail(e.target.value)}></input></th>
-                    
+
                     <th></th>
                     <th>
                         <form onSubmit={handleCreate}>
@@ -308,34 +304,32 @@ const CustomerManagement = () => {
                         </form>
                     </th>
                 </tr>
-                {idNull ? (<PaginationUser data={customers}></PaginationUser>)
+                {idNull ? (<PaginationUser data={residents}></PaginationUser>)
+
 
                     : (
                         <tbody><tr >
                             <td>1</td>
-                            <td>{customers.id}</td>
-                            <td>{customers.fullname}</td>
-                            <td>{customers.dateofbirth}</td>
-                            <td>{customers.gender ? "Male" : "Female"}</td>
-                            <td>{customers.phone}</td>
-                            <td>{customers.email}</td>
-
-                            <td style={{ color: customers.status_Account === true ? '#118408' : '#E23F31', fontWeight: 'bold' }}>{customers.status_Account === true ? 'Active' : 'Ban'}</td>
+                            <td>{residents.id}</td>
+                            <td>{residents.fullname}</td>
+                            <td>{residents.dateofbirth}</td>
+                            <td>{residents.gender ? "Male" : "Female"}</td>
+                            <td>{residents.phone}</td>
+                            <td>{residents.email}</td>
+                            <td style={{ color: residents.status_Account === true ? '#118408' : '#E23F31', fontWeight: 'bold' }}>{residents.status_Account === true ? 'Active' : 'Booked'}</td>
                             <td>
-                                <form>
-                                    <button onClick={togglePopupCreateRes} style={{ border: 'none', backgroundColor: '#2DC98A', color: 'white', width: '55px', borderRadius: '2px' }}>Edit</button>
-                                </form>
+
+                                <button onClick={togglePopupCreateRes} style={{ border: 'none', backgroundColor: '#2DC98A', color: 'white', width: '55px', borderRadius: '2px' }}>Edit</button>
+
                             </td>
                         </tr>
+                            <PopUpEditUser handleClose={togglePopupCreateRes} show={showPopupCreateRes}></PopUpEditUser>
                         </tbody>
+
                     )
                 }
+
             </table>
-
-
-
-
-
 
 
 
@@ -344,4 +338,4 @@ const CustomerManagement = () => {
     );
 }
 
-export default CustomerManagement;
+export default ResidentManagement;

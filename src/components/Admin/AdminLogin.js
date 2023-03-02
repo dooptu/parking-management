@@ -6,14 +6,15 @@ import { faCheck, faTimes, faInfoCircle, faUser } from "@fortawesome/free-solid-
 import BackgroundCommon from "../Complement/BackgroundCommon";
 import Helmet from "react-helmet";
 import { HelmetProvider } from "react-helmet-async";
+import './AdminLogin.css'
 
 // const LOGIN_URL = "https://0c1a-42-118-112-251.ap.ngrok.io/ParkingManagement/api/user/getUser/";
 
-const LOGIN_URL = "https://corsproxy-pms.herokuapp.com/https://backend-heroku-pms.herokuapp.com/user/findById?id="
+const LOGIN_URL = "https://corsproxy-pms.herokuapp.com/https://backend-heroku-pms.herokuapp.com/MoreFeatureGet/findByIdSecurity?id_Manager="
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,30}/;
 const EMAIL_REGEX = /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/;
 
-const Login = () => {
+const AdminLogin = () => {
     const [username, usernameupdate] = useState('');
     const [password, passwordupdate] = useState('');
 
@@ -33,6 +34,8 @@ const Login = () => {
         passwordupdate(password)
     }, [password]);
 
+    
+
     const ProceedLogin = (e) => {
         e.preventDefault();
         if (validate()) {
@@ -47,11 +50,11 @@ const Login = () => {
                     "Cache-Control": "no-cache",
                     mode: 'cors'
                 }
-                
+
             }).then((res) => {
                 console.log(res.json)
                 return res.json();
-                
+
             }).then((resp) => {
                 console.log(resp.password)
                 console.log(resp)
@@ -60,22 +63,38 @@ const Login = () => {
                 } else {
                     if (resp.password === password) {
                         console.log(resp);
-                        toast.success('Success');
+
                         sessionStorage.setItem('username', username);
                         sessionStorage.setItem('fullname', resp.fullname);
                         sessionStorage.setItem('email', resp.email);
                         sessionStorage.setItem('phone', resp.phone);
                         sessionStorage.setItem('id', username);
-                        // window.location.href ='/'
-                        usenavigate('/');
+                        if (resp.role == 3) {
+                            console.log(resp.role)
+                            toast.success('Success', resp.role);
+                            localStorage.setItem('username', username);
+                            usenavigate('/SercurityHomePage')
+                        } else if (resp.role == 2) {
+                            console.log(resp.role)
+                            toast.success('Success', resp.role);
+                            localStorage.setItem('username', username);
+                            usenavigate('/BuildingManagerHomePage')
+                        }else if (resp.role == 1) {
+                            console.log(resp.role)
+                            toast.success('Success', resp.role);
+                            localStorage.setItem('username', username);
+                            usenavigate('/BuildingManagerHomePage')
+                        } else {
+                            toast.error('You are not a admin');
+                        }
                     } else {
                         toast.error('Please Enter Correct Password');
                     }
                 }
             })
-            // .catch((err) => {
-            //     toast.error('Login Failed due to :' + err.message);
-            // });
+            .catch((err) => {
+                toast.error('Login Failed due to :' + err.message);
+            });
         }
     }
 
@@ -106,9 +125,15 @@ const Login = () => {
                     toast.error('Please Enter valid username');
                 } else {
                     if (resp.password === password) {
-                        toast.success('Success');
-                        sessionStorage.setItem('username', username);
-                        usenavigate('/')
+                        if (resp.role === 3) {
+                            toast.success('Success');
+                            sessionStorage.setItem('username', username);
+                            usenavigate('/SercurityHomePage')
+                        } else if (resp.role === 2) {
+                            toast.success('Success');
+                            sessionStorage.setItem('username', username);
+                            usenavigate('/BuildingManagerHomePage')
+                        }
                     } else {
                         toast.error('Please Enter valid credentials');
                     }
@@ -144,12 +169,7 @@ const Login = () => {
             </div> */}
 
                     <div className="login-form">
-                        <h2 style={{}}>User Log in</h2>
-                        <span style={{ marginBottom: "40px", display: "block" }}>Log in to your YourParkingSpace account.</span>
-                        <button className="google" style={{ marginBottom: "10px" }} type="submit"> <img style={{ width: "30px", position: "absolute", left: "20px", marginRight: "30px" }} src='./assets/img/Google_Logo.png' /> Login with Google</button>
-                        <button className="google" style={{ marginTop: "0px" }} type="submit"> <img style={{ width: "30px", position: "absolute", left: "20px", marginRight: "30px" }} src='./assets/img/facebook.png' /> Login with Facebook</button>
-                        <br />
-                        <div className="dash-or"><span>Or</span></div>
+                        <h2 style={{}}>Admin Log in</h2>
                         <form onSubmit={ProceedLogin}>
                             <input placeholder="User Name" style={{ marginTop: "30px" }} value={username} onChange={e => usernameupdate(e.target.value)} ></input>
                             <input placeholder="Password" type="password" value={password} onChange={e => passwordupdate(e.target.value)} ></input>
@@ -174,4 +194,4 @@ const Login = () => {
     );
 }
 
-export default Login;
+export default AdminLogin;

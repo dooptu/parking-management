@@ -4,7 +4,6 @@ import { toast } from "react-toastify";
 import Helmet from "react-helmet";
 import { HelmetProvider } from "react-helmet-async";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-//  import visa from "D:/WorkSpace/React_projects/SWP/ParkingManagement/public/assets/img/visa"
 import { faCheck, faTimes, faInfoCircle, faUser, faClock, faArrowRight, faCashRegister, } from "@fortawesome/free-solid-svg-icons";
 import Slider from "../Complement/Slider"
 import Header from "../Complement/Header";
@@ -16,11 +15,12 @@ const PHONE_REGEX = /^[0-9]{10,12}$/;
 const ReservationComplete = () => {
 
     const [invoice, setInvoice] = useState([]);
+    const [username, setUsername] = useState(sessionStorage.getItem('username'));
 
 
 
     useEffect(() => {
-        fetch('https://corsproxy-pms.herokuapp.com/https://demo-spring-heroku-app.herokuapp.com/payment/findPayment')
+        fetch('https://corsproxy-pms.herokuapp.com/https://backend-heroku-pms.herokuapp.com/paymentCustomer/findPayment')
             .then(response => response.json())
             .then((data) => {
                 setInvoice(data);
@@ -31,7 +31,7 @@ const ReservationComplete = () => {
 
     return (
         <div>
-            <Header></Header>
+             <Header data={username}></Header>
             <Slider></Slider>
 
             <h2 style={{ textAlign: 'center', paddingTop: '30px', color: 'Green' }}>Completed</h2>
@@ -74,7 +74,7 @@ const ReservationComplete = () => {
                     <i>{invoice.startDate}, {invoice.endDate}, {invoice.startTime}, {invoice.endTime}</i>
                     <br />
                     <span>Status Invoice</span>
-                    {(invoice.status_Invoice == true) ? <i style={{color:'green'}}>Completed</i> : <i style={{color:'red'}}>Not Completed</i>}
+                    {(invoice.status_Invoice == true) ? <i style={{color:'green'}}>Completed</i> : <i style={{color:'red'}}>Waiting to pay</i>}
                     <br />
                     <span>Created</span>
                     <i>{sessionStorage.getItem("datebook")}, {sessionStorage.getItem("timebook")}</i>

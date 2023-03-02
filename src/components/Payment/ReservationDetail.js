@@ -19,7 +19,7 @@ const ReservationDetail = () => {
     const [phone, setPhone] = useState(sessionStorage.getItem("phone"))
     const [validPhone, setValidPhone] = useState(false);
     const [typeOfVehicle, setTypeOfVehicle] = useState('Moto');
-    const [slot, setSlot] = useState('R2');
+    const [slot, setSlot] = useState('');
     const [shells, setShells] = useState([]);
 
     useEffect(() => {
@@ -71,35 +71,20 @@ const ReservationDetail = () => {
   
 
     useEffect(() => {
-        if (zone === 'A') {
-            fetch('https://corsproxy-pms.herokuapp.com/https://demo-spring-heroku-app.herokuapp.com/present_slot/findAll/C')
+        // if (zone === 'A') {
+            console.log(zone)
+            fetch('https://corsproxy-pms.herokuapp.com/https://backend-heroku-pms.herokuapp.com/present_slot/findAll/'+zone)
                 .then(response => response.json())
                 .then((data) => {
                     setShells(data)
-
+                    console.log(data)
                 })
                 .catch(error => console.error(error));
-        } else if (zone === 'B') {
-            fetch('https://corsproxy-pms.herokuapp.com/https://demo-spring-heroku-app.herokuapp.com/present_slot/findAll/C')
-                .then(response => response.json())
-                .then((data) => {
-                    setShells(data)
+    }, [zone]);
 
-                })
-                .catch(error => console.error(error));
-        } else if (zone === 'C') {
-            fetch('https://corsproxy-pms.herokuapp.com/https://demo-spring-heroku-app.herokuapp.com/present_slot/findAll/C')
-                .then(response => response.json())
-                .then((data) => {
-                    setShells(data)
-
-                })
-                .catch(error => console.error(error));
-        }
-    }, []);
-
-    const residentSlot = shells.filter(slot => slot.id_C_Slot.startsWith('R'));
-    const customerSlot = shells.filter(slot => slot.id_C_Slot.startsWith('C'));
+    const residentSlot = shells.filter(slot => slot.id_slot.startsWith('R'));
+    const customerSlot = shells.filter(slot => slot.id_slot.startsWith('C'));
+    console.log(customerSlot);
 
     const IsValidate = () => {
         let isproceed = true;
@@ -129,7 +114,7 @@ const ReservationDetail = () => {
         const idUser = sessionStorage.getItem("id");
         const obj = { idUser, startDate, endDate, startTime, endTime, id_Building, type_Of_Vehicle, id_C_Slot, fullname, email, phone }
 
-        fetch('https://corsproxy-pms.herokuapp.com/https://demo-spring-heroku-app.herokuapp.com/bookingCustomer/save', {
+        fetch('https://corsproxy-pms.herokuapp.com/https://backend-heroku-pms.herokuapp.com/bookingCustomer/save', {
             method: 'POST',
             header: {
 
@@ -289,9 +274,10 @@ const ReservationDetail = () => {
                         <label>Slot *</label>
                         <br />
                         <select className="form-select" onChange={(e) => setSlot(e.target.value)} >
-                            {shells.map(shell => {
+                            {customerSlot.map(shell => {
                                 if (shell.status_Slots == false) {
-                                    return <option>{shell.id_C_Slot}</option>
+                                    
+                                    return <option>{shell.id_slot}</option>
                                 }
                             })}
 
@@ -354,7 +340,7 @@ const ReservationDetail = () => {
                             {residentSlot.slice(1, 10).map(shell => (
                                 <td className="border" key={shell.id} style={{ backgroundColor: shell.status_Slots === true ? 'rgba(250, 104, 104, 0.874)' : 'white' }}>
 
-                                    {shell.id_C_Slot}
+                                    {shell.id_slot}
                                 </td>
                             ))}
                         </tr>
@@ -363,7 +349,7 @@ const ReservationDetail = () => {
                             {residentSlot.slice(10, 20).map(shell => (
                                 <td className="border" key={shell.id} style={{ backgroundColor: shell.status_Slots === true ? 'rgba(250, 104, 104, 0.874)' : 'white' }}>
 
-                                    {shell.id_C_Slot}
+                                    {shell.id_slot}
                                 </td>
                             ))}
                         </tr>
@@ -379,7 +365,7 @@ const ReservationDetail = () => {
                             {customerSlot.slice(0, 10).map(shell => (
                                 <td className="border" key={shell.id} style={{ backgroundColor: shell.status_Slots === true ? 'rgba(250, 104, 104, 0.874)' : 'white' }}>
 
-                                    {shell.id_C_Slot}
+                                    {shell.id_slot}
                                 </td>
                             ))}
                         </tr>
@@ -388,7 +374,7 @@ const ReservationDetail = () => {
                             {customerSlot.slice(10, 20).map(shell => (
                                 <td className="border" key={shell.id} style={{ backgroundColor: shell.status_Slots === true ? 'rgba(250, 104, 104, 0.874)' : 'white' }}>
 
-                                    {shell.id_C_Slot}
+                                    {shell.id_slot}
                                 </td>
                             ))}
                         </tr>
