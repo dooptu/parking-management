@@ -1,26 +1,25 @@
 import '../Admin.css'
-import './CommanDashBoard.css'
 import React, { useState, useEffect, useRef } from "react";
-import Pagination from '../../Complement/Pagination';
-import PaginationUser from './PaginationUser';
+
+import PaginationUser from '../Sercurity/PaginationUser';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import PopUpEditUser from '../Sercurity/Popup/PopUpEditUser';
 import AdminHeader from '../AdminPageHeader';
-import { faBuilding } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 
 const URL_Find_All = 'https://cors-anywhere-production-8d5d.up.railway.app/https://parking-management-system-deploy-production-d240.up.railway.app/MoreFeatureGet/findByIdCustomer?idCustomer=';
-const URL = 'https://cors-anywhere-production-8d5d.up.railway.app/https://parking-management-system-deploy-production-d240.up.railway.app/security/ListAllCustomerFromBuilding/'
+const URL = 'https://cors-anywhere-production-8d5d.up.railway.app/https://parking-management-system-deploy-production-d240.up.railway.app/headManager/findAllBuildingManager'
+const URL_PUT = 'https://cors-anywhere-production-8d5d.up.railway.app/https://parking-management-system-deploy-production-d240.up.railway.app/buildingManager/BanOrUnbanSecurity?idUser='
 
-const REGISTER_URL = "https://cors-anywhere-production-8d5d.up.railway.app/https://parking-management-system-deploy-production-d240.up.railway.app/security/createCustomer";
+const REGISTER_URL = "https://cors-anywhere-production-8d5d.up.railway.app/https://parking-management-system-deploy-production-d240.up.railway.app/headManager/createBuildingManager";
 const USER_REGEX = /^[a-zA-Z][a-zA-Z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,30}/;
 const EMAIL_REGEX = /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/;
 const PHONE_REGEX = /^[0-9]{10,12}$/;
 
-const CustomerManagement = () => {
-    const [customers, setCustomers] = useState([]);
+const BuildingManagerManagement = () => {
+    const [resident, setResident] = useState([]);
     const [filteredCustomers, setFilteredCustomers] = useState([]);
     const [idSearch, setIdSearch] = useState('');
     const [idNull, setIdNull] = useState(true);
@@ -59,11 +58,16 @@ const CustomerManagement = () => {
     const [errMsg, setErrMsg] = useState('');
     const [success, setSuccess] = useState(false);
 
+    const [idUser, setIdUser] = useState('');
+
     const [showPopupCreateRes, setShowPopupCreateRes] = useState(false);
     const togglePopupCreateRes = () => {
-
         setShowPopupCreateRes(!showPopupCreateRes);
     };
+
+    const set = (item) => {
+        setIdUser(item)
+    }
 
 
     useEffect(() => {
@@ -206,18 +210,18 @@ const CustomerManagement = () => {
     }, [building])
 
     useEffect(() => {
-        fetch(URL + building)
+        fetch(URL)
             .then(response => response.json())
             .then((data) => {
-                setCustomers(data)
+                setResident(data)
             })
             .catch((err) => {
                 console.log(toast);
                 toast.error('Failed: ' + err.message);
                 localStorage.setItem("msg", 'Failed: ' + err.message)
-                window.location.href = '/AdminHomePage'
+
             });
-    }, [building])
+    }, [])
 
     const handleSetBuilding = (item) => {
         setBuilding(item)
@@ -230,7 +234,7 @@ const CustomerManagement = () => {
                 .then(response => response.json())
                 .then((data) => {
                     setIdNull(true);
-                    setCustomers(data)
+                    setResident(data)
                 })
                 .catch((err) => {
                     console.log(toast);
@@ -244,7 +248,7 @@ const CustomerManagement = () => {
                 .then(response => response.json())
                 .then((data) => {
                     setIdNull(false);
-                    setCustomers(data)
+                    setResident(data)
                 })
                 .catch((err) => {
                     console.log(toast);
@@ -256,50 +260,26 @@ const CustomerManagement = () => {
 
     }
 
-    useEffect(() => {
-        const navItems = document.querySelectorAll('.nav-custom-sercurity li');
-
-        navItems.forEach(navItem => {
-            navItem.addEventListener('click', () => {
-                // Remove the active class from all li elements
-                navItems.forEach(item => {
-                    item.classList.remove('active');
-                });
-
-                // Add the active class to the clicked li element
-                navItem.classList.add('active');
-
-                // Call the handleSetBuilding function with the appropriate argument
-                handleSetBuilding(navItem.innerText.charAt(navItem.innerText.length - 1));
-            });
+    const handleChangeStatus = (id, status) => {
+        console.log(URL_PUT + id + '&status=' + !status)
+        fetch(URL_PUT + id + '&status=' + status, {
+            method: 'PUT'
+        }).then((res) => {
+            setSuccess(true);
+            toast.success('Change successfully.');
+        }).catch((err) => {
+            toast.error('Failed: ' + err.message);
         });
-    }, [])
-
-
-
+    }
 
     return (
         <div className="admin-homepage-dashboard">
-            <AdminHeader ></AdminHeader>
-
-            <form className='filter-id justify-content-center' style={{ textAlign: 'left', marginTop: '30px', float: 'left' }} onSubmit={handleIdFilter}>
+            <AdminHeader></AdminHeader>
+            <form className='filter-id justify-content-center' onSubmit={handleIdFilter}>
                 Filter by ID:
                 <input type="text" onChange={e => setId(e.target.value)} />
                 <button type='submit'>Search</button>
             </form>
-            <ul class="nav justify-content-center nav-custom nav-custom-sercurity">
-                <li class="nav-item" onClick={() => handleSetBuilding('A')}>
-                    <a class="nav-link" href="#"><FontAwesomeIcon style={{ paddingRight: '10px' }} icon={faBuilding}></FontAwesomeIcon>Zone A</a>
-                </li>
-                <li class="nav-item" onClick={() => handleSetBuilding('B')}>
-                    <a class="nav-link" href="#"><FontAwesomeIcon style={{ paddingRight: '10px' }} icon={faBuilding}></FontAwesomeIcon>Zone B</a>
-                </li>
-                <li class="nav-item" onClick={() => handleSetBuilding('C')}>
-                    <a class="nav-link" href="#"><FontAwesomeIcon style={{ paddingRight: '10px' }} icon={faBuilding}></FontAwesomeIcon>Zone C</a>
-                </li>
-            </ul>
-
-
 
             <table className="table table-striped">
                 <thead>
@@ -336,19 +316,42 @@ const CustomerManagement = () => {
                         </form>
                     </th>
                 </tr>
-                {idNull ? (<PaginationUser data={customers}></PaginationUser>)
+                {idNull ?
+                    resident.map((item, index) => (
+                        <tr key={index}>
+                            <td>{index + 1}</td>
+                            <td>{item.id}</td>
+                            <td>{item.fullname}</td>
+                            <td>{item.dateofbirth}</td>
+                            <td>{item.gender ? "Male" : "Female"}</td>
+                            <td>{item.phone}</td>
+                            <td>{item.email}</td>
+                            <td>
+
+                                <a href='#' onClick={() => handleChangeStatus(item.id, item.status_Account)} style={{ color: item.status_Account === true ? '#118408' : '#E23F31', fontWeight: 'bold' }}>{item.status_Account === true ? 'Active' : item.status_Account === false ? 'Ban' : 'Booked'}</a>
+                            </td>
+                            <td>
+                                <form onSubmit={''}>
+                                    <button onClick={() => { togglePopupCreateRes(); set(item.id) }} style={{ border: 'none', backgroundColor: '#2DC98A', color: 'white', width: '55px', borderRadius: '2px' }}>Edit</button>
+                                </form>
+                                <PopUpEditUser idUser={idUser} handleClose={togglePopupCreateRes} show={showPopupCreateRes} role='Customer'></PopUpEditUser>
+                            </td>
+
+
+                        </tr>
+                    ))
 
                     : (
                         <tbody><tr >
                             <td>1</td>
-                            <td>{customers.id}</td>
-                            <td>{customers.fullname}</td>
-                            <td>{customers.dateofbirth}</td>
-                            <td>{customers.gender ? "Male" : "Female"}</td>
-                            <td>{customers.phone}</td>
-                            <td>{customers.email}</td>
+                            <td>{resident.id}</td>
+                            <td>{resident.fullname}</td>
+                            <td>{resident.dateofbirth}</td>
+                            <td>{resident.gender ? "Male" : "Female"}</td>
+                            <td>{resident.phone}</td>
+                            <td>{resident.email}</td>
 
-                            <td style={{ color: customers.status_Account === true ? '#118408' : '#E23F31', fontWeight: 'bold' }}>{customers.status_Account === true ? 'Active' : 'Ban'}</td>
+                            <td style={{ color: resident.status_Account === true ? '#118408' : '#E23F31', fontWeight: 'bold' }}>{resident.status_Account === true ? 'Active' : 'Ban'}</td>
                             <td>
                                 <form>
                                     <button onClick={togglePopupCreateRes} style={{ border: 'none', backgroundColor: '#2DC98A', color: 'white', width: '55px', borderRadius: '2px' }}>Edit</button>
@@ -360,16 +363,8 @@ const CustomerManagement = () => {
                 }
             </table>
 
-
-
-
-
-
-
-
-
         </div>
     );
 }
 
-export default CustomerManagement;
+export default BuildingManagerManagement;

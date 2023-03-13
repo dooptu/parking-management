@@ -5,11 +5,11 @@ import HeaderAccount from './HeaderAccount';
 import BodyLink from './BodyLink';
 import FooterAccount from './FooterAccount';
 
-function CompletedBooking() {
+function HistoryBooking() {
     const [history, setHistory] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:3000/completed')
+        fetch('http://localhost:3000/past')
             .then((response) => response.json())
             .then((bookingData) => {
                 setHistory(bookingData);
@@ -70,4 +70,4 @@ function CompletedBooking() {
     )
 }
 
-export default CompletedBooking;
+export default HistoryBooking;

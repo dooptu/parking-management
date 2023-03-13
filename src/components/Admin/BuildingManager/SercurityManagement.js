@@ -7,13 +7,14 @@ import PaginationUser from '../Sercurity/PaginationUser';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import PopUpEditUser from '../Sercurity/Popup/PopUpEditUser';
+import AdminHeader from '../AdminPageHeader';
 
 
-const URL_Find_All = 'https://corsproxy-pms.herokuapp.com/https://backend-heroku-pms.herokuapp.com/MoreFeatureGet/findByIdCustomer?idCustomer=';
-const URL = 'https://corsproxy-pms.herokuapp.com/https://backend-heroku-pms.herokuapp.com/buildingManager/findAllSecurity'
-const URL_PUT = 'https://corsproxy-pms.herokuapp.com/https://backend-heroku-pms.herokuapp.com/buildingManager/BanOrUnbanSecurity?idUser='
+const URL_Find_All = 'https://cors-anywhere-production-8d5d.up.railway.app/https://parking-management-system-deploy-production-d240.up.railway.app/MoreFeatureGet/findByIdCustomer?idCustomer=';
+const URL = 'https://cors-anywhere-production-8d5d.up.railway.app/https://parking-management-system-deploy-production-d240.up.railway.app/buildingManager/findAllSecurity'
+const URL_PUT = 'https://cors-anywhere-production-8d5d.up.railway.app/https://parking-management-system-deploy-production-d240.up.railway.app/buildingManager/BanOrUnbanSecurity?idUser='
 
-const REGISTER_URL = " https://corsproxy-pms.herokuapp.com/https://backend-heroku-pms.herokuapp.com/buildingManager/createSecurity";
+const REGISTER_URL = "https://cors-anywhere-production-8d5d.up.railway.app/https://parking-management-system-deploy-production-d240.up.railway.app/buildingManager/createSecurity";
 const USER_REGEX = /^[a-zA-Z][a-zA-Z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,30}/;
 const EMAIL_REGEX = /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/;
@@ -275,7 +276,7 @@ const SercurityManagement = () => {
 
     return (
         <div className="admin-homepage-dashboard">
-            <h5 style={{ textAlign: 'left', margin: '20px' }}>Manage Sercurity</h5>
+            <AdminHeader></AdminHeader>
             <form className='filter-id justify-content-center' onSubmit={handleIdFilter}>
                 Filter by ID:
                 <input type="text" onChange={e => setId(e.target.value)} />
@@ -363,14 +364,6 @@ const SercurityManagement = () => {
                     )
                 }
             </table>
-
-
-
-
-
-
-
-
 
         </div>
     );

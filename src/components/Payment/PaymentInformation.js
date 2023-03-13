@@ -12,6 +12,7 @@ import Footer from "../Complement/Footer";
 import ReservationDetail from "./ReservationDetail";
 import './Payment.css'
 
+
 const EMAIL_REGEX = /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/;
 const PHONE_REGEX = /^[0-9]{10,12}$/;
 const PaymentInformation = () => {
@@ -20,14 +21,16 @@ const PaymentInformation = () => {
     const [bookingInf, setBookingInf] = useState([]);
     const [type, setType] = useState('Banking');
     const [username, setUsername] = useState(sessionStorage.getItem('username'));
-    
+    const [success, setSuccess] = useState(false);
+    const usenavigate = useNavigate();
+
 
     useEffect(() => {
         setType(type);
     }, [type]);
 
     useEffect(() => {
-        fetch('https://corsproxy-pms.herokuapp.com/https://backend-heroku-pms.herokuapp.com/bookingCustomer/findBooking')
+        fetch('https://cors-anywhere-production-8d5d.up.railway.app/https://parking-management-system-deploy-production-d240.up.railway.app/bookingCustomer/findBooking')
             .then(response => response.json())
             .then((data) => {
                 setBookingInf(data);
@@ -46,13 +49,13 @@ const PaymentInformation = () => {
         window.location.href = '/Banking'
     }
 
-    const toComplete = async(e) => {
+    const toComplete = async (e) => {
         e.preventDefault();
         //type of payment vs idbooking
         const id_Booking = bookingInf.id_Booking;
         const type_Of_Payment = bookingInf.type;
         const id_Building = bookingInf.id_Building;
-        
+
         const regObj = { id_Booking, type_Of_Payment, id_Building }
         fetch('https://corsproxy-pms.herokuapp.com/https://backend-heroku-pms.herokuapp.com/paymentCustomer/save', {
 
@@ -71,7 +74,7 @@ const PaymentInformation = () => {
             console.log(JSON.stringify(regObj));
             console.log(JSON.stringify(regObj))
             console.log(res);
-            
+
             const currentDate = new Date(Date.now());
             const formattedDate = currentDate.toISOString().substr(0, 10);
             const now = new Date();
@@ -82,10 +85,47 @@ const PaymentInformation = () => {
             sessionStorage.setItem("datebook", formattedDate);
             sessionStorage.setItem("timebook", currentTime)
             window.location.href = '/ReservationComplete'
-            
+
         }).catch((err) => {
             toast.error('Failed: ' + err.message);
         });
+    }
+
+    const handleCancel = async (e) => {
+        e.preventDefault();
+        const id_booking = bookingInf.id_Booking;
+        const id_Customer = username;
+        const id_Building = obj.id_Building;
+        const id_C_slot = obj.id_C_Slot;
+
+
+        const regObj = { id_booking, id_Customer, id_Building, id_C_slot };
+
+        console.log(regObj)
+
+        fetch('https://cors-anywhere-production-8d5d.up.railway.app/https://parking-management-system-deploy-production-d240.up.railway.app/bookingCustomer/cancelBooking', {
+
+            method: 'POST',
+            header: {
+                "Accept": "*/*",
+                "Content-Type": "application/text",
+                "X-Requested-With": "XMLHttpRequest",
+                "Cache-Control": "no-cache",
+            },
+
+            body: JSON.stringify(regObj)
+
+
+        }).then((data) => {
+            setSuccess(true);
+            console.log(data);
+            usenavigate('/Reservation');
+            toast.success('Cancel complete');
+
+        }).catch((err) => {
+            toast.error('Failed: ' + err.message);
+        });
+
     }
 
     return (
@@ -134,18 +174,12 @@ const PaymentInformation = () => {
                         <option>Banking</option>
                     </select>
 
-                
-                        
-                            <form onSubmit={handleSubmit}>
-                                <button style={{ color: "#fff" }} type="submit">Pay now</button>
-                            </form>
-                        
-                        
-                        
-                            
+                    <form onSubmit={handleSubmit}>
+                        <button style={{ color: "#fff" }} type="submit">Pay now</button>
+                    </form>
 
                 </div>
-                <img src={''} />
+                <img src={'../assets/img/visa.png'} />
                 <div className="payment-infor-detail" >
                     <span>Reservation ID</span>
                     <i>{bookingInf.id_Booking}</i>
@@ -178,11 +212,13 @@ const PaymentInformation = () => {
                     <i>Not completed</i>
                     <br />
                     <span>Price</span>
-                    <i>{obj.total_Of_Money}</i>
+                    <i >{obj.total_Of_Money}</i>
                     <br />
 
 
                 </div>
+
+                <button onClick={handleCancel}>Cancel Reservation</button>
 
             </div>
 

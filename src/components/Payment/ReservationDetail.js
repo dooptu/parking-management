@@ -73,7 +73,7 @@ const ReservationDetail = () => {
     useEffect(() => {
         // if (zone === 'A') {
             console.log(zone)
-            fetch('https://corsproxy-pms.herokuapp.com/https://backend-heroku-pms.herokuapp.com/present_slot/findAll/'+zone)
+            fetch('https://cors-anywhere-production-8d5d.up.railway.app/https://parking-management-system-deploy-production-d240.up.railway.app/present_slot/findAll/'+zone)
                 .then(response => response.json())
                 .then((data) => {
                     setShells(data)
@@ -114,7 +114,7 @@ const ReservationDetail = () => {
         const idUser = sessionStorage.getItem("id");
         const obj = { idUser, startDate, endDate, startTime, endTime, id_Building, type_Of_Vehicle, id_C_Slot, fullname, email, phone }
 
-        fetch('https://corsproxy-pms.herokuapp.com/https://backend-heroku-pms.herokuapp.com/bookingCustomer/save', {
+        fetch('https://cors-anywhere-production-8d5d.up.railway.app/https://parking-management-system-deploy-production-d240.up.railway.app/bookingCustomer/save', {
             method: 'POST',
             header: {
 
@@ -126,6 +126,7 @@ const ReservationDetail = () => {
             },
             body: JSON.stringify(obj)
         }).then((res) => {
+            
             console.log(obj)
             sessionStorage.setItem("obj", JSON.stringify(obj));
             const currentDate = new Date(Date.now());
@@ -139,6 +140,7 @@ const ReservationDetail = () => {
             sessionStorage.setItem("timebook", currentTime);
             window.location.href = '/PaymentInformation'
             console.log(res);
+            toast.success('Booking Success');
 
         }).catch((err) => {
             console.log(err.massage())
@@ -266,8 +268,8 @@ const ReservationDetail = () => {
                         <br />
                         <select className="form-select" onChange={(e) => setTypeOfVehicle(e.target.value)}>
                             <option>Car</option>
-                            <option>Moto</option>
-                            <option>Bicycle</option>
+                            <option>Motor</option>
+                            <option>Bike</option>
                         </select>
                     </div>
                     <div className=" col-lg-6 class-input">

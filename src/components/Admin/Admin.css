@@ -1,12 +1,12 @@
 .admin-header {
   width: 100%;
-  height: 70px;
-  background-color: #2DC98A;
-  padding: 1%;
+  height: 50px;
+  border-bottom: 1px solid black;
+  margin-top: -10px;
 }
 
-.header a {
-  color: white;
+.admin-header a, i {
+  color: rgb(0, 0, 0) !important;
 }
 
 /* ----------------------------ADMIN-ROLE---------------------- */
@@ -32,34 +32,74 @@
 
 .admin-homepage-body {
   position: relative;
+  
 }
 
 .admin-nav-custom {
-  margin-top: 50px;
-  margin-left: 6%;
-  width: 10%;
-  text-align: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 15%;
+  height: 1000px;
   float: left;
+  background-color: #263544;
+  
 }
 
+.admin-nav-custom-title{
+  width: 100%;
+  height: 80px;
+  border-bottom: 1px solid #00000047;
+  color: white !important;
+}
+
+.admin-nav-custom-title p{
+  font-size: 23px !important;
+  font-weight: bold;
+
+}
+
+.admin-nav-custom label {
+  color: white !important;
+  text-decoration: none;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 25px;
+  font-size: 16px !important;
+  font-weight: bold;
+  color: #2ED8B6 !important;
+
+}
 
 
 
 .admin-nav-custom li {
-  padding: 0 20px 0 20px;
+  width: 100% !important;
+  list-style: none;
+  padding-left: 10% !important;
+  z-index: 100;
+  font-size: 14px !important;
+  color: #B2B9BF !important;
 
+}
+
+.navbar-nav li:active,
+.navbar-nav li.active {
+  background-color: #2DC98A;
 }
 
 .nav-custom li {
   display: inline-block;
   position: relative;
-  color: white;
-  font-size: 15px;
+  
+  
 
 }
 
+
+
 .admin-nav-custom a {
-  color: #A4A5A8;
+  color: white !important;
   text-decoration: none;
 }
 
@@ -144,4 +184,9 @@
 .footer a,
 p {
   color: white;
+}
+
+table>thead>tr{
+  background-color: #263544;
+  color: #fff;
 }

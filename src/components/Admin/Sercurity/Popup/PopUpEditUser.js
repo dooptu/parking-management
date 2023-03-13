@@ -10,9 +10,9 @@ const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,30}/;
 const EMAIL_REGEX = /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/;
 const PHONE_REGEX = /^[0-9]{10,12}$/;
 
-const URL = 'https://corsproxy-pms.herokuapp.com/https://backend-heroku-pms.herokuapp.com/security/updateCustomer_Resident?idUser='
-const URL_USER = 'https://corsproxy-pms.herokuapp.com/https://backend-heroku-pms.herokuapp.com/user/findById?id='
-const URL_SERCURITY = 'https://corsproxy-pms.herokuapp.com/https://backend-heroku-pms.herokuapp.com/buildingManager/updateSecurity?idUser='
+const URL = 'https://cors-anywhere-production-8d5d.up.railway.app/https://parking-management-system-deploy-production-d240.up.railway.app/security/updateCustomer_Resident?idUser='
+const URL_USER = 'https://cors-anywhere-production-8d5d.up.railway.app/https://parking-management-system-deploy-production-d240.up.railway.app/user/findById?id='
+const URL_SERCURITY = 'https://cors-anywhere-production-8d5d.up.railway.app/https://parking-management-system-deploy-production-d240.up.railway.app/buildingManager/updateSecurity?idUser='
 
 const PopUpEditUser = ({ handleClose, show, idUser, role }) => {
   const showHideClassName = show ? 'popup display-block' : 'popup display-none';
@@ -56,7 +56,7 @@ const PopUpEditUser = ({ handleClose, show, idUser, role }) => {
 
 
   useEffect(() => {
-    
+
     fetch(URL_USER + idUser)
       .then(response => response.json())
       .then((data) => {
@@ -171,11 +171,20 @@ const PopUpEditUser = ({ handleClose, show, idUser, role }) => {
 
     const regObj = { password, fullname, dateofbirth, gender, email, phone }
 
-    console.log(mainURL + idUser);
+
 
     if (IsValidate()) {
       console.log(regObj)
-      if (role === 'User') { setMainURL(URL) } else setMainURL(URL_SERCURITY)
+      console.log(idUser)
+      console.log(role)
+      if (role == 'User') {
+        setMainURL(URL); 
+        console.log(mainURL);
+      }
+      else {
+        setMainURL(URL_SERCURITY);
+        console.log(mainURL + idUser);
+      }
       fetch(mainURL + idUser, {
         method: 'PUT',
         header: {
@@ -205,7 +214,7 @@ const PopUpEditUser = ({ handleClose, show, idUser, role }) => {
           &times;
         </button>
         <form onSubmit={handleSubmit} className="row popup-edit-user">
-          <h2 style={{}}>Edit User</h2>
+          <h2>Edit User</h2>
 
           <h6>User name: ' {idUser} '</h6>
 

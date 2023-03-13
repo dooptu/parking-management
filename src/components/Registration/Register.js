@@ -5,18 +5,14 @@ import { json, Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import BackgroundCommon from "../Complement/BackgroundCommon";
 import { Helmet, HelmetProvider } from 'react-helmet-async';
-import axios from "../../api/axios";
-import { isValidDateValue } from "@testing-library/user-event/dist/utils";
-import { formToJSON } from "axios";
+
 import './Register.css'
 
 const USER_REGEX = /^[a-zA-Z][a-zA-Z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,30}/;
 const EMAIL_REGEX = /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/;
 const PHONE_REGEX = /^[0-9]{10,12}$/;
-const REGISTER_URL = " https://corsproxy-pms.herokuapp.com/https://backend-heroku-pms.herokuapp.com/user/save";
-// const REGISTER_URL = "https://1525-27-74-221-84.ap.ngrok.io/user/save"
-// const REGISTER_URL = "http://localhost:5000/users"
+const REGISTER_URL = "https://cors-anywhere-production-8d5d.up.railway.app/https://parking-management-system-deploy-production-d240.up.railway.app/user/save";
 
 
 const Register = () => {
@@ -227,7 +223,7 @@ const Register = () => {
                                 </p>
                             </section>
                         ) : (
-                            <section >
+                            <section style={{border:'none'}} >
                                 <p ref={errRef} className={errMsg ? "errMsg"
                                     : "offScreen"} aria-live="assertive">{errMsg}</p>
                                 <form onSubmit={handleSubmit} className="row">

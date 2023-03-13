@@ -2,8 +2,9 @@ import React from "react";
 import { useEffect, useState } from "react";
 import './BuildingManager.css'
 import { toast } from "react-toastify";
+import AdminHeader from "../AdminPageHeader";
 
-const URL = 'https://corsproxy-pms.herokuapp.com/https://backend-heroku-pms.herokuapp.com/buildingManager/RevenueFromEachBuilding'
+const URL = 'https://cors-anywhere-production-8d5d.up.railway.app/https://parking-management-system-deploy-production-d240.up.railway.app/buildingManager/RevenueFromEachBuilding'
 
 const RevenueManagement = () => {
     const [item, setItem] = useState([]);
@@ -23,14 +24,16 @@ const RevenueManagement = () => {
 
     return (
         <div className="admin-homepage-dashboard">
-            <h5 style={{ textAlign: 'left', margin: '20px' }}>Manage Revenue</h5>
+            <AdminHeader></AdminHeader>
 
-            <table className="table table-striped">
+            <table className="table table-striped" style={{marginTop:'50px'}}>
                 <thead>
                     <tr>
                         <th>Building ID</th>
                         <th>Income</th>
                         <th>Manager ID</th>
+                        <th>Num of Customers</th>
+                        <th>Num of Residents</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -39,6 +42,8 @@ const RevenueManagement = () => {
                             <td>{item.id_Building}</td>
                             <td>{item.income}</td>
                             <td>{item.id_manager}</td>
+                            <td>{item.countCustomer}</td>
+                            <td>{item.countResident}</td>
                         </tr>
                     ))}
                 </tbody>
