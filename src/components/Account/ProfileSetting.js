@@ -75,7 +75,7 @@ function ProfileSetting() {
                 <BodyLink />
                 <Container className="profile-setting">
                     <div style={{ borderBottom: "1px solid black", display: "flex", marginTop: "5%" }}>
-                        <img src={'../assets/img/logo.png'} style={{ width: "150px", height: "40px", marginLeft: "30px", marginBottom: "10px" }}></img>
+                        <img alt='alt img'  src={'../assets/img/logo.png'} style={{ width: "150px", height: "40px", marginLeft: "30px", marginBottom: "10px" }}></img>
                         <NavLink className='logo' to='/login' style={{ color: "black", marginLeft: "70%", textDecoration: "none" }}><i class="bi bi-bookmark-fill"></i> Log out</NavLink>
                     </div>
                     <Card style={{ marginTop: "5%" }}>

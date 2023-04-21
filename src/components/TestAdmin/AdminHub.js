@@ -183,7 +183,7 @@ const AdminHub = () => {
                         <span class="num">8</span>
                     </a>
                     <a href="#" class="profile">
-                        <img src=" " />
+                        <img alt='alt img'  src=" " />
                     </a>
                 </nav>
 
@@ -250,7 +250,7 @@ const AdminHub = () => {
                                 <tbody>
                                     <tr>
                                         <td>
-                                            <img src=" " />
+                                            <img alt='alt img'  src=" " />
                                             <p>John Doe</p>
                                         </td>
                                         <td>01-10-2021</td>
@@ -258,7 +258,7 @@ const AdminHub = () => {
                                     </tr>
                                     <tr>
                                         <td>
-                                            <img src=" " />
+                                            <img alt='alt img'  src=" " />
                                             <p>John Doe</p>
                                         </td>
                                         <td>01-10-2021</td>
@@ -266,7 +266,7 @@ const AdminHub = () => {
                                     </tr>
                                     <tr>
                                         <td>
-                                            <img src=" " />
+                                            <img alt='alt img'  src=" " />
                                             <p>John Doe</p>
                                         </td>
                                         <td>01-10-2021</td>
@@ -274,7 +274,7 @@ const AdminHub = () => {
                                     </tr>
                                     <tr>
                                         <td>
-                                            <img src=" " />
+                                            <img alt='alt img'  src=" " />
                                             <p>John Doe</p>
                                         </td>
                                         <td>01-10-2021</td>
@@ -282,7 +282,7 @@ const AdminHub = () => {
                                     </tr>
                                     <tr>
                                         <td>
-                                            <img src=" " />
+                                            <img alt='alt img'  src=" " />
                                             <p>John Doe</p>
                                         </td>
                                         <td>01-10-2021</td>

@@ -26,7 +26,7 @@ const Header = (props) => {
         <div className="header">
             <div className="headernotres">
                 <div className="logo">
-                    <img src={'../assets/img/logo.png'}></img>
+                    <img alt='alt img'  src={'../assets/img/logo.png'}></img>
                 </div>
                 <div class="nav justify-content-end nav-custom">
 
@@ -101,7 +101,7 @@ const Header = (props) => {
                     <NavDropdown.Item ><a onClick={logout} type="submit">Log out</a></NavDropdown.Item>
                 </NavDropdown>
                 <div className="logo">
-                    <img src={'../assets/img/logo.png'}></img>
+                    <img alt='alt img'  src={'../assets/img/logo.png'}></img>
                 </div>
             </Nav>
         </div>

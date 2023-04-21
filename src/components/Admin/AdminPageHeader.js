@@ -23,7 +23,7 @@ const AdminHeader = (nameOfpage) => {
         <div className="admin-header">
 
             <div className="logo">
-                <img src={'../assets/img/logo.png'}></img>
+                <img alt='alt img'  src={'../assets/img/logo.png'}></img>
             </div>
             <ul class="nav justify-content-end nav-custom  ">
 

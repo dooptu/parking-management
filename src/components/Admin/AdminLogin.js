@@ -169,7 +169,7 @@ const AdminLogin = () => {
                 </Helmet>
                 <div className="container-login">
                     <div className="container-background" style={{ marginTop: '-80px', height: '720px', marginLeft:'300px' }}>
-                        <img style={{ position: "absolute", zIndex: "10", marginTop: "110px" }} src="./assets/img/man.png"></img>
+                        <img alt='alt img'  style={{ position: "absolute", zIndex: "10", marginTop: "110px" }} src="./assets/img/man.png"></img>
                     </div>
 
                     <div className="login-form">

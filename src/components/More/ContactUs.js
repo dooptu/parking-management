@@ -20,7 +20,7 @@ function ContactUs() {
             <Header />
             <div className='row' style={{ marginTop: "10%" }} data-aos="fade-up" data-aos-anchor-placement="top-center">
                 <div className='col s6'>
-                    <img src='https://parkivia.ancorathemes.com/wp-content/uploads/2017/12/img-featur-copyright.jpg'></img>
+                    <img alt='alt img'  src='https://parkivia.ancorathemes.com/wp-content/uploads/2017/12/img-featur-copyright.jpg'></img>
                 </div>
                 <div className='col s6'>
                     <h2 style={{ fontSize: "35px", lineHeight: "1.3", paddingBottom: "0,3em", color: "#21303e", textAlign: "left", width: "320px", fontWeight: "bold", background: "linear-gradient(-21deg,#14be3d 0%,#16d445 100%);" }}>We Make Airport Parking Easy</h2>
@@ -43,24 +43,24 @@ function ContactUs() {
                 <Card className='col s6' style={{ marginLeft: "7%" }} >
                     <h4 style={{ fontSize: "35px", lineHeight: "1.3", paddingBottom: "0,3em", color: "#21303e", textAlign: "left", width: "320px", fontWeight: "bold", background: "linear-gradient(-21deg,#14be3d 0%,#16d445 100%);" }}>2002-2023</h4>
                     <p style={{ marginBottom: "1em", marginTop: "4em", fontSize: "20px", maxWidth: "100%", paddingBottom: "0", fontFamily: "Mont,sans-serif", marginBlockStart: "1em", marginBlockEnd: "1em", marginInlineStart: "0px", marginInlineEnd: "0px", color: "#4a697c" }}>Aliquam commodo interdum viverra. Sed venenatis faucibus tellus, sit amet laoreet ligula ultricies a. Maecenas cursus auctor nulla, nec scelerisque est laoreet a quis. Ut gravida rutrum aliquam. Curabitur id orci maximus, ornare metus ac, tristique risus.</p>
-                    <img style={{ borderRadius: "5px", width: "100%" }} src='https://parkivia.ancorathemes.com/wp-content/uploads/2017/12/img-step1-copyright.jpg'></img>
+                    <img alt='alt img'  style={{ borderRadius: "5px", width: "100%" }} src='https://parkivia.ancorathemes.com/wp-content/uploads/2017/12/img-step1-copyright.jpg'></img>
                 </Card>
             </div>
 
             <div className='row' style={{ backgroundColor: "#2dc98a" }} >
                 <h2 style={{ textAlign: "center", marginTop: "5%", marginBottom: "6%", color: "white", fontWeight: "bold" }} data-aos="fade-up" data-aos-anchor-placement="top-center">Our Investor</h2>
                 <Card className='col s4 onhover' style={{ marginRight: "50px", marginLeft: "2%", height: "350px" }} data-aos="fade-up" data-aos-anchor-placement="top-center">
-                    <img style={{ marginLeft: "30%" }} src='https://parkivia.ancorathemes.com/wp-content/uploads/2017/12/invest2-1.png'></img>
+                    <img alt='alt img'  style={{ marginLeft: "30%" }} src='https://parkivia.ancorathemes.com/wp-content/uploads/2017/12/invest2-1.png'></img>
                     <h4 style={{ textAlign: "center" }}>Cube LLC</h4>
                     <p style={{ textAlign: 'center', color: "black" }}>Parking lots specifically for bicycles are becoming more prevalent in many countries. These may include bicycle parking racks and locks and modern.</p>
                 </Card>
                 <Card className='col s4 onhover' style={{ marginRight: "50px", height: "350px" }} data-aos="fade-up" data-aos-anchor-placement="top-center">
-                    <img style={{ marginLeft: "30%" }} src='https://parkivia.ancorathemes.com/wp-content/uploads/2017/12/invest3-1.png'></img>
+                    <img alt='alt img'  style={{ marginLeft: "30%" }} src='https://parkivia.ancorathemes.com/wp-content/uploads/2017/12/invest3-1.png'></img>
                     <h4 style={{ textAlign: "center" }}>Car Ventures</h4>
                     <p style={{ textAlign: "center", color: "black" }}>Parking lots specifically for bicycles are becoming more prevalent in many countries. These may include bicycle parking racks and locks and modern.</p>
                 </Card>
                 <Card className='col s4 onhover' style={{ height: "350px", marginRight: "5%" }} data-aos="fade-up" data-aos-anchor-placement="top-center">
-                    <img style={{ marginLeft: "30%" }} src='https://parkivia.ancorathemes.com/wp-content/uploads/2017/12/invest1-1.png'></img>
+                    <img alt='alt img'  style={{ marginLeft: "30%" }} src='https://parkivia.ancorathemes.com/wp-content/uploads/2017/12/invest1-1.png'></img>
                     <h4 style={{ textAlign: "center" }}>Globe Corporate</h4>
                     <p style={{ textAlign: "center", color: "black" }}>Parking lots specifically for bicycles are becoming more prevalent in many countries. These may include bicycle parking racks and locks and modern.</p>
                 </Card>

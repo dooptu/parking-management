@@ -17,7 +17,7 @@ const News = () => {
                     <h2 class="section-heading">News</h2>
                 </div>
                 <div className="col s6 carimg">
-                    <img src="https://parkivia.ancorathemes.com/wp-content/uploads/2017/12/img-featur-copyright.jpg"></img>
+                    <img alt='alt img'  src="https://parkivia.ancorathemes.com/wp-content/uploads/2017/12/img-featur-copyright.jpg"></img>
                 </div>
                 <div className="col s6">
                     <h2
@@ -178,7 +178,7 @@ const News = () => {
                         scelerisque est laoreet a quis. Ut gravida rutrum aliquam. Curabitur
                         id orci maximus, ornare metus ac, tristique risus.
                     </p>
-                    <img
+                    <img alt='alt img' 
                         style={{ borderRadius: "5px", width: "100%" }}
                         src="https://parkivia.ancorathemes.com/wp-content/uploads/2017/12/img-step1-copyright.jpg"
                     ></img>

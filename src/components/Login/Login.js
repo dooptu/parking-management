@@ -134,17 +134,17 @@ const Login = () => {
                 <div className="container-login">
 
                     {/* <div className="container-background">
-                <img style={{position:"absolute",zIndex:"10", marginLeft:"-200px", marginTop:"110px"}} src="man.png"></img>
+                <img alt='alt img'  style={{position:"absolute",zIndex:"10", marginLeft:"-200px", marginTop:"110px"}} src="man.png"></img>
             </div> */}
 
                     <div className="login-form">
                         <div className="container-background" style={{marginTop:'-80px', height:'720px'}}>
-                            <img style={{ position: "absolute", zIndex: "10", marginTop: "110px" }} src="./assets/img/man.png"></img>
+                            <img alt='alt img'  style={{ position: "absolute", zIndex: "10", marginTop: "110px" }} src="./assets/img/man.png"></img>
                         </div>
                         <h2>User Log in</h2>
                         <span style={{ marginBottom: "40px", display: "block" }}>Log in to your Eparking account.</span>
-                        {/* <button className="google" style={{ marginBottom: "10px", backgroundColor: 'white' }} type="submit"> <img style={{ width: "30px", position: "absolute", left: "20px", marginRight: "30px" }} src='./assets/img/Google_Logo.png' /> Login with Google</button>
-                        <button className="google" style={{ marginTop: "0px" }} type="submit"> <img style={{ width: "30px", position: "absolute", left: "20px", marginRight: "30px" }} src='./assets/img/facebook.png' /> Login with Facebook</button> */}
+                        {/* <button className="google" style={{ marginBottom: "10px", backgroundColor: 'white' }} type="submit"> <img alt='alt img'  style={{ width: "30px", position: "absolute", left: "20px", marginRight: "30px" }} src='./assets/img/Google_Logo.png' /> Login with Google</button>
+                        <button className="google" style={{ marginTop: "0px" }} type="submit"> <img alt='alt img'  style={{ width: "30px", position: "absolute", left: "20px", marginRight: "30px" }} src='./assets/img/facebook.png' /> Login with Facebook</button> */}
                         <br />
                         <div className="dash-or"><span></span></div>
                         <form onSubmit={ProceedLogin}>
@@ -162,8 +162,8 @@ const Login = () => {
                     <div className="res-form">
                         <h2>User Log in</h2>
                         <span style={{ marginBottom: "40px", display: "block" }}>Log in to your YourParkingSpace account.</span>
-                        <button className="google" style={{ marginBottom: "10px" }} type="submit"> <img style={{ width: "30px", position: "absolute", left: "20px", marginLeft: "-40px" }} src='./assets/img/Google_Logo.png' /> Login with Google</button>
-                        <button className="google" style={{ marginTop: "0px" }} type="submit"> <img style={{ width: "30px", position: "absolute", left: "20px", marginLeft: "-40px" }} src='./assets/img/facebook.png' /> Login with Facebook</button>
+                        <button className="google" style={{ marginBottom: "10px" }} type="submit"> <img alt='alt img'  style={{ width: "30px", position: "absolute", left: "20px", marginLeft: "-40px" }} src='./assets/img/Google_Logo.png' /> Login with Google</button>
+                        <button className="google" style={{ marginTop: "0px" }} type="submit"> <img alt='alt img'  style={{ width: "30px", position: "absolute", left: "20px", marginLeft: "-40px" }} src='./assets/img/facebook.png' /> Login with Facebook</button>
                         <br />
                         <div className="dash-or"><span>Or</span></div>
                         <form onSubmit={ProceedLogin}>

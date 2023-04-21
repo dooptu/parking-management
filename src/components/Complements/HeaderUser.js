@@ -21,7 +21,7 @@ const UserHeader = (nameOfpage) => {
         <div className="admin-header" style={{marginTop:'30px'}}>
 
             <div className="logo" style={{marginLeft:'20%'}}>
-                <img src={'../assets/img/logo.png'}></img>
+                <img alt='alt img'  src={'../assets/img/logo.png'}></img>
             </div>
             <ul class="nav justify-content-end nav-custom  ">
 
