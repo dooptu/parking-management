@@ -2,11 +2,11 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import './Zone.css';
 import {url_api} from "../../API/api";
-import { faCarRear, faRoad, faExit, faBicycle, faMotorcycle } from "@fortawesome/free-solid-svg-icons";
+import { faCarRear, faBicycle, faMotorcycle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 function ZoneB() {
     const [shells, setShells] = useState([]);
-    const [shellsR, setShellsR] = useState([]);
+   
 
     useEffect(() => {
         fetch(url_api+'/present_slot/findAllSlot/B')

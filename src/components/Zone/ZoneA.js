@@ -2,20 +2,15 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import './Zone.css';
 import { url_api } from "../../API/api";
-import { faCarRear, faRoad, faExit, faBicycle, faMotorcycle } from "@fortawesome/free-solid-svg-icons";
+import { faCarRear,  faBicycle, faMotorcycle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
 // import ReactJsAlert from "reactjs-alert";
 
 
 function ZoneA() {
     const [shells, setShells] = useState([]);
-    const [shellsR, setShellsR] = useState([]);
+   
 
     useEffect(() => {
         fetch(url_api + '/present_slot/findAllSlot/A')

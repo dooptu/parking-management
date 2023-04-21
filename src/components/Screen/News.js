@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback } from "react";
+import React, { useState} from "react";
 import Slider from "../Complements/Slider"
 import Header from "../Complements/Header";
 import Footer from "../Complements/Footer";

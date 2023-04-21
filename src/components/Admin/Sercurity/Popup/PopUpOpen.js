@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect, useRef, useCallback } from "react";
+import React, { useState, useEffect} from "react";
 import { toast } from "react-toastify";
 import { url_api } from "../../../../API/api";
 import PopUpPaymentResident from "./PopUpPaymentResident";

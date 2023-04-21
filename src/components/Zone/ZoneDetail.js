@@ -10,7 +10,7 @@ import Footer from "../Complements/Footer";
 import ZoneA from "./ZoneA";
 import ZoneB from "./ZoneB";
 import ZoneC from "./ZoneC";
-import {url_api} from "../../API/api"
+
 
 const ZoneDetail = () => {
     const {index} = useParams();

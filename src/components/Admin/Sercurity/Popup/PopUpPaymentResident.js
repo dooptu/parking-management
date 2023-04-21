@@ -1,6 +1,6 @@
 
-import React, { useState, useEffect, useRef, useCallback } from "react";
-import { toast } from "react-toastify";
+import React, { useState, useEffect} from "react";
+
 import { url_api } from "../../../../API/api";
 
 
@@ -8,7 +8,7 @@ import { url_api } from "../../../../API/api";
 const PopUpPaymentResident = ({ handleClose, show, data, idSearch, url }) => {
     console.log('url: '+url)
     const showHideClassName = show ? 'popup display-block' : 'popup display-none';
-    const [success, setSuccess] = useState(false);
+
     const [flag, setFlag] = useState(false);
     const [invoice, setInvoice] = useState([]);
     console.log('--------------------------------------------------')
@@ -27,7 +27,7 @@ const PopUpPaymentResident = ({ handleClose, show, data, idSearch, url }) => {
     // }, [])
 
     useEffect(() => {
-        const id_User = idSearch;
+   
         const regObj2 = {...invoice};
         console.log('obj: ' + JSON.stringify(regObj2));
 

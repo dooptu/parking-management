@@ -1,19 +1,19 @@
-import React, { useState, useEffect, useRef, useCallback } from "react";
+import React, { useState } from "react";
 import Slider from "../Complements/Slider"
 import Header from "../Complements/Header";
 import Footer from "../Complements/Footer";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendarDay, faCar, faMoneyBill, faShield, faUserShield, faCreditCard } from "@fortawesome/free-solid-svg-icons";
-import { url_api } from "../../API/api";
+
 import './Screen.css'
 
 
 
-const URL = url_api + "/updatemoney/findAllMoney";
+
 
 const Service = () => {
     const [username, setUsername] = useState(sessionStorage.getItem('username'));
-    const [obj, setObj] = useState([]);
+
 
     return (
         <div className="service-page body-reservation">
