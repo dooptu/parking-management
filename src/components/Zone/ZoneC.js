@@ -1,12 +1,15 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import './Zone.css'
+import './Zone.css';
+import {url_api} from "../../API/api"
+import { faCarRear, faRoad, faExit, faBicycle, faMotorcycle } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 function ZoneC() {
     const [shells, setShells] = useState([]);
     const [shellsR, setShellsR] = useState([]);
 
     useEffect(() => {
-        fetch('https://cors-anywhere-production-8d5d.up.railway.app/https://parking-management-system-deploy-production-d240.up.railway.app/present_slot/findAll/C')
+        fetch(url_api+'/present_slot/findAllSlot/C')
             .then(response => response.json())
             .then((data) => {
                 setShells(data)
@@ -47,13 +50,13 @@ function ZoneC() {
                     </p>
                     <p>
                         <h5>DESCRIPTION</h5>
-                        <span>P1 is the nearest zone to the terminal (100m distance).</span>
+                        <span>Zone C is the most recently built, providing a large area and a modern entry and security monitoring system with the latest technology. The slots are spacious and equipped with modern facilities.</span>
                         <br />
-                        <span>Maximum parking time: 4 hours</span>
+                        
                     </p>
                     <p>
                         <h5>SPECIFICATIONS</h5>
-                        <span>Maximum parking time: 4 hourss</span>
+                        <span>Maximum parking time: 1 month</span>
                     </p>
 
                     <p style={{ border: 'none' }}>
@@ -63,13 +66,13 @@ function ZoneC() {
 
                     <div class="table-responsive  align-items-center justify-content-center">
                         <div>Resident Area</div>
-                        <table class="table border">
+                        <table class="table border" style={{ boxShadow: 'rgba(0, 0, 0, 0.14) 0px 3px 8px' }}>
                             <tbody>
                                 <tr class="border">
 
                                     {residentSlot.slice(0, 10).map(shell => (
                                         <td className="border" key={shell.id} style={{ backgroundColor: shell.status_Slots === true ? 'rgba(250, 104, 104, 0.874)' : 'white' }}>
-
+                                            <FontAwesomeIcon style={{ fontSize: '16px', paddingRight: '30px' }} icon={faCarRear}></FontAwesomeIcon>
                                             {shell.id_slot}
                                         </td>
                                     ))}
@@ -78,6 +81,16 @@ function ZoneC() {
 
                                     {residentSlot.slice(10, 20).map(shell => (
                                         <td className="border" key={shell.id} style={{ backgroundColor: shell.status_Slots === true ? 'rgba(250, 104, 104, 0.874)' : 'white' }}>
+                                            <FontAwesomeIcon style={{ fontSize: '16px', paddingRight: '30px' }} icon={faBicycle}></FontAwesomeIcon>
+                                            {shell.id_slot}
+                                        </td>
+                                    ))}
+                                </tr>
+                                <tr class="border">
+
+                                    {residentSlot.slice(20, 30).map(shell => (
+                                        <td className="border" key={shell.id} style={{ backgroundColor: shell.status_Slots === true ? 'rgba(250, 104, 104, 0.874)' : 'white' }}>
+                                            <FontAwesomeIcon style={{ fontSize: '16px', paddingRight: '30px' }} icon={faMotorcycle}></FontAwesomeIcon>
 
                                             {shell.id_slot}
                                         </td>
@@ -88,12 +101,13 @@ function ZoneC() {
 
                         </table>
                         <div>Customer Area</div>
-                        <table class="table border">
+                        <table class="table border" style={{ boxShadow: 'rgba(0, 0, 0, 0.14) 0px 3px 8px' }}>
                             <tbody>
                                 <tr class="border">
 
                                     {customerSlot.slice(0, 10).map(shell => (
                                         <td className="border" key={shell.id} style={{ backgroundColor: shell.status_Slots === true ? 'rgba(250, 104, 104, 0.874)' : 'white' }}>
+                                            <FontAwesomeIcon style={{ fontSize: '16px', paddingRight: '30px' }} icon={faCarRear}></FontAwesomeIcon>
 
                                             {shell.id_slot}
                                         </td>
@@ -103,6 +117,17 @@ function ZoneC() {
 
                                     {customerSlot.slice(10, 20).map(shell => (
                                         <td className="border" key={shell.id} style={{ backgroundColor: shell.status_Slots === true ? 'rgba(250, 104, 104, 0.874)' : 'white' }}>
+                                            <FontAwesomeIcon style={{ fontSize: '16px', paddingRight: '30px' }} icon={faBicycle}></FontAwesomeIcon>
+
+                                            {shell.id_slot}
+                                        </td>
+                                    ))}
+                                </tr>
+                                <tr class="border">
+
+                                    {customerSlot.slice(20, 30).map(shell => (
+                                        <td className="border" key={shell.id} style={{ backgroundColor: shell.status_Slots === true ? 'rgba(250, 104, 104, 0.874)' : 'white' }}>
+                                            <FontAwesomeIcon style={{ fontSize: '16px', paddingRight: '30px' }} icon={faMotorcycle}></FontAwesomeIcon>
 
                                             {shell.id_slot}
                                         </td>

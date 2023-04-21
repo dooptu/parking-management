@@ -3,8 +3,9 @@ import { useEffect, useState } from "react";
 import './HeadManager.css'
 import { toast } from "react-toastify";
 import AdminHeader from "../AdminPageHeader";
+import {url_api} from "../../../API/api";
 
-const URL = 'https://cors-anywhere-production-8d5d.up.railway.app/https://parking-management-system-deploy-production-d240.up.railway.app/headManager/RevenueFromAllBuilding'
+const URL = url_api+"/headManager/RevenueFromAllBuilding";
 
 const RevenueAllManagement = () => {
     const [items, setItems] = useState([]);
@@ -26,7 +27,7 @@ const RevenueAllManagement = () => {
         <div className="admin-homepage-dashboard">
             <AdminHeader></AdminHeader>
 
-            <table className="table table-striped"  style={{marginTop:'50px'}}>
+            <table className="table "  style={{marginTop:'50px'}}>
                 <thead>
                     <tr>
                         <th>User ID</th>
@@ -37,7 +38,7 @@ const RevenueAllManagement = () => {
 
                     <tr>
                         <td>{items.idUser}</td>
-                        <td>{items.income}</td>
+                        <td>{ Number(items.income).toLocaleString(undefined, { minimumFractionDigits: 2 })} VND</td>
                     </tr>
 
                 </tbody>

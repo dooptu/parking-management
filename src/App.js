@@ -28,9 +28,25 @@ import CancelledBooking from './components/Account/CancelledBooking';
 import CompletedBooking from './components/Account/CompletedBooking';
 import HistoryBooking from './components/Account/HistoryBooking';
 import ProfileSetting from './components/Account/ProfileSetting';
+
 import SerHomePage from './components/Admin/Sercurity/SerHomePage';
 import MoneyManagement from './components/Admin/Sercurity/MoneyManagement';
-import ResidentPage from './components/Main/ResidentPage';
+import ResidentPage from './components/Resident/ResidentPage';
+import CustomerPage from './components/Customer/CustomerPage';
+import News from './components/Screen/News';
+import Service from './components/Screen/Service';
+import ErrorPage from './components/Error/ErrorPage';
+
+
+
+
+
+import About from './components/Complements/About';
+import AdminHub from './components/Admin/AdminHub';
+import TestDate from './components/Error/test';
+
+
+
 
 
 function App() {
@@ -61,6 +77,7 @@ function App() {
           <Route path='/RevenueManagement' element={<RevenueManagement></RevenueManagement>}></Route>
           <Route path='/MoneyManagement' element={<MoneyManagement></MoneyManagement>}></Route>
           <Route path='/HeadManagerHomePage' element={<HeadManagerHomePage></HeadManagerHomePage>}></Route>
+          <Route path='/about' element={<About></About>}></Route>
 
 
           <Route path='/allbooking' element={<AllBooking />}></Route>
@@ -71,6 +88,20 @@ function App() {
           <Route path='/account' element={<AccountInformation />}></Route>
 
           <Route path='/ResidentPage' element={<ResidentPage></ResidentPage>}></Route>
+          <Route path='/CustomerPage' element={<CustomerPage></CustomerPage>}></Route>
+
+
+          <Route path='/News' element={<News></News>}></Route>
+          <Route path='/Service' element={<Service></Service>}></Route>
+          <Route path='*' element=<ErrorPage></ErrorPage> />
+
+
+          <Route path='/AdminHub' element={<AdminHub></AdminHub>}></Route>
+
+          <Route path='/testDemo' element={<TestDate></TestDate>}></Route>
+      
+          
+
 
         </Routes>
       </BrowserRouter>

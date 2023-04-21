@@ -1,20 +1,23 @@
 import React, { useState, useEffect, useRef } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheck, faTimes, faInfoCircle, faUser } from "@fortawesome/free-solid-svg-icons";
-import { json, Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { Helmet, HelmetProvider } from 'react-helmet-async';
+import {url_api} from "../../../../API/api";
+import '../../Admin.css'
 
 const USER_REGEX = /^[a-zA-Z][a-zA-Z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,30}/;
 const EMAIL_REGEX = /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/;
 const PHONE_REGEX = /^[0-9]{10,12}$/;
 
-const URL = 'https://cors-anywhere-production-8d5d.up.railway.app/https://parking-management-system-deploy-production-d240.up.railway.app/security/updateCustomer_Resident?idUser='
-const URL_USER = 'https://cors-anywhere-production-8d5d.up.railway.app/https://parking-management-system-deploy-production-d240.up.railway.app/user/findById?id='
-const URL_SERCURITY = 'https://cors-anywhere-production-8d5d.up.railway.app/https://parking-management-system-deploy-production-d240.up.railway.app/buildingManager/updateSecurity?idUser='
+const URL = url_api+"/security/updateCustomer_Resident?idUser=";
+const URL_USER = url_api+"/user/findById?id=";
+const URL_SERCURITY = url_api+"/buildingManager/updateSecurity?idUser=";
 
-const PopUpEditUser = ({ handleClose, show, idUser, role }) => {
+const PopUpEditUser = ({ handleClose, show, idUser, role, url }) => {
+  
+  console.log('url: '+url)
+  console.log('show: '+show)
+  console.log('role: '+role)
+  console.log('idUser: '+idUser)
   const showHideClassName = show ? 'popup display-block' : 'popup display-none';
   const [mainURL, setMainURL] = useState('');
 
@@ -177,15 +180,8 @@ const PopUpEditUser = ({ handleClose, show, idUser, role }) => {
       console.log(regObj)
       console.log(idUser)
       console.log(role)
-      if (role == 'User') {
-        setMainURL(URL); 
-        console.log(mainURL);
-      }
-      else {
-        setMainURL(URL_SERCURITY);
-        console.log(mainURL + idUser);
-      }
-      fetch(mainURL + idUser, {
+    
+      fetch(url + idUser, {
         method: 'PUT',
         header: {
           "Access-Control-Allow-Origin": URL,
@@ -293,7 +289,7 @@ const PopUpEditUser = ({ handleClose, show, idUser, role }) => {
 
           </div>
 
-          <button style={{ border: 'none', backgroundColor: '#2DC98A', color: 'white', borderRadius: '2px' }}>Save edition</button>
+          <button className="save-edit" style={{ border: 'none', backgroundColor: '#2DC98A', color: 'white', borderRadius: '2px' }}>Save edition</button>
 
 
         </form>

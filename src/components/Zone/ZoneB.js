@@ -1,12 +1,15 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import './Zone.css'
+import './Zone.css';
+import {url_api} from "../../API/api";
+import { faCarRear, faRoad, faExit, faBicycle, faMotorcycle } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 function ZoneB() {
     const [shells, setShells] = useState([]);
     const [shellsR, setShellsR] = useState([]);
 
     useEffect(() => {
-        fetch('https://cors-anywhere-production-8d5d.up.railway.app/https://parking-management-system-deploy-production-d240.up.railway.app/present_slot/findAll/B')
+        fetch(url_api+'/present_slot/findAllSlot/B')
             .then(response => response.json())
             .then((data) => {
                 setShells(data)
@@ -18,7 +21,6 @@ function ZoneB() {
 
     }, []);
 
-    
 
     const residentSlot = shells.filter(slot => slot.id_slot.startsWith('R'));
     const customerSlot = shells.filter(slot => slot.id_slot.startsWith('C'));
@@ -45,13 +47,13 @@ function ZoneB() {
                         </Link></p>
                     <p>
                         <h5>DESCRIPTION</h5>
-                        <span>P1 is the nearest zone to the terminal (100m distance).</span>
+                        <span>Zone B was built in 2020, not only with a large capacity of over 30 slots for all vehicles but also located near the main gate, which is convenient for entering and exiting.</span>
                         <br />
-                        <span>Maximum parking time: 4 hours</span>
+
                     </p>
                     <p>
                         <h5>SPECIFICATIONS</h5>
-                        <span>Maximum parking time: 4 hourss</span>
+                        <span>Maximum parking time: 1 month</span>
                     </p>
 
                     <p style={{ border: 'none' }}>
@@ -61,13 +63,13 @@ function ZoneB() {
 
                     <div class="table-responsive  align-items-center justify-content-center">
                         <div>Resident Area</div>
-                        <table class="table border">
+                        <table class="table border" style={{ boxShadow: 'rgba(0, 0, 0, 0.14) 0px 3px 8px' }}>
                             <tbody>
                                 <tr class="border">
 
                                     {residentSlot.slice(0, 10).map(shell => (
                                         <td className="border" key={shell.id} style={{ backgroundColor: shell.status_Slots === true ? 'rgba(250, 104, 104, 0.874)' : 'white' }}>
-
+                                            <FontAwesomeIcon style={{ fontSize: '16px', paddingRight: '30px' }} icon={faCarRear}></FontAwesomeIcon>
                                             {shell.id_slot}
                                         </td>
                                     ))}
@@ -76,6 +78,16 @@ function ZoneB() {
 
                                     {residentSlot.slice(10, 20).map(shell => (
                                         <td className="border" key={shell.id} style={{ backgroundColor: shell.status_Slots === true ? 'rgba(250, 104, 104, 0.874)' : 'white' }}>
+                                            <FontAwesomeIcon style={{ fontSize: '16px', paddingRight: '30px' }} icon={faBicycle}></FontAwesomeIcon>
+                                            {shell.id_slot}
+                                        </td>
+                                    ))}
+                                </tr>
+                                <tr class="border">
+
+                                    {residentSlot.slice(20, 30).map(shell => (
+                                        <td className="border" key={shell.id} style={{ backgroundColor: shell.status_Slots === true ? 'rgba(250, 104, 104, 0.874)' : 'white' }}>
+                                            <FontAwesomeIcon style={{ fontSize: '16px', paddingRight: '30px' }} icon={faMotorcycle}></FontAwesomeIcon>
 
                                             {shell.id_slot}
                                         </td>
@@ -86,12 +98,13 @@ function ZoneB() {
 
                         </table>
                         <div>Customer Area</div>
-                        <table class="table border">
+                        <table class="table border" style={{ boxShadow: 'rgba(0, 0, 0, 0.14) 0px 3px 8px' }}>
                             <tbody>
                                 <tr class="border">
 
                                     {customerSlot.slice(0, 10).map(shell => (
                                         <td className="border" key={shell.id} style={{ backgroundColor: shell.status_Slots === true ? 'rgba(250, 104, 104, 0.874)' : 'white' }}>
+                                            <FontAwesomeIcon style={{ fontSize: '16px', paddingRight: '30px' }} icon={faCarRear}></FontAwesomeIcon>
 
                                             {shell.id_slot}
                                         </td>
@@ -101,6 +114,17 @@ function ZoneB() {
 
                                     {customerSlot.slice(10, 20).map(shell => (
                                         <td className="border" key={shell.id} style={{ backgroundColor: shell.status_Slots === true ? 'rgba(250, 104, 104, 0.874)' : 'white' }}>
+                                            <FontAwesomeIcon style={{ fontSize: '16px', paddingRight: '30px' }} icon={faBicycle}></FontAwesomeIcon>
+
+                                            {shell.id_slot}
+                                        </td>
+                                    ))}
+                                </tr>
+                                <tr class="border">
+
+                                    {customerSlot.slice(20, 30).map(shell => (
+                                        <td className="border" key={shell.id} style={{ backgroundColor: shell.status_Slots === true ? 'rgba(250, 104, 104, 0.874)' : 'white' }}>
+                                            <FontAwesomeIcon style={{ fontSize: '16px', paddingRight: '30px' }} icon={faMotorcycle}></FontAwesomeIcon>
 
                                             {shell.id_slot}
                                         </td>

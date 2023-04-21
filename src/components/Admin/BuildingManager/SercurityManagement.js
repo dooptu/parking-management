@@ -1,5 +1,6 @@
 import '../Admin.css'
 import React, { useState, useEffect, useRef } from "react";
+import {url_api} from "../../../API/api";
 
 
 
@@ -10,11 +11,11 @@ import PopUpEditUser from '../Sercurity/Popup/PopUpEditUser';
 import AdminHeader from '../AdminPageHeader';
 
 
-const URL_Find_All = 'https://cors-anywhere-production-8d5d.up.railway.app/https://parking-management-system-deploy-production-d240.up.railway.app/MoreFeatureGet/findByIdCustomer?idCustomer=';
-const URL = 'https://cors-anywhere-production-8d5d.up.railway.app/https://parking-management-system-deploy-production-d240.up.railway.app/buildingManager/findAllSecurity'
-const URL_PUT = 'https://cors-anywhere-production-8d5d.up.railway.app/https://parking-management-system-deploy-production-d240.up.railway.app/buildingManager/BanOrUnbanSecurity?idUser='
+const URL_Find_All = url_api+"/MoreFeatureGet/findByIdCustomer?idCustomer=";
+const URL = url_api+"/buildingManager/findAllSecurity";
+const URL_PUT = url_api+"/buildingManager/BanOrUnbanSecurity?idUser=";
 
-const REGISTER_URL = "https://cors-anywhere-production-8d5d.up.railway.app/https://parking-management-system-deploy-production-d240.up.railway.app/buildingManager/createSecurity";
+const REGISTER_URL = url_api+"/buildingManager/createSecurity";
 const USER_REGEX = /^[a-zA-Z][a-zA-Z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,30}/;
 const EMAIL_REGEX = /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/;
@@ -283,7 +284,7 @@ const SercurityManagement = () => {
                 <button type='submit'>Search</button>
             </form>
 
-            <table className="table table-striped">
+            <table className="table ">
                 <thead>
                     <tr>
                         <th>No.</th>
@@ -293,7 +294,7 @@ const SercurityManagement = () => {
                         <th>Gender</th>
                         <th>Phone</th>
                         <th>Email</th>
-                        <th>Status</th>
+                        
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -311,7 +312,7 @@ const SercurityManagement = () => {
                     <th><input onChange={(e) => setPhone(e.target.value)}></input></th>
                     <th><input onChange={(e) => setEmail(e.target.value)}></input></th>
 
-                    <th></th>
+                
                     <th>
                         <form onSubmit={handleCreate}>
                             <button style={{ border: 'none', backgroundColor: '#2DC98A', color: 'white', width: '55px', borderRadius: '2px' }}>Create</button>
@@ -328,13 +329,10 @@ const SercurityManagement = () => {
                             <td>{item.gender ? "Male" : "Female"}</td>
                             <td>{item.phone}</td>
                             <td>{item.email}</td>
-                            <td>
-
-                                <a href='#' onClick={() => handleChangeStatus(item.id, item.status_Account)} style={{ color: item.status_Account === true ? '#118408' : '#E23F31', fontWeight: 'bold' }}>{item.status_Account === true ? 'Active' : item.status_Account === false ? 'Ban' : 'Booked'}</a>
-                            </td>
+                            
                             <td>
                                 <form onSubmit={''}>
-                                    <button onClick={() => { togglePopupCreateRes(); set(item.id) }} style={{ border: 'none', backgroundColor: '#2DC98A', color: 'white', width: '55px', borderRadius: '2px' }}>Edit</button>
+                                    <button className='save-edit' onClick={() => { togglePopupCreateRes(); set(item.id) }} style={{ border: 'none', backgroundColor: '#2DC98A', color: 'white', width: '55px', borderRadius: '2px' }}>Edit</button>
                                 </form>
                                 <PopUpEditUser idUser={idUser} handleClose={togglePopupCreateRes} show={showPopupCreateRes} role='Customer'></PopUpEditUser>
                             </td>

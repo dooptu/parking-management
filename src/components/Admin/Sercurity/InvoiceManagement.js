@@ -3,12 +3,12 @@ import React, { useState, useEffect, useRef, useCallback } from "react";
 import PaginationInvoice from './PaginationInvoice';
 import './CommanDashBoard.css'
 import AdminHeader from '../AdminPageHeader';
+import {url_api} from "../../../API/api";
 
-
-const URL_Find_C_ID = 'https://cors-anywhere-production-8d5d.up.railway.app/https://parking-management-system-deploy-production-d240.up.railway.app/security/searchCustomerInvoiceId/';
-const URL_Find_R_ID = 'https://cors-anywhere-production-8d5d.up.railway.app/https://parking-management-system-deploy-production-d240.up.railway.app/security/searchResidentInvoiceId/';
-const URL_R = 'https://cors-anywhere-production-8d5d.up.railway.app/https://parking-management-system-deploy-production-d240.up.railway.app/security/findAllResidentInvoice'
-const URL_C = 'https://cors-anywhere-production-8d5d.up.railway.app/https://parking-management-system-deploy-production-d240.up.railway.app/security/findAllCustomerInvoice'
+const URL_Find_C_ID = url_api+"/security/searchCustomerInvoiceId/";
+const URL_Find_R_ID = url_api+"/security/searchResidentInvoiceId/";
+const URL_R = url_api+"/security/findAllResidentInvoice"
+const URL_C = url_api+"/security/findAllCustomerInvoice"
 
 
 const InvoiceManagement = () => {
@@ -119,7 +119,7 @@ const InvoiceManagement = () => {
     return (
         <div className="admin-homepage-dashboard">
         <AdminHeader></AdminHeader>
-            <form className='filter-id justify-content-center' style={{ textAlign: 'left', marginTop: '30px', float: 'left', marginRight:'350px' }}  onSubmit={handleIdFilter}>
+            <form className='filter-id justify-content-center' style={{ textAlign: 'left', marginTop: '30px', float: 'left', marginRight:'230px' }}  onSubmit={handleIdFilter}>
                 Filter by ID:
                 <input  type="text" onChange={e => setId(e.target.value)} />
                 <button type='submit'>Search</button>
@@ -135,7 +135,7 @@ const InvoiceManagement = () => {
             </ul>
             
 
-            <table className="table table-striped">
+            <table className="table ">
                 <thead>
                     <tr>
                         <th>No.</th>
@@ -143,10 +143,10 @@ const InvoiceManagement = () => {
                         <th>Id Payment</th>
                         <th>{user === 'Resident' ? 'Id_Resident' : 'Id_Customer'}</th>
                         <th>Type Of Payment</th>
-                        <th>Time</th>
+                        
                         <th>Total Of Money</th>
-                        <th>Status</th>
-                        <th>Action</th>
+                        <th style={{textAlign:'center'}}>Status</th>
+                        
                     </tr>
 
                 </thead>

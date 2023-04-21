@@ -1,12 +1,15 @@
 
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import { toast } from "react-toastify";
+import { url_api } from "../../../../API/api";
+import PopUpPaymentResident from "./PopUpPaymentResident";
 
-const URL = 'https://cors-anywhere-production-8d5d.up.railway.app/https://parking-management-system-deploy-production-d240.up.railway.app/present_slot/findAll/';
-const URL_Search_Res = 'https://cors-anywhere-production-8d5d.up.railway.app/https://parking-management-system-deploy-production-d240.up.railway.app/user/findById?id=';
-const URL_Book = 'https://cors-anywhere-production-8d5d.up.railway.app/https://parking-management-system-deploy-production-d240.up.railway.app/residentslot/saveResidentSlot'
-const URL_Infor_R_Slot = 'https://cors-anywhere-production-8d5d.up.railway.app/https://parking-management-system-deploy-production-d240.up.railway.app/security/ResponseResidentInfoSlot?id_Building='
-const URL_PAYMENT = 'https://cors-anywhere-production-8d5d.up.railway.app/https://parking-management-system-deploy-production-d240.up.railway.app/paymentResident/save'
+const URL = url_api + "/present_slot/findAllSlot/";
+const URL_Search_Res = url_api + "/user/findById?id=";
+const URL_Book = url_api + "/residentslot/saveResidentSlot"
+const URL_Infor_R_Slot = url_api + "/security/ResponseResidentInfoSlot?id_Building="
+const URL_PAYMENT = url_api + "/paymentResident/save"
+const URL_FIND_PAYMENT = url_api + "/paymentResident/findPayment";
 
 const Popup = ({ handleClose, show }) => {
   const showHideClassName = show ? 'popup display-block' : 'popup display-none';
@@ -24,6 +27,17 @@ const Popup = ({ handleClose, show }) => {
   const [id, setId] = useState('');
   const [building, setBuilding] = useState('A')
   const [shells, setShells] = useState([]);
+  const [flag, setFlag] = useState(false);
+  const [invoice, setInvoice] = useState([]);
+  const [inforInvoice, setInforInvoice] = useState([]);
+
+  const [showPopupCreateRes, setShowPopupCreateRes] = useState(false);
+
+
+  const togglePopupCreateRes = () => {
+
+      setShowPopupCreateRes(!showPopupCreateRes);
+  };
 
   const massageSlot = () => {
     toast.error('Slot null!');
@@ -139,8 +153,8 @@ const Popup = ({ handleClose, show }) => {
   console.log(idSearch);
   console.log(building)
 
-  const handleResidentPayment = async (e) => {
-    e.preventDefault();
+  const handleResidentPayment =  () => {
+    
     const idUser = idSearch;
     const id_Building = building;
     const typeOfPayment = 'Banking';
@@ -171,8 +185,38 @@ const Popup = ({ handleClose, show }) => {
       if (err.response && err.response.status === 500)
         toast.error('Failed: ' + err.message);
     });
+    fetch(url_api + "/paymentResident/findPayment")
+      .then(response =>
+        response.json()
+      )
+      .then((data) => {
+        setInvoice(data);
+        console.log(data)
+        console.log('fetch first')
+        setFlag(true)
+      })
+      .catch(error => console.error(error));
+
+      
+    
 
   }
+
+  useEffect(() => {
+    fetch(URL_FIND_PAYMENT)
+        .then(response =>
+            response.json()
+        )
+        .then((data) => {
+            setInforInvoice(data);
+            console.log('data: ' + data)
+            console.log('fetch first')
+            setFlag(true)
+        })
+        .catch(error => console.error(error));
+}, [flag])
+
+  
 
 
   return (
@@ -186,7 +230,7 @@ const Popup = ({ handleClose, show }) => {
           <form className='filter-id justify-content-start' style={{ marginLeft: '27%' }} onSubmit={handleIdFilter}>
             <label> Filter by ID: </label>
             <br />
-            <input type="text" onChange={e => setIdSearch(e.target.value)} style={{ borderRadius: '0', width: '44.5%' }} />
+            <input type="text" onChange={e => setIdSearch(e.target.value)} style={{ borderRadius: '0', width: '55%' }} />
             <button type='submit' style={{ borderRadius: '0', width: '14%' }}>Search</button>
           </form>
           <label style={{ marginLeft: '28%', width: '42%' }}>Fullname</label>
@@ -208,34 +252,51 @@ const Popup = ({ handleClose, show }) => {
             <option>C</option>
           </select>
 
-          <label style={{ marginLeft: '28%' }}>Slot</label>
-
-          <select className="form-select" style={{ marginLeft: '28%', width: '42%', borderRadius: '0' }} onChange={(e) => setSlot(e.target.value)} value={slot}>
-            {residentSlot.map(shell => {
-              if (shell.status_Slots == false) {
-
-                return <option>{shell.id_slot}</option>
-              }
-            })}
-
-
-          </select>
           <label style={{ marginLeft: '28%' }}>Type of vehicle</label>
           <select className="form-select" style={{ marginLeft: '28%', width: '42%', borderRadius: '0' }} onChange={(e) => setTypeOfVehicle(e.target.value)} value={typeOfVehicle}>
             <option>Car</option>
             <option>Motor</option>
             <option>Bike</option>
           </select>
+
+
+          <label style={{ marginLeft: '28%' }}>Slot</label>
+
+          <select className="form-select" style={{ marginLeft: '28%', width: '42%', borderRadius: '0' }} onChange={(e) => setSlot(e.target.value)} value={slot}>
+            {typeOfVehicle === 'Car' && residentSlot.slice(0, 10).map((shell) => {
+              if (shell.status_Slots === false) {
+                return <option key={shell.id_slot}>{shell.id_slot}</option>;
+              }
+              return null;
+            })}
+            {typeOfVehicle === 'Motor' && residentSlot.slice(10, 20).map((shell) => {
+              if (shell.status_Slots === false) {
+                return <option key={shell.id_slot}>{shell.id_slot}</option>;
+              }
+              return null;
+            })}
+            {typeOfVehicle === 'Bike' && residentSlot.slice(20, 30).map((shell) => {
+              if (shell.status_Slots === false) {
+                return <option key={shell.id_slot}>{shell.id_slot}</option>;
+              }
+              return null;
+            })}
+
+
+
+          </select>
           <br />
+
 
 
         </div>
         <form onSubmit={handleSubmit} className="col-lg-6  class-input">
           <button style={{ color: "#fff", marginLeft: '48%', width: '60%' }} type="submit">Save Reservation</button>
         </form>
-        <form onSubmit={handleResidentPayment} className="col-lg-6  class-input">
+        <form onSubmit={() => {handleResidentPayment(); togglePopupCreateRes()}} className="col-lg-6  class-input">
           <button style={{ color: "#fff", marginLeft: '48%', width: '60%' }} type="submit">Payment</button>
         </form>
+        <PopUpPaymentResident handleClose={togglePopupCreateRes} show={showPopupCreateRes} url={URL_FIND_PAYMENT} data={inforInvoice} idSearch={idSearch}></PopUpPaymentResident>
       </section>
     </div>
   );

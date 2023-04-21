@@ -1,7 +1,7 @@
-import '../Admin.css'
+
 import './CommanDashBoard.css'
 import React, { useState, useEffect, useRef } from "react";
-import Pagination from '../../Complement/Pagination';
+import Pagination from '../../Complements/Pagination';
 import PaginationUser from './PaginationUser';
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -9,15 +9,19 @@ import "react-toastify/dist/ReactToastify.css";
 import AdminHeader from '../AdminPageHeader';
 import { faBuilding } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { url_api } from "../../../API/api";
+import PopUpEditUser from './Popup/PopUpEditUser';
 
-const URL_Find_All = 'https://cors-anywhere-production-8d5d.up.railway.app/https://parking-management-system-deploy-production-d240.up.railway.app/MoreFeatureGet/findByIdCustomer?idCustomer=';
-const URL = 'https://cors-anywhere-production-8d5d.up.railway.app/https://parking-management-system-deploy-production-d240.up.railway.app/security/ListAllCustomerFromBuilding/'
+const URL_Find_All = url_api + "/MoreFeatureGet/findByIdCustomer?idCustomer=";
+const URL = url_api + "/security/ListAllCustomerFromBuilding/";
 
-const REGISTER_URL = "https://cors-anywhere-production-8d5d.up.railway.app/https://parking-management-system-deploy-production-d240.up.railway.app/security/createCustomer";
+const REGISTER_URL = url_api + "/security/createCustomer";
 const USER_REGEX = /^[a-zA-Z][a-zA-Z0-9-_]{3,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,30}/;
 const EMAIL_REGEX = /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/;
 const PHONE_REGEX = /^[0-9]{10,12}$/;
+const ROLE = 'C'
+const URL_CUSTOMER = url_api + "/security/updateCustomer_Resident?idUser=";
 
 const CustomerManagement = () => {
     const [customers, setCustomers] = useState([]);
@@ -59,11 +63,25 @@ const CustomerManagement = () => {
     const [errMsg, setErrMsg] = useState('');
     const [success, setSuccess] = useState(false);
 
+    const [typeSearch, setTypeSearch] = useState('iduser')
+    const [valueSearch, setValueSearch] = useState('');
+
+
     const [showPopupCreateRes, setShowPopupCreateRes] = useState(false);
+
     const togglePopupCreateRes = () => {
 
         setShowPopupCreateRes(!showPopupCreateRes);
     };
+
+    useEffect(() => {
+        setTypeSearch(typeSearch)
+        setId(id)
+        console.log("type: " + typeSearch + ", value: " + id)
+
+        console.log('----------------------------------------------------------------------')
+        console.log(url_api + "/security/searchUser?typeOfSearch=" + typeSearch + "&value=" + id)
+    }, [typeSearch, id])
 
 
     useEffect(() => {
@@ -225,34 +243,36 @@ const CustomerManagement = () => {
 
     const handleIdFilter = async (e) => {
         e.preventDefault();
-        if (id === null || id === '') {
-            fetch(URL + building)
-                .then(response => response.json())
-                .then((data) => {
-                    setIdNull(true);
-                    setCustomers(data)
-                })
-                .catch((err) => {
-                    console.log(toast);
-                    toast.error('Failed: ' + err.message);
-                    localStorage.setItem("msg", 'Failed: ' + err.message)
-                });
+        // if (id === null || id === '') {
+        //     fetch(URL + building)
+        //         .then(response => response.json())
+        //         .then((data) => {
+        //             setIdNull(true);
+        //             setCustomers(data)
+        //         })
+        //         .catch((err) => {
+        //             console.log(toast);
+        //             toast.error('Failed: ' + err.message);
+        //             localStorage.setItem("msg", 'Failed: ' + err.message)
+        //         });
 
-        }
-        else {
-            fetch(URL_Find_All + id)
-                .then(response => response.json())
-                .then((data) => {
-                    setIdNull(false);
-                    setCustomers(data)
-                })
-                .catch((err) => {
-                    console.log(toast);
-                    toast.error('Failed: ' + err.message);
-                    localStorage.setItem("msg", 'Failed: ' + err.message)
-                    window.location.href = '/AdminHomePage'
-                });
-        }
+        // }
+        // else {
+        //     console.log('----------------------------------------------------------------------')
+        //     console.log(url_api + "/security/searchUser?typeOfSearch=" + typeSearch + "email&value=" + id)
+        //     fetch(url_api + "/security/searchUser?typeOfSearch=" + typeSearch + "email&value=" + id)
+        //         .then(response => response.json())
+        //         .then((data) => {
+        //             setIdNull(false);
+        //             setCustomers(data)
+        //         })
+        //         .catch((err) => {
+        //             console.log(toast);
+        //             toast.error('Failed: ' + err.message);
+        //             localStorage.setItem("msg", 'Failed: ' + err.message)
+        //             window.location.href = '/AdminHomePage'
+        //         });
+        // }
 
     }
 
@@ -284,7 +304,12 @@ const CustomerManagement = () => {
 
             <form className='filter-id justify-content-center' style={{ textAlign: 'left', marginTop: '30px', float: 'left' }} onSubmit={handleIdFilter}>
                 Filter by ID:
-                <input type="text" onChange={e => setId(e.target.value)} />
+                <select type="select" style={{ fontSize: '8px', height: '31px', width: '80px' }} >
+                    <option value="female" className="gender">iduser</option>
+                    <option value="male" className="gender">email</option>
+                    <option value="male" className="gender">phone</option>
+                </select>
+                <input style={{ width: '40%' }} type="text" onChange={e => setId(e.target.value)} />
                 <button type='submit'>Search</button>
             </form>
             <ul class="nav justify-content-center nav-custom nav-custom-sercurity">
@@ -301,7 +326,9 @@ const CustomerManagement = () => {
 
 
 
-            <table className="table table-striped">
+
+
+            <table className="table" >
                 <thead>
                     <tr>
                         <th>No.</th>
@@ -315,6 +342,7 @@ const CustomerManagement = () => {
                         <th>Action</th>
                     </tr>
                 </thead>
+
                 <tr className='security-add-new'>
                     <th></th>
                     <th><input onChange={(e) => setId(e.target.value)}></input></th>
@@ -336,7 +364,8 @@ const CustomerManagement = () => {
                         </form>
                     </th>
                 </tr>
-                {idNull ? (<PaginationUser data={customers}></PaginationUser>)
+
+                {idNull ? (<PaginationUser data={customers} role={'C'}></PaginationUser>)
 
                     : (
                         <tbody><tr >
@@ -348,13 +377,14 @@ const CustomerManagement = () => {
                             <td>{customers.phone}</td>
                             <td>{customers.email}</td>
 
-                            <td style={{ color: customers.status_Account === true ? '#118408' : '#E23F31', fontWeight: 'bold' }}>{customers.status_Account === true ? 'Active' : 'Ban'}</td>
+                            <td style={{ color: customers.status_Account === false ? '#118408' : '#E23F31', fontWeight: 'bold' }}>{customers.status_Account === false ? 'Active' : 'Ban'}</td>
                             <td>
                                 <form>
                                     <button onClick={togglePopupCreateRes} style={{ border: 'none', backgroundColor: '#2DC98A', color: 'white', width: '55px', borderRadius: '2px' }}>Edit</button>
                                 </form>
                             </td>
                         </tr>
+                            <PopUpEditUser handleClose={togglePopupCreateRes} show={showPopupCreateRes} url={URL_CUSTOMER}></PopUpEditUser>
                         </tbody>
                     )
                 }
